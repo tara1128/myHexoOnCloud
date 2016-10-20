@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -104,12 +104,16 @@
 <p>保存到Git账户的Settings里即可。</p>
 <p>测试云服务器是否可以访问Git项目，执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
 <p>如果出现“You’ve successfully authenticated”字样，表示可以美美的Clone Git项目去了。</p>
-<p>至此，在本地hexo new post “My new article”来新建文章，然后hexo generate –deploy做发布，本地hexo server测试通过后，即可在云服务器上更新Git目录了。</p>
+<p>至此，在本地就可以开心的写博客了！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new post <span class="string">"My new article"</span>  <span class="comment">#新建文章</span></div></pre></td></tr></table></figure></p>
+<p>如果删除某个文章，可以直接删除source目录下的.md文件，再执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean  <span class="comment">#清理database和public fold，然后再做generate</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate --deploy  <span class="comment">#生成和发布</span></div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server  <span class="comment">#本地测试</span></div></pre></td></tr></table></figure>
+<p>测试通过后，即可在云服务器上更新Git目录了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/10/20/how-to-play-with-hexo/" data-id="ciui11thc0000nypms2x83jf4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/10/20/how-to-play-with-hexo/" data-id="ciui11thc0000nypms2x83jf4" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -144,7 +148,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -165,7 +169,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
