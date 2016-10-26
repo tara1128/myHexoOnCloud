@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -97,22 +97,22 @@
         <p>事情是这样的。<br>知道了使用apt-get可以安装和升级或卸载软件包，非常方便，可怎样才算真正卸载干净？有强迫症的人，一想到已经卸载的软件还残留一些配置文件在机器里，就浑身不舒服…</p>
 <p>So，有必要对apt-get的使用略做详解。</p>
 <h2 id="What-is-apt-get-anyway"><a href="#What-is-apt-get-anyway" class="headerlink" title="What is apt-get anyway?"></a>What is apt-get anyway?</h2><p>apt-get是Debian Linux发行版中的APT软件包管理工具。题外话：Debian是一个大的系统组织框架，在这个框架下有多种不同操作系统核心的分支计划，主要为采用Linux核心的Debian GNU/Linux系统。</p>
-<h2 id="How-to-use-apt-get-then"><a href="#How-to-use-apt-get-then" class="headerlink" title="How to use apt-get then?"></a>How to use apt-get then?</h2><p>需要引入所需的软件库。Debian的软件库就是其软件包的集合，存在于网上的一些公共站点，把它们的地址引入，apt-get可以搜索到指定的软件。存放这些地址列表的配置文件在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/etc/apt/sources.list</div></pre></td></tr></table></figure></p>
-<p>在修改了list文件后或每隔一段时间，都要运行update命令来更新软件包，确保自己机器里的软件包都是最新的。但是update命令仅仅是更新软件包，不会做任何install。命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update  <span class="comment">#sudo不是必须的</span></div></pre></td></tr></table></figure></p>
-<p>当你想要安装一个软件包时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install packageName</div></pre></td></tr></table></figure></p>
-<h2 id="How-to-use-apt-get-to-uninstall-and-make-things-clean"><a href="#How-to-use-apt-get-to-uninstall-and-make-things-clean" class="headerlink" title="How to use apt-get to uninstall and make things clean?"></a>How to use apt-get to uninstall and make things clean?</h2><p>使用apt-get卸载一个已安装的软件包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get remove packageName   <span class="comment">#remove命令会保留这个软件包的配置文件</span></div></pre></td></tr></table></figure></p>
-<p>卸载软件包，并删除配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get -purge remove packageName</div></pre></td></tr></table></figure></p>
-<p>已经卸载的软件会备份在硬盘上，需要执行下面的命令来彻底删除已经卸载的软件的备份，并释放硬盘空间：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get autoclean apt</div></pre></td></tr></table></figure></p>
-<h2 id="Other-useful-commands-with-apt-get"><a href="#Other-useful-commands-with-apt-get" class="headerlink" title="Other useful commands with apt-get"></a>Other useful commands with apt-get</h2><p>安装一个软件后，我想把它的备份删除，但是又不想影响它的使用，可以在install之后，执行clean：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get clean  <span class="comment">#仅删除软件的备份，释放硬盘空间，不影响软件使用</span></div></pre></td></tr></table></figure></p>
-<p>每隔一段时间，要更新已安装的软件包，upgrade命令会执行install的动作，这也是它和update命令之间的区别，upgrade帮助你把已安装的软件的最新版本安装好了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get upgrade</div></pre></td></tr></table></figure></p>
-<p>还有一个很酷但是以前没用到的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get dist-upgrade   <span class="comment">#将系统升级到新版本</span></div></pre></td></tr></table></figure></p>
-<p>定期运行之，可以清除那些已经卸载的软件包们的.deb文件们，同时释放硬盘空间，然后再autoclean来将已安装的软件包的那些无用的.deb文件一起删除：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get autoclean</div></pre></td></tr></table></figure></p>
+<h2 id="How-to-use-apt-get-then"><a href="#How-to-use-apt-get-then" class="headerlink" title="How to use apt-get then?"></a>How to use apt-get then?</h2><p>需要引入所需的软件库。Debian的软件库就是其软件包的集合，存在于网上的一些公共站点，把它们的地址引入，apt-get可以搜索到指定的软件。存放这些地址列表的配置文件在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ /etc/apt/sources.list</div></pre></td></tr></table></figure></p>
+<p>在修改了list文件后或每隔一段时间，都要运行update命令来更新软件包，确保自己机器里的软件包都是最新的。但是update命令仅仅是更新软件包，不会做任何install。命令如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get update  <span class="comment">#sudo不是必须的</span></div></pre></td></tr></table></figure></p>
+<p>当你想要安装一个软件包时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get install packageName</div></pre></td></tr></table></figure></p>
+<h2 id="How-to-use-apt-get-to-uninstall-and-make-things-clean"><a href="#How-to-use-apt-get-to-uninstall-and-make-things-clean" class="headerlink" title="How to use apt-get to uninstall and make things clean?"></a>How to use apt-get to uninstall and make things clean?</h2><p>使用apt-get卸载一个已安装的软件包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get remove packageName   <span class="comment">#remove命令会保留这个软件包的配置文件</span></div></pre></td></tr></table></figure></p>
+<p>卸载软件包，并删除配置文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get -purge remove packageName</div></pre></td></tr></table></figure></p>
+<p>已经卸载的软件会备份在硬盘上，需要执行下面的命令来彻底删除已经卸载的软件的备份，并释放硬盘空间：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get autoclean apt</div></pre></td></tr></table></figure></p>
+<h2 id="Other-useful-commands-with-apt-get"><a href="#Other-useful-commands-with-apt-get" class="headerlink" title="Other useful commands with apt-get"></a>Other useful commands with apt-get</h2><p>安装一个软件后，我想把它的备份删除，但是又不想影响它的使用，可以在install之后，执行clean：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get clean  <span class="comment">#仅删除软件的备份，释放硬盘空间，不影响软件使用</span></div></pre></td></tr></table></figure></p>
+<p>每隔一段时间，要更新已安装的软件包，upgrade命令会执行install的动作，这也是它和update命令之间的区别，upgrade帮助你把已安装的软件的最新版本安装好了：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get upgrade</div></pre></td></tr></table></figure></p>
+<p>还有一个很酷但是以前没用到的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get dist-upgrade   <span class="comment">#将系统升级到新版本</span></div></pre></td></tr></table></figure></p>
+<p>定期运行之，可以清除那些已经卸载的软件包们的.deb文件们，同时释放硬盘空间，然后再autoclean来将已安装的软件包的那些无用的.deb文件一起删除：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ sudo apt-get autoclean</div></pre></td></tr></table></figure></p>
 <p>从此，硬盘干干净净。强迫症患者表示很开心！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciuqb8j4l000cs6pmuvz5y4cr" class="article-share-link">Delen</a>
+      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciuqb8j4l000cs6pmuvz5y4cr" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -169,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciuqb8j3n0000s6pmzqr8hyu6" class="article-share-link">Delen</a>
+      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciuqb8j3n0000s6pmzqr8hyu6" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
@@ -230,7 +230,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciuqb8j4j000bs6pmis0nn5sn" class="article-share-link">Delen</a>
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciuqb8j4j000bs6pmis0nn5sn" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -249,7 +249,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -259,7 +259,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
     </div>
@@ -269,7 +269,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 10px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a>
     </div>
@@ -278,7 +278,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -288,7 +288,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -317,7 +317,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
