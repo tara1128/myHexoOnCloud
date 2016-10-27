@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -106,13 +106,25 @@
 <p>然后在项目根目录下执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$   node index.js</div></pre></td></tr></table></figure></p>
 <p>这样会打印出example模块的module如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Module &#123;</div><div class="line">  id: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">  exports: &#123;&#125;,</div><div class="line">  parent:  <span class="comment">#引用example模块的文件就是example的parent，此例中就是index.js</span></div><div class="line">   Module &#123;</div><div class="line">     id: <span class="string">'.'</span>, <span class="comment">#这里的id就是文件的绝对路径，index的路径就是当前执行的目录</span></div><div class="line">     exports: &#123;&#125;,</div><div class="line">     parent: null,  <span class="comment">#index文件没有被任何文件引用，parent为空</span></div><div class="line">     filename: <span class="string">'/Users/alex/test/index.js'</span>,</div><div class="line">     loaded: <span class="literal">false</span>,</div><div class="line">     children: [ [Circular] ],</div><div class="line">     paths: </div><div class="line">      [ <span class="string">'/Users/alex/test/node_modules'</span>,</div><div class="line">        <span class="string">'/Users/alex/node_modules'</span>,</div><div class="line">        <span class="string">'/Users/node_modules'</span>,</div><div class="line">        <span class="string">'/node_modules'</span> ] &#125;,</div><div class="line">  filename: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">  loaded: <span class="literal">false</span>,</div><div class="line">  children: [],   <span class="comment"># example模块没有加载其他模块，因此children为空</span></div><div class="line">  paths: </div><div class="line">   [ <span class="string">'/Users/alex/test/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/alex/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/node_modules'</span>,</div><div class="line">     <span class="string">'/node_modules'</span> ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>同样index文件的module对象打印出来是这个样子的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Module &#123;</div><div class="line">  id: <span class="string">'.'</span>, <span class="comment">#index文件位于当前执行目录</span></div><div class="line">  exports: &#123;&#125;,</div><div class="line">  parent: null, <span class="comment">#index文件没有被任何文件引入</span></div><div class="line">  filename: <span class="string">'/Users/alex/test/index.js'</span>,</div><div class="line">  loaded: <span class="literal">false</span>,</div><div class="line">  children: <span class="comment">#index内部加载了example模块，因此index的children有example模块</span></div><div class="line">   [ Module &#123;</div><div class="line">       id: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">       exports: [Object],</div><div class="line">       parent: [Circular],</div><div class="line">       filename: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">       loaded: <span class="literal">true</span>,</div><div class="line">       children: [],</div><div class="line">       paths: [Object] &#125; ],</div><div class="line">  paths: </div><div class="line">   [ <span class="string">'/Users/alex/test/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/alex/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/node_modules'</span>,</div><div class="line">     <span class="string">'/node_modules'</span> ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="module对象的几个属性"><a href="#module对象的几个属性" class="headerlink" title="module对象的几个属性"></a>module对象的几个属性</h3><h4 id="module-id-模块文件的绝对路径"><a href="#module-id-模块文件的绝对路径" class="headerlink" title="module.id 模块文件的绝对路径"></a>module.id 模块文件的绝对路径</h4><h4 id="module-filename"><a href="#module-filename" class="headerlink" title="module.filename"></a>module.filename</h4><h4 id="module-loaded"><a href="#module-loaded" class="headerlink" title="module.loaded"></a>module.loaded</h4><h4 id="module"><a href="#module" class="headerlink" title="module."></a>module.</h4><p>在index文件里，用require加载了一个模块example。<br>require并不是CommonJS的全局命令，而是当前模块module的一个方法module.require。这个require会调用Node内部的Module._load命令。</p>
-<p>未完待续。。。</p>
+<h3 id="module对象的几个属性"><a href="#module对象的几个属性" class="headerlink" title="module对象的几个属性"></a>module对象的几个属性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># module.id 模块文件的绝对路径带文件名</span></div><div class="line"><span class="comment"># module.filename 模块文件名带绝对路径</span></div><div class="line"><span class="comment"># module.loaded 模块是否完成加载</span></div><div class="line"><span class="comment"># module.parent 谁调用了本模块</span></div><div class="line"><span class="comment"># module.children 本模块调用了谁</span></div><div class="line"><span class="comment"># module.exports 本模块对外的输出值</span></div></pre></td></tr></table></figure>
+<h2 id="require的加载机制"><a href="#require的加载机制" class="headerlink" title="require的加载机制"></a>require的加载机制</h2><p>First，require并不是CommonJS的全局命令，而是当前模块module的一个方法module.require。这个require命令会读取并执行一个JS文件，然后返回该模块的exports对象。<br>简言之，require做的就是：load -&gt; compile -&gt; return.</p>
+<p>require的参数里，文件名默认后缀为js，因此可以写”.js”也可以不写。而对于文件的路径，如果是以”/“开头的就是绝对路径了，例如”/Users/alex/test/“，如果是”./“则是相对路径，表示相对于当前执行的文件的路径而言。如果当前执行的是index文件，而index文件位于项目的根目录，那么”./“在当前环境下就表示根目录。</p>
+<p>如果require的路径里没有任何路径，只是某个模块的名称，例如某个核心模块react或express之类，这些模块也许已经被全局安装到开发者的本地机器里，也许是局部安装在项目的目录里，anyway，不加路径的require命令，会让Node同学依次搜索以下文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$   <span class="comment"># /usr/local/lib/node/***.js</span></div><div class="line">$   <span class="comment"># /home/user/project/node_modules/***.js</span></div><div class="line">$   <span class="comment"># /home/user/node_modules/***.js</span></div><div class="line">$   <span class="comment"># /node_modules/***.js</span></div></pre></td></tr></table></figure></p>
+<p>具体的路径名会因系统的不同而略有差异。</p>
+<p>如果想得到require命令加载的文件名，使用resolve方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$   <span class="comment"># require.resolve();</span></div></pre></td></tr></table></figure></p>
+<p>如果没有发现所要加载的文件，则node会尝试用.js .json .node为后缀再去搜索文件。.json后缀的文件会以JSON格式的文本文件解析，.node后缀的文件会以编译后的二进制文件解析。</p>
+<p>require会调用Node内部的Module.load命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Module._load = <span class="keyword">function</span>(request, parent, isMain) &#123;</div><div class="line">  <span class="comment"># 先看Module._cache中是否有指定的模块</span></div><div class="line">  <span class="comment"># 如没有，就创建一个新的Module实例，并缓存</span></div><div class="line">  <span class="comment"># 用module.load()加载指定的模块文件</span></div><div class="line">  <span class="comment"># 用module.compile()执行文件里的代码</span></div><div class="line">  <span class="comment"># 如果load 或 compile 报错，就从缓存删除该模块</span></div><div class="line">  <span class="comment"># 没有报错，则返回该模块的module.exports对象</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>上述所提到的compile方法的具体流程大致如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Module.prototype._compile = <span class="keyword">function</span>(content, filename) &#123;</div><div class="line">  <span class="comment"># 定义一个require函数指向module.require</span></div><div class="line">  <span class="comment"># require.resolve() 方法将模块名解析到绝对路径</span></div><div class="line">  <span class="comment"># reuqire.main 指向当前本模块</span></div><div class="line">  <span class="comment"># require.extensions 根据不同的后缀名调用不同的执行函数</span></div><div class="line">  <span class="comment"># 将所指文件放到一个函数中，可调用require，并执行该函数</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>Damn，有点晕…</p>
+<p>Anyway，当require函数准备完毕，那么所加载的模块内的代码就已经被放进了一个新的函数中，并可执行。这也是为什么模块可以避免污染全局的原因。Just like：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span> (exports, require, module, __filename, __dirname) &#123;</div><div class="line">  <span class="comment"># My code goes here ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>And，Module._compile方法是同步执行的。<br>So，Module_load要等它执行完成，才会返回module.exports。</p>
+<p>推荐文章：<br><a href="http://blog.ponyfoo.com/2014/08/25/a-gentle-browserify-walkthrough" target="_blank" rel="external">About Browserify</a><br><a href="http://fredkschott.com/post/2014/06/require-and-the-module-system/" target="_blank" rel="external">How Require works</a><br><a href="https://docs.nodejitsu.com/articles/getting-started/what-is-require" target="_blank" rel="external">What is require</a><br><a href="http://addyosmani.com/writing-modular-js/" target="_blank" rel="external">Writting Modular JS with AMD, CommonJS</a></p>
+<p>饿了。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciurxgvgz000099pm4oddhzbv" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciurxgvgz000099pm4oddhzbv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
@@ -168,7 +180,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciurxgvhe000599pmn1q68mze" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciurxgvhe000599pmn1q68mze" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -225,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciurxgvhd000499pm4ejzq316" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciurxgvhd000499pm4ejzq316" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
@@ -286,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciurxgvh6000199pmojmcvaa9" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciurxgvh6000199pmojmcvaa9" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -305,7 +317,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -315,7 +327,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
     </div>
@@ -325,7 +337,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a>
     </div>
@@ -334,7 +346,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -344,7 +356,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
@@ -377,7 +389,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
