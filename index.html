@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,63 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-vim-to-be-like-a-IDE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/vim-to-be-like-a-IDE/" class="article-date">
+  <time datetime="2016-10-28T09:28:39.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/28/vim-to-be-like-a-IDE/">把Vim打造成一枚IDE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用惯了Vim之后，就不想再安装任何IDE了，因为不喜欢臃肿的IDE和繁琐的配置，况且前端的代码基本上不需要编译，Vim用熟了完全可以高效工作，IDE在提高工作效率的作用上完全没有明显优势。So，never installed any IDEs。当然，也曾因此被某些人鄙视：“神马？你居然不用IDE？”……呵呵，用Vim写的代码仍然可以甩你三条街。</p>
+<p>今天偶然发现一篇好文章，推荐了一些实用工具，可以让Vim用得更舒爽，就像在用一枚IDE。终于可以满足我既不抛弃Vim，又可以享受IDE带来的便捷操作了。更重要的是，Vim的插件安装尤其干净利索，丝毫不臃肿！</p>
+<p>这么好的事儿，必须要立刻写博做一记录啊！</p>
+<h2 id="Vim的插件管理工具pathogen-vim"><a href="#Vim的插件管理工具pathogen-vim" class="headerlink" title="Vim的插件管理工具pathogen.vim"></a>Vim的插件管理工具pathogen.vim</h2><p>据说是vim最好用的管理插件的插件。话不多说，直接上Checkout地址：<br><a href="https://github.com/tpope/vim-pathogen.git" target="_blank" rel="external">https://github.com/tpope/vim-pathogen.git</a></p>
+<p>解压后的脚本放在~/.vim/autoload/目录里即可。pathogen安装完毕！</p>
+<p>同时在~/.vim/vimrc 文件里添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">call pathogen<span class="comment">#infect()  # 这句话要写在filetype plugin indent on和syntax on之前</span></div></pre></td></tr></table></figure></p>
+<p>需要注意的是，pathogen只能放在~/.vim/autoload/目录下，启动之也只能通过修改~/.vim/vimrc文件。</p>
+<p>pathogen让每个插件占有一个单独的目录，解决了文件分散的问题，好装好卸！安装完pathogen之后，在~/.vim/目录下新建一个专门放插件的目录bundle，以后要安装的所有插件都放这个目录里，要删除某个插件，只需要删除这个目录里对应的目录和文件即可。要更新某个插件，只需要checkout最新的版本进去即可。</p>
+<p>So cool，OK？</p>
+<h2 id="用pathogen安装一个插件syntastic"><a href="#用pathogen安装一个插件syntastic" class="headerlink" title="用pathogen安装一个插件syntastic"></a>用pathogen安装一个插件syntastic</h2><p>Cannot be any easier……<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$   <span class="built_in">cd</span> ~/.vim/bundle/</div><div class="line">$   git <span class="built_in">clone</span> --depth=1 https://github.com/scrooloose/syntastic.git</div></pre></td></tr></table></figure></p>
+<p>Done！退出Vim再重新开启。</p>
+<p>网上推荐的部分配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> statusline+=%<span class="comment">#warningmsg#</span></div><div class="line"><span class="built_in">set</span> statusline+=%&#123;SyntasticStatuslineFlag()&#125;</div><div class="line"><span class="built_in">set</span> statusline+=%*</div><div class="line"><span class="built_in">let</span> g:syntastic_always_populate_loc_list = 1 <span class="string">"automatically load errors into the location list</span></div><div class="line">let g:syntastic_auto_loc_list = 1 "close error window automatically</div><div class="line"><span class="built_in">let</span> g:syntastic_check_on_open = 1 <span class="string">"check for errors when a file is loaded</span></div><div class="line">let g:syntastic_check_on_wq = 0 "<span class="built_in">disable</span> checks <span class="keyword">for</span> errors whenever you save the file</div><div class="line"><span class="built_in">let</span> g:syntastic_error_symbol = <span class="string">"✗"</span> <span class="string">"Syntastic uses arrow symbols to indicate errors, change it.</span></div></pre></td></tr></table></figure></p>
+<p>常用的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">:SyntasticInfo  <span class="comment"># 显示当前状态</span></div><div class="line">:SyntasticReset  <span class="comment"># 清空错误信息</span></div><div class="line">:Errors  <span class="comment"># 打开错误信息显示窗口</span></div><div class="line">:SyntasticToggleMode  <span class="comment"># 切换当前插件状态，激活或禁用</span></div><div class="line">:SyntasticCheck  <span class="comment"># 手动调用语法检查</span></div><div class="line">:SyntasticSetLoclist  <span class="comment"># 手动输出错误到quick-fix，但不会打开错误窗口。</span></div><div class="line">:lnext  <span class="comment"># 到下一个错误</span></div><div class="line">:lprevious  <span class="comment"># 到上一个错误</span></div></pre></td></tr></table></figure></p>
+<p>修改Syntastic的高亮颜色来适应当前自己的Vim主题色：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">highlight SyntasticErrorSign guifg=white guibg=black</div></pre></td></tr></table></figure></p>
+<p>Try it yourself!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/10/28/vim-to-be-like-a-IDE/" data-id="ciutn5ne10005dtpmxb61zxj4" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-touch-event-in-mobiles" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -117,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciutju0do0005rvpm7qo6tpxv" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciutn5ndx0004dtpm8vq5vja2" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/touch/">touch</a></li></ul>
@@ -185,7 +242,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciutju0dm0004rvpmsanvls7u" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciutn5ne80006dtpmv54c5d2u" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
@@ -241,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciutju0ds0006rvpmxlplmcv1" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciutn5ned0009dtpmc7ihoyba" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -298,7 +355,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciutju0d70000rvpm1rb0vfzd" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciutn5ndg0000dtpmddrk5beh" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
@@ -359,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciutju0df0001rvpmxcqmqc3w" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciutn5ndp0001dtpmoaafx13m" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -378,7 +435,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -388,9 +445,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li></ul>
     </div>
   </div>
 
@@ -400,14 +457,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a>
+      <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -417,9 +474,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/10/28/vim-to-be-like-a-IDE/">把Vim打造成一枚IDE</a>
+          </li>
         
           <li>
             <a href="/2016/10/28/touch-event-in-mobiles/">移动开发中的touch事件相关问题</a>
@@ -435,10 +496,6 @@
         
           <li>
             <a href="/2016/10/21/Nginx-reverse-proxy/">在云服务器上配置Nginx反向代理Node服务</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/20/how-to-play-with-hexo/">How to play with Hexo</a>
           </li>
         
       </ul>
