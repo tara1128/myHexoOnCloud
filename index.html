@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -109,7 +109,7 @@
 <h3 id="TouchEvent的srcElement和target"><a href="#TouchEvent的srcElement和target" class="headerlink" title="TouchEvent的srcElement和target"></a>TouchEvent的srcElement和target</h3><p>在IE6-8中事件模型与标准不同，非标准的el.attachEvent()绑定的事件监听里，其事件对象的srcElement等价于target。</p>
 <h3 id="TouchEvent的touches"><a href="#TouchEvent的touches" class="headerlink" title="TouchEvent的touches"></a>TouchEvent的touches</h3><p>touches返回的是一个TouchList对象，包含了所有当前接触触摸平面的触点的Touch对象，无论它们的起始于哪个element上，也无论它们状态是否发生了变化。（请区别于TouchEvent.targetTouches）<br>通常使用touches[0]拿到触点及其位置属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var touch = e.touches[0];</div><div class="line">var touchStartX = touch.pageX;</div><div class="line">var touchStartY = touch.pageY;</div></pre></td></tr></table></figure></p>
 <p>然后在touchmove中计算出某个方向的位移量：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var touch = e.touches[0]; <span class="comment"># 这几行是写在touchmove事件处理函数中！</span></div><div class="line">var deltaX = touch.pageX - touchStartX;</div><div class="line">var deltaY = touch.pageY - touchStartY;</div></pre></td></tr></table></figure></p>
-<p>虽然在手指滑动的过程中会不断触发touchmove，但是每一次都会更新delta值，因此可以获取到最新的值。但考虑到频繁触发，建议不要在touchmove的处理函数中做大量复杂的计算。<br>当然，拿到最新的delta位移，还是要在touchend里做响应：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这是在touchend里的处理：</span></div><div class="line"><span class="keyword">if</span>( deltaX &lt; 20 )&#123;</div><div class="line">  <span class="comment"># 位移太小，老子不做响应</span></div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  <span class="comment"># Do something ...</span></div><div class="line">  touchStartX = 0;</div><div class="line">  deltaX = 0; <span class="comment"># 干完事儿了要清零</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>虽然在手指滑动的过程中会不断触发touchmove，但是每一次都会更新delta值，因此可以获取到最新的值。但考虑到频繁触发，建议不要在touchmove的处理函数中做大量复杂的计算。<br>当然，拿到最新的delta位移，还是要在touchend里做响应：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这是在touchend里的处理：</span></div><div class="line"><span class="keyword">if</span>( Math.abs(deltaX) &lt; 20 )&#123;</div><div class="line">  <span class="comment"># 位移太小，老子不做响应</span></div><div class="line">  <span class="comment"># deltaX可能是负值，因此要用绝对值来判断位移量的大小！</span></div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  <span class="comment"># Do something ...</span></div><div class="line">  touchStartX = 0;</div><div class="line">  deltaX = 0; <span class="comment"># 干完事儿了要清零</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h3 id="TouchEvent的targetTouches"><a href="#TouchEvent的targetTouches" class="headerlink" title="TouchEvent的targetTouches"></a>TouchEvent的targetTouches</h3><p>也是返回一个TouchList对象，是包含了如下触点的Touch对象：触摸起始于当前事件的目标element上，并且仍然没有离开触摸平面的触点。(具体区别要做一个实验才能看出来)</p>
 <h2 id="touchcancel-事件"><a href="#touchcancel-事件" class="headerlink" title="touchcancel 事件"></a>touchcancel 事件</h2><p>正常的touch好像是不会触发touchcancel。它是当触点由于某些原因被中断时而触发。比如弹窗。And，当用户产生的触点个数超过了设备支持的个数，从而导致TouchList中最早的Touch对象被取消。（最后这句话是转的，待验证）</p>
 <p>That maybe so much about it.</p>
@@ -117,7 +117,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciutju0do0005rvpm7qo6tpxv" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciutju0do0005rvpm7qo6tpxv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/touch/">touch</a></li></ul>
@@ -185,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciutju0dm0004rvpmsanvls7u" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciutju0dm0004rvpmsanvls7u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
@@ -241,7 +241,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciutju0ds0006rvpmxlplmcv1" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciutju0ds0006rvpmxlplmcv1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -298,7 +298,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciutju0d70000rvpm1rb0vfzd" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciutju0d70000rvpm1rb0vfzd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
@@ -359,7 +359,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciutju0df0001rvpmxcqmqc3w" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciutju0df0001rvpmxcqmqc3w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -378,7 +378,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -388,7 +388,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li></ul>
     </div>
@@ -398,7 +398,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a>
     </div>
@@ -417,7 +417,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -454,7 +454,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
