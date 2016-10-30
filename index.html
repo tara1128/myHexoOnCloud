@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -97,10 +97,14 @@
         <p>Regular Expression，RegExp，正则表达式，作为一种常用工具，虽然长得很像外星文，但如果写得好，可以极大的提高代码执行效率。正则表达式的功能就是执行字符串的查找和替换，正确的使用正则，可以避免繁琐的代码循环。</p>
 <p>本文记录一些常用的要点，便于工作时查阅。</p>
 <h2 id="常见字符"><a href="#常见字符" class="headerlink" title="常见字符"></a>常见字符</h2><p>.     : 匹配任意字符，换行符除外<br>\d    : 等价于[0-9]，匹配数字<br>\D    : 等价于[^0-9]，匹配非数字<br>\w    : 等价于[A-Za-z0-9_]，别忘了下划线！<br>\W    : 等价于[^A-Za-z0-9]<br>\s    : 匹配空白符，包括空格、制表符、换行符、换页符（\f\n\r\t\v）<br>\S    : 匹配非空白符<br>\t    : 匹配水平制表符tab<br>\v    : 匹配垂直制表符vertical tab<br>\r    : 匹配回车符carriage return<br>\n    : 匹配换行符linefeed<br>\f    : 匹配换页符form-feed<br>[\b]  : 匹配退格键backspace，与\b不同。<br>\0    : 匹配一个NUL字符<br>\cX   : X为A-Z中的字符，匹配control-X</p>
-<h2 id="常见边界"><a href="#常见边界" class="headerlink" title="常见边界"></a>常见边界</h2><p>^     : 匹配字符串的开始，/^A/匹配’Anta’，不匹配’antA’<br>$     : 匹配字符串的结尾，/t$/匹配’eat’，不匹配’tea’<br>\b    : 匹配零宽单词边界（字母与空格之间），/\bno/匹配’at noon’中的’no’<br>\B    : 匹配零宽非单词边界（两字母之间，或两空格之间）/\Bon/匹配’at noon’中的’on’</p>
+<h2 id="常见边界"><a href="#常见边界" class="headerlink" title="常见边界"></a>常见边界</h2><p>^     : 匹配字符串的开始，/^A/匹配’Anta’，不匹配’antA’<br>$     : 匹配字符串的结尾，/t$/匹配’eat’，不匹配’tea’<br>\b    : 匹配零宽单词边界（字母与空格之间，即匹配\w与\W之间的空间），/\bno/匹配’at noon’中的’no’<br>\B    : 匹配零宽非单词边界（两字母之间，或两空格之间）/\Bon/匹配’at noon’中的’on’<br>\b 和 \B，只匹配位置，不匹配字符。用\bcat\b匹配都的字符串长度是3，不是5.</p>
 <h2 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h2><p>+     : 匹配一个或多个，至少一个（+放在字符或字符集的后面，\w+）<br>*     : 匹配0个或多个，可以是0次，可以多次，表示字符可有可无<br>?     : 匹配0个或1个，最多不超1个。例如合法URL的https中的s，可出现0次或1次<br>{3}   : 匹配重复3次，精确次数，\d{3}<br>{3, } : 匹配至少3个，\d{3, } 匹配至少3个数字<br>{2,4} : 匹配最少2次，最多4次。</p>
 <h2 id="「贪婪型」匹配和「懒惰型」匹配"><a href="#「贪婪型」匹配和「懒惰型」匹配" class="headerlink" title="「贪婪型」匹配和「懒惰型」匹配"></a>「贪婪型」匹配和「懒惰型」匹配</h2><p>贪婪型字符，*，+，{n, } 等字符在匹配时的行为模式是“多多益善”，而不是“适可而止”。它们会尽可能的从一段文本中的开头一直匹配到文本末尾，而不是匹配到第一个匹配为止。</p>
 <p>解决的方法，就是让贪婪型变成懒惰型，匹配一个即停止。在字符后面加“?”即可。<br>* =====&gt; *?<br>+ =====&gt; +?<br>{n, } ======&gt; {n, }?</p>
+<h2 id="分行匹配模式"><a href="#分行匹配模式" class="headerlink" title="分行匹配模式"></a>分行匹配模式</h2><p>例如一段代码中有分散的几行是注释（双斜杠”//“开头的一行），如何用分行模式将其匹配出来？正则中的分行匹配模式（multiline mode）即(?m)记号可以让正则的引擎把行分隔符当作一个字符串的分隔符来对待。这时候，^将不仅匹配正常的字符串开头，还将匹配换行符后的开始位置；同理，$将不仅匹配字符串的结尾，还匹配换行符后面的结束位置。</p>
+<p>需要注意的是，(?m)分行记号必须出现在正则表达式的最前面。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(?m)^\s*//.*$</div></pre></td></tr></table></figure></p>
+<p>(?m)表示匹配多行，^\s*表示字符串的开始，后面是任意个空白字符，然后是双斜杠，然后是任意个任意字符，最后是字符串结尾。</p>
+<h2 id="子表达式"><a href="#子表达式" class="headerlink" title="子表达式"></a>子表达式</h2><p>（未完待续……）</p>
 
       
     </div>
@@ -484,7 +488,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -513,7 +517,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -523,7 +527,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
