@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,66 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-regular-expression" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/30/regular-expression/" class="article-date">
+  <time datetime="2016-10-30T05:56:48.000Z" itemprop="datePublished">2016-10-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/30/regular-expression/">正则表达式的常用要点小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Regular Expression，RegExp，正则表达式，作为一种常用工具，虽然长得很像外星文，但如果写得好，可以极大的提高代码执行效率。正则表达式的功能就是执行字符串的查找和替换，正确的使用正则，可以避免繁琐的代码循环。</p>
+<p>本文记录一些常用的要点，便于工作时查阅。</p>
+<h2 id="常见字符"><a href="#常见字符" class="headerlink" title="常见字符"></a>常见字符</h2><p>.     : 匹配任意字符，换行符除外<br>\d    : 等价于[0-9]，匹配数字<br>\D    : 等价于[^0-9]，匹配非数字<br>\w    : 等价于[A-Za-z0-9_]，别忘了下划线！<br>\W    : 等价于[^A-Za-z0-9]<br>\s    : 匹配空白符，包括空格、制表符、换行符、换页符（\f\n\r\t\v）<br>\S    : 匹配非空白符<br>\t    : 匹配水平制表符tab<br>\v    : 匹配垂直制表符vertical tab<br>\r    : 匹配回车符carriage return<br>\n    : 匹配换行符linefeed<br>\f    : 匹配换页符form-feed<br>[\b]  : 匹配退格键backspace，与\b不同。<br>\0    : 匹配一个NUL字符<br>\cX   : X为A-Z中的字符，匹配control-X</p>
+<h2 id="常见边界"><a href="#常见边界" class="headerlink" title="常见边界"></a>常见边界</h2><p>^     : 匹配字符串的开始，/^A/匹配’Anta’，不匹配’antA’<br>$     : 匹配字符串的结尾，/t$/匹配’eat’，不匹配’tea’<br>\b    : 匹配零宽单词边界（字母与空格之间），/\bno/匹配’at noon’中的’no’<br>\B    : 匹配零宽非单词边界（两字母之间，或两空格之间）/\Bon/匹配’at noon’中的’on’</p>
+<h2 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h2><ul>
+<li>: 匹配一个或多个，至少一个（+放在字符或字符集的后面，\w+）</li>
+</ul>
+<ul>
+<li>: 匹配0个或多个，可以是0次，可以多次，表示字符可有可无<br>?     : 匹配0个或1个，最多不超1个。例如合法URL的https中的s，可出现0次或1次<br>{3}   : 匹配重复3次，精确次数，\d{3}<br>{3, } : 匹配至少3个，\d{3, } 匹配至少3个数字<br>{2,4} : 匹配最少2次，最多4次。</li>
+</ul>
+<h2 id="「贪婪型」匹配和「懒惰型」匹配"><a href="#「贪婪型」匹配和「懒惰型」匹配" class="headerlink" title="「贪婪型」匹配和「懒惰型」匹配"></a>「贪婪型」匹配和「懒惰型」匹配</h2><p>贪婪型字符，*，+，{n, } 等字符在匹配时的行为模式是“多多益善”，而不是“适可而止”。它们会尽可能的从一段文本中的开头一直匹配到文本末尾，而不是匹配到第一个匹配为止。</p>
+<p>解决的方法，就是让贪婪型变成懒惰型，匹配一个即停止。在字符后面加“?”即可。</p>
+<ul>
+<li>=====&gt; *?</li>
+</ul>
+<ul>
+<li>=====&gt; +?<br>{n, } ======&gt; {n, }?</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/10/30/regular-expression/" data-id="ciuwctycv000aqqpmgfkw5qug" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RegExp/">RegExp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-vim-to-be-like-a-IDE" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -113,7 +173,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/vim-to-be-like-a-IDE/" data-id="ciutn5ne10005dtpmxb61zxj4" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/28/vim-to-be-like-a-IDE/" data-id="ciuwctycr0006qqpmta4b0mba" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
@@ -174,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciutn5ndx0004dtpm8vq5vja2" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciuwctycz000cqqpmqa5o2gfk" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/touch/">touch</a></li></ul>
@@ -242,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciutn5ne80006dtpmv54c5d2u" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="ciuwctyc30000qqpmgwnwouoq" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
@@ -298,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciutn5ned0009dtpmc7ihoyba" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/26/using-apt-get/" data-id="ciuwctycg0004qqpmvrpg9urw" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -355,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciutn5ndg0000dtpmddrk5beh" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciuwctyc90001qqpmxbssr0yv" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
@@ -416,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciutn5ndp0001dtpmoaafx13m" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciuwctycl0005qqpmtmx0uug9" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -435,7 +495,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -445,9 +505,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li></ul>
     </div>
   </div>
 
@@ -455,16 +515,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+      <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -474,9 +534,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/10/30/regular-expression/">正则表达式的常用要点小结</a>
+          </li>
         
           <li>
             <a href="/2016/10/28/vim-to-be-like-a-IDE/">把Vim打造成一枚IDE</a>
@@ -494,10 +558,6 @@
             <a href="/2016/10/26/using-apt-get/">会用apt-get安装了，可怎样算卸载干净？</a>
           </li>
         
-          <li>
-            <a href="/2016/10/21/Nginx-reverse-proxy/">在云服务器上配置Nginx反向代理Node服务</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -511,7 +571,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
