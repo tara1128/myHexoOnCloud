@@ -15,7 +15,7 @@ ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;
 <meta property="og:description" content="最近在写一个React的小项目，用了ES6的写法，略生疏。部分ES5与ES6的对应写法，在此做一简短记录，便于日后查阅。
 Arrow FunctionsES6最显眼的区别于ES5的变化之一就是箭头函数了。写惯了JS的传统function，对箭头函数的感觉还是不够热：
 ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;);">
-<meta property="og:updated_time" content="2016-11-01T05:40:01.000Z">
+<meta property="og:updated_time" content="2016-11-01T05:42:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning ES6">
 <meta name="twitter:description" content="最近在写一个React的小项目，用了ES6的写法，略生疏。部分ES5与ES6的对应写法，在此做一简短记录，便于日后查阅。
@@ -64,7 +64,7 @@ ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -104,7 +104,8 @@ ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;
 <p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array.map(<span class="keyword">function</span>(v, i) &#123;</div><div class="line">  <span class="built_in">return</span> v + 1;  </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array.map( (v, i) =&gt; v + 1  )</div></pre></td></tr></table></figure></p>
 <p>======= 我是一只分割线 =======</p>
-<p>ES5的写法：<br>`` bash<br>numbers.forEach(function(v) {<br>  if(v % 2 == 0){<br>    console.log(v);<br>  }<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">ES6的写法：</div><div class="line">``` bash</div><div class="line">numbers.forEach(v =&gt; &#123;</div><div class="line">  if(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(<span class="keyword">function</span>(v) &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(v =&gt; &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 <p>======= 我也是一只分割线 =======</p>
 <p>对于定义一个类：<br>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var Person = <span class="keyword">function</span>(id, name) &#123;</div><div class="line">  this.id = id;</div><div class="line">  this.name = name;</div><div class="line">  this.speak(name);</div><div class="line">&#125;;</div><div class="line">Person.prototype.speak = <span class="keyword">function</span>(name) &#123;</div><div class="line">  console.log(<span class="string">'My name is '</span>, name);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor (id, name) &#123;  <span class="comment"># 构造函数</span></div><div class="line">    this.id = id;</div><div class="line">    this.name = name;</div><div class="line">    this.speak(name);</div><div class="line">  &#125;</div><div class="line">  speak(name) &#123;</div><div class="line">    console.log(<span class="string">'My name is '</span>, name);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -148,7 +149,7 @@ ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorier</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -177,7 +178,7 @@ ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -187,7 +188,7 @@ ES5的写法：123array.map(function(v, i) &amp;#123;  return v + 1;  &amp;#125;
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
