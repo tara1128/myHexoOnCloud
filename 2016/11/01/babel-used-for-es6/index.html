@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Run Faster To Get A Bite</title>
+  <title>Using Babel to Deal with ES6 | Run Faster To Get A Bite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A tiny personal blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Run Faster To Get A Bite">
-<meta property="og:url" content="http://shaojing.wang/index.html">
+  <meta name="description" content="测试ES6的支持情况下午在测试ES6的语句，先是在目录里新建一个app.js文件，写码如下：1() =&amp;gt; &amp;#123;console.log(&apos;This is an arrow function!&apos;);&amp;#125;();
+在Node环境下（V5+）可执行。浏览器不支持（Of course……）
+然后又随意写了一个箭头函数：123456var arr = [100, 29, 38, 57, 4">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Using Babel to Deal with ES6">
+<meta property="og:url" content="http://shaojing.wang/2016/11/01/babel-used-for-es6/index.html">
 <meta property="og:site_name" content="Run Faster To Get A Bite">
-<meta property="og:description" content="A tiny personal blog">
+<meta property="og:description" content="测试ES6的支持情况下午在测试ES6的语句，先是在目录里新建一个app.js文件，写码如下：1() =&amp;gt; &amp;#123;console.log(&apos;This is an arrow function!&apos;);&amp;#125;();
+在Node环境下（V5+）可执行。浏览器不支持（Of course……）
+然后又随意写了一个箭头函数：123456var arr = [100, 29, 38, 57, 4">
+<meta property="og:updated_time" content="2016-11-01T08:50:42.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Run Faster To Get A Bite">
-<meta name="twitter:description" content="A tiny personal blog">
+<meta name="twitter:title" content="Using Babel to Deal with ES6">
+<meta name="twitter:description" content="测试ES6的支持情况下午在测试ES6的语句，先是在目录里新建一个app.js文件，写码如下：1() =&amp;gt; &amp;#123;console.log(&apos;This is an arrow function!&apos;);&amp;#125;();
+在Node环境下（V5+）可执行。浏览器不支持（Of course……）
+然后又随意写了一个箭头函数：123456var arr = [100, 29, 38, 57, 4">
   
     <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
   
@@ -66,9 +73,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-babel-used-for-es6" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-babel-used-for-es6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/01/babel-used-for-es6/" class="article-date">
   <time datetime="2016-11-01T06:54:11.000Z" itemprop="datePublished">2016-11-01</time>
@@ -85,8 +90,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/babel-used-for-es6/">Using Babel to Deal with ES6</a>
+    <h1 class="article-title" itemprop="name">
+      Using Babel to Deal with ES6
     </h1>
   
 
@@ -128,75 +133,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-es5-to-es6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/01/es5-to-es6/" class="article-date">
-  <time datetime="2016-11-01T03:37:56.000Z" itemprop="datePublished">2016-11-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/es5-to-es6/">Learning ES6</a>
-    </h1>
+    <a href="/2016/11/01/es5-to-es6/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Learning ES6</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在写一个React的小项目，用了ES6的写法，略生疏。部分ES5与ES6的对应写法，在此做一简短记录，便于日后查阅。</p>
-<h2 id="Arrow-Functions"><a href="#Arrow-Functions" class="headerlink" title="Arrow Functions"></a>Arrow Functions</h2><p>ES6最显眼的区别于ES5的变化之一就是箭头函数了。写惯了JS的传统function，对箭头函数的感觉还是不够热：</p>
-<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array.map(<span class="keyword">function</span>(v, i) &#123;</div><div class="line">  <span class="built_in">return</span> v + 1;  </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array.map( (v, i) =&gt; v + 1  )</div></pre></td></tr></table></figure></p>
-<p>======= 我是一只分割线 =======</p>
-<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(<span class="keyword">function</span>(v) &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(v =&gt; &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>======= 我也是一只分割线 =======</p>
-<p>对于定义一个类：<br>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var Person = <span class="keyword">function</span>(id, name) &#123;</div><div class="line">  this.id = id;</div><div class="line">  this.name = name;</div><div class="line">  this.speak(name);</div><div class="line">&#125;;</div><div class="line">Person.prototype.speak = <span class="keyword">function</span>(name) &#123;</div><div class="line">  console.log(<span class="string">'My name is '</span>, name);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor (id, name) &#123;  <span class="comment"># 构造函数</span></div><div class="line">    this.id = id;</div><div class="line">    this.name = name;</div><div class="line">    this.speak(name);</div><div class="line">  &#125;</div><div class="line">  speak(name) &#123;</div><div class="line">    console.log(<span class="string">'My name is '</span>, name);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>======= 我会告诉你我是一只分割线吗 =======</p>
-<p>在React里用createClass定义一个组件类。<br>ES5的写法就是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">var App = React.createClass(&#123;</div><div class="line">  getDefaultProps: <span class="function"><span class="title">function</span></span>() &#123;   <span class="comment"># 获取默认属性</span></div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">      autoLoad: <span class="literal">false</span>,</div><div class="line">      initWidth: 100,</div><div class="line">      appName: <span class="string">'A Name'</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  propTypes: &#123;</div><div class="line">    autoLoad: React.PropTypes.bool.isRequired,</div><div class="line">    initWidth: React.PropTypes.number.isRequired,</div><div class="line">    appName: React.PropTypes.string.isRequired</div><div class="line">  &#125;,</div><div class="line">  getInitialState: <span class="function"><span class="title">function</span></span>() &#123;   <span class="comment"># 初始化state</span></div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">      currentWidth: 100,</div><div class="line">      currentState: 1</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  handleChange: <span class="keyword">function</span>(e) &#123;  <span class="comment"># 一个普通的监听后执行的回调函数</span></div><div class="line">    this.setState(&#123;</div><div class="line">      currentWidth: 200,</div><div class="line">      currentState: 0</div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  render: <span class="function"><span class="title">function</span></span>() &#123;  <span class="comment"># 渲染模板</span></div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'wrapper'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;this.handleChange&#125; /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>ES6的写法则为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">class App extends React.Component &#123;</div><div class="line">  static defaultProps = &#123;   <span class="comment"># ES6用static成员实现默认属性</span></div><div class="line">    autoLoad: <span class="literal">false</span>,</div><div class="line">    initWidth: 100,</div><div class="line">    appName: <span class="string">'A Name'</span></div><div class="line">  &#125;; <span class="comment"># 这里有分号！</span></div><div class="line">  static propTypes = &#123;</div><div class="line">    autoLoad: React.PropTypes.bool.isRequired,</div><div class="line">    initWidth: React.PropTypes.number.isRequired,</div><div class="line">    appName: React.PropTypes.string.isRequired</div><div class="line">  &#125;; <span class="comment"># 这里也有分号！</span></div><div class="line"></div><div class="line">  constructor(props) &#123;  <span class="comment"># 在构造函数中初始化state</span></div><div class="line">    super(props); <span class="comment"># 继承</span></div><div class="line">    this.state = &#123;</div><div class="line">      currentWidth: 100,</div><div class="line">      currentState: 1</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleChange(e) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      currentWidth: 200,</div><div class="line">      currentState: 0</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">componentWillMount</span></span>() &#123; <span class="comment"># 另外加一个监听器的例子</span></div><div class="line">    Something.addEventListener(<span class="string">'change'</span>, this.onAppChange);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">componentDidUnmount</span></span>() &#123;</div><div class="line">    Something.removeEventListener(<span class="string">'change'</span>, this.onAppChange);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  onAppChange = (event) =&gt; &#123;  <span class="comment"># onAppChange的值是箭头函数，初始化时即绑好this</span></div><div class="line">    <span class="comment"># Do whatever you want</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'wrapper'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;this.handleChange.bind(this)&#125; /&gt;</div><div class="line">        <span class="comment"># 或：&lt;input type='text' onChange=&#123;e=&gt;this.handleChange(e)&#125; /&gt;</span></div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>======= 我会告诉你我是一只分割线吗 =======</p>
-<p>其他的写法</p>
-<p>比如import时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var MyComp = require(<span class="string">'./MyComp'</span>); <span class="comment"># ES5</span></div><div class="line">import MyComp from <span class="string">'./MyComp'</span>; <span class="comment"># ES6</span></div></pre></td></tr></table></figure></p>
-<p>比如exports时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">module.exports = MyComp; <span class="comment"># ES5</span></div><div class="line"><span class="built_in">export</span> default class MyComp extends Component&#123; ... &#125; <span class="comment"># ES6</span></div></pre></td></tr></table></figure></p>
-<p>最后推荐一个好东东：<a href="http://es6-features.org/#Constants" target="_blank" rel="external">ECMAScript 6 — New Features: Overview &amp; Comparison</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/01/es5-to-es6/" data-id="ciuz98m810006dupmzio7qro4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">

@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,63 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-Nginx-reverse-proxy" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/21/Nginx-reverse-proxy/" class="article-date">
+  <time datetime="2016-10-21T14:57:57.000Z" itemprop="datePublished">2016-10-21</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/Nginx-reverse-proxy/">在云服务器上配置Nginx反向代理Node服务</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>刚买的云主机，服务启动后，先安装了Nginx，做了基本的配置之后，发现开发一个完整的WebApp，Javascript只能写前端的逻辑，服务端的逻辑就要涉及到PHP、Java、.etc，对我而言学习的时间成本略高于我当前的开发进度需求。于是自然想到Node，服务端的Javascript的不二选择。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>通常Node服务的端口都不是80，而我的云主机绑定了域名之后，自然不愿让用户在访问时还要在域名后面输入9000、3000这些端口号。So，如何让Nginx代理Node服务并且对外端口是80？</p>
+<h2 id="问题尝试"><a href="#问题尝试" class="headerlink" title="问题尝试"></a>问题尝试</h2><p>想到既然Node本身就是可以提供服务的，那么直接用Node就好了啊，可是Node服务进程退出之后，服务也随之停止了。于是找到了两款解决此问题的工具：Forever和pm2。<br>相比而言，尽管Forever的名字很浪漫，但是pm2更好用。<br>全局安装pm2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install pm2@latest -g</div></pre></td></tr></table></figure></p>
+<p>启动pm2，开启监视，每次更新文件，页面自动刷新：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 start app.js --watch</div></pre></td></tr></table></figure></p>
+<p>停止pm2进程，但没有停止监视：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 stop 0  <span class="comment">#不会停止watching</span></div></pre></td></tr></table></figure></p>
+<p>停止pm2进程，同时停止监视：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ pm2 stop --watch 0  <span class="comment">#同时停止watching</span></div></pre></td></tr></table></figure></p>
+<p>更多PM2，<a href="http://pm2.keymetrics.io/docs/usage/quick-start/" target="_blank" rel="external">查看这里</a></p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>由于Nginx可以做到reverse proxy，也就是以代理服务器的方式来接收网络请求，然后将请求转发给内部网络上的另外一个服务器，再从这个服务器上得到的响应内容返回给发送请求的客户端。<br>由此，需要更改Nginx的配置文件。<br>先找到Nginx的配置文件，试过Mac、Ubuntu、和CentOS等操作系统，发现Nginx的配置文件的位置是不一样的。在Ubuntu上可以用以下命令来找到某个文件的位置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">whereis nginx</div></pre></td></tr></table></figure></p>
+<p>而在Mac下，可以用which命令来找文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">which</span> nginx</div></pre></td></tr></table></figure></p>
+<p>关于寻找文件的问题，以后再细说，有点跑题了…<br>Anyway，我的云主机是Ubuntu系统，So，Nginx配置文件在：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /usr/<span class="built_in">local</span>/nginx/conf/nginx.conf  <span class="comment">#默认编辑器我喜欢用Vim，你也可以用Nano</span></div></pre></td></tr></table></figure></p>
+<p>在配置文件里找到http模块，添加一个upstream模块：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">upstream node_app &#123;</div><div class="line">  server 127.0.0.1:8081;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>8081就是我们自己Node服务的端口号。<br>然后找到监听80端口的那个server模块，做一些修改：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen  80;</div><div class="line">  server_name   localhost;</div><div class="line">  location / &#123;</div><div class="line">    proxy_pass  http://node_app;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>然后重启Nginx：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/nginx restart</div></pre></td></tr></table></figure></p>
+<p>如此一来，当使用域名访问主机时，就会被代理服务请求到8081的Node服务。<br>同时，也可以配置另外一个监听80端口的server模块：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  listen  80;</div><div class="line">  server_name   123.456.789.123;  <span class="comment">#云主机的公网ip地址</span></div><div class="line">  location / &#123;</div><div class="line">    root  /home/ubuntu/var/www;</div><div class="line">    index index.html index.htm;   <span class="comment">#PHP等服务指向的index页面</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>重启Nginx后，用域名访问的是Node服务，用ip地址访问的就是PHP的index页面。<br>Isn’t that nice and fun ?</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/" data-id="ciuz98m7n0001dupmc8dbh0zh" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/proxy/">proxy</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-how-to-play-with-hexo" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -117,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciuz2fuz8000bjypmy7pyosqx" class="article-share-link">Delen</a>
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciuz98m7v0004dupm7rcscto2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
@@ -140,7 +197,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -150,7 +207,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li></ul>
     </div>
@@ -162,14 +219,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+      <a href="/tags/ES6/" style="font-size: 20px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 20px;">nginx</a> <a href="/tags/node/" style="font-size: 20px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -179,9 +236,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/01/babel-used-for-es6/">Using Babel to Deal with ES6</a>
+          </li>
         
           <li>
             <a href="/2016/11/01/es5-to-es6/">Learning ES6</a>
@@ -197,10 +258,6 @@
         
           <li>
             <a href="/2016/10/28/vim-to-be-like-a-IDE/">把Vim打造成一枚IDE</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/28/touch-event-in-mobiles/">移动开发中的touch事件相关问题</a>
           </li>
         
       </ul>
