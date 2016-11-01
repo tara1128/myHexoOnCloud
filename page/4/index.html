@@ -3,21 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>在云服务器上配置Nginx反向代理Node服务 | Run Faster To Get A Bite</title>
+  <title>Run Faster To Get A Bite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题背景刚买的云主机，服务启动后，先安装了Nginx，做了基本的配置之后，发现开发一个完整的WebApp，Javascript只能写前端的逻辑，服务端的逻辑就要涉及到PHP、Java、.etc，对我而言学习的时间成本略高于我当前的开发进度需求。于是自然想到Node，服务端的Javascript的不二选择。
-问题描述通常Node服务的端口都不是80，而我的云主机绑定了域名之后，自然不愿让用户在访问时">
-<meta property="og:type" content="article">
-<meta property="og:title" content="在云服务器上配置Nginx反向代理Node服务">
-<meta property="og:url" content="http://shaojing.wang/2016/10/21/Nginx-reverse-proxy/index.html">
+  <meta name="description" content="A tiny personal blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Run Faster To Get A Bite">
+<meta property="og:url" content="http://shaojing.wang/page/4/index.html">
 <meta property="og:site_name" content="Run Faster To Get A Bite">
-<meta property="og:description" content="问题背景刚买的云主机，服务启动后，先安装了Nginx，做了基本的配置之后，发现开发一个完整的WebApp，Javascript只能写前端的逻辑，服务端的逻辑就要涉及到PHP、Java、.etc，对我而言学习的时间成本略高于我当前的开发进度需求。于是自然想到Node，服务端的Javascript的不二选择。
-问题描述通常Node服务的端口都不是80，而我的云主机绑定了域名之后，自然不愿让用户在访问时">
-<meta property="og:updated_time" content="2016-10-23T06:16:13.000Z">
+<meta property="og:description" content="A tiny personal blog">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在云服务器上配置Nginx反向代理Node服务">
-<meta name="twitter:description" content="问题背景刚买的云主机，服务启动后，先安装了Nginx，做了基本的配置之后，发现开发一个完整的WebApp，Javascript只能写前端的逻辑，服务端的逻辑就要涉及到PHP、Java、.etc，对我而言学习的时间成本略高于我当前的开发进度需求。于是自然想到Node，服务端的Javascript的不二选择。
-问题描述通常Node服务的端口都不是80，而我的云主机绑定了域名之后，自然不愿让用户在访问时">
+<meta name="twitter:title" content="Run Faster To Get A Bite">
+<meta name="twitter:description" content="A tiny personal blog">
   
     <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
   
@@ -70,7 +66,9 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Nginx-reverse-proxy" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main">
+  
+    <article id="post-Nginx-reverse-proxy" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/21/Nginx-reverse-proxy/" class="article-date">
   <time datetime="2016-10-21T14:57:57.000Z" itemprop="datePublished">2016-10-21</time>
@@ -87,8 +85,8 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      在云服务器上配置Nginx反向代理Node服务
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/21/Nginx-reverse-proxy/">在云服务器上配置Nginx反向代理Node服务</a>
     </h1>
   
 
@@ -123,29 +121,76 @@
     </footer>
   </div>
   
-    
-<nav id="article-nav">
-  
-    <a href="/2016/10/26/using-apt-get/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
-      <div class="article-nav-title">
-        
-          会用apt-get安装了，可怎样算卸载干净？
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2016/10/20/how-to-play-with-hexo/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
-      <div class="article-nav-title">How to play with Hexo</div>
-    </a>
-  
-</nav>
+</article>
 
+
+  
+    <article id="post-how-to-play-with-hexo" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/20/how-to-play-with-hexo/" class="article-date">
+  <time datetime="2016-10-20T02:58:26.000Z" itemprop="datePublished">2016-10-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/20/how-to-play-with-hexo/">How to play with Hexo</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了快速搭建个人博客，方便记录日常零碎的知识点，我用了Hexo。具体的操作步骤在<a href="https://hexo.io/" target="_blank" rel="external">Hexo官网</a>有详细的介绍，此不赘述。<br>值得一记的是，博客发布到Git仓库并部署到我的云服务器。</p>
+<h2 id="基本流程"><a href="#基本流程" class="headerlink" title="基本流程"></a>基本流程</h2><p>1：本地搭建Hexo环境，启动一个Hexo项目。日常的博客编写都在本地。<br>2：在Git里创建一个Git项目。<br>3：本地安装Hexo的hexo-deployer-git插件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
+<p>4：在Hexo的配置文件里配置Deployment参数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: &lt;repository url&gt;</div><div class="line">  branch: [branch]</div><div class="line">  message: [message]</div></pre></td></tr></table></figure></p>
+<p>5：在本地Hexo项目根目录执行如下命令，即可自动提交到远程Git仓库：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate --deploy</div></pre></td></tr></table></figure></p>
+<p>6：本地测试，执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
+<p>7：在云服务器上Clone这个远程Git项目到某目录。<br>8：配置服务器上Nginx，指向目标目录。</p>
+<h2 id="耗费时间的问题"><a href="#耗费时间的问题" class="headerlink" title="耗费时间的问题"></a>耗费时间的问题</h2><p>在云服务器上Clone Git失败！<br>原因是我登录云服务器的账号不是root，而且没有~/.ssh目录的执行权限。因此ssh-keygen会失败。开始我用sudo ssh-keygen，但这样生成的是root下的key，而不是我的账号所需的key，仍然无法clone git项目。<br>解决方法：修改~/.ssh/目录的权限！<br>先查看目录权限<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ ll <span class="_">-d</span> .ssh/</div></pre></td></tr></table></figure></p>
+<p>打印出如下内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">drwxr-x--x 2 root root 4096 Oct 20 14:28 .ssh/</div></pre></td></tr></table></figure></p>
+<p>这表示目录所在组和所有者都是root，改之：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown ubuntu:ubuntu .ssh/</div></pre></td></tr></table></figure></p>
+<p>这样就把.ssh/目录的所有者改为了ubuntu，也就是我的账号。<br>这样我就可以为所欲为了。开始生成ssh key：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh-keygen</div></pre></td></tr></table></figure></p>
+<p>默认会保存在~/.ssh/目录下，带有pub后缀的是公钥，打印之：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat ~/.ssh/id_rsa.pub</div></pre></td></tr></table></figure></p>
+<p>保存到Git账户的Settings里即可。</p>
+<p>测试云服务器是否可以访问Git项目，执行命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh -T git@github.com</div></pre></td></tr></table></figure></p>
+<p>如果出现“You’ve successfully authenticated”字样，表示可以美美的Clone Git项目去了。</p>
+<p>至此，在本地就可以开心的写博客了！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new post <span class="string">"My new article"</span>  <span class="comment">#新建文章</span></div></pre></td></tr></table></figure></p>
+<p>如果删除某个文章，可以直接删除source目录下的.md文件，再执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo clean  <span class="comment">#清理database和public fold，然后再做generate</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate --deploy  <span class="comment">#生成和发布</span></div></pre></td></tr></table></figure>
+<p>更新云服务器之前，可以在本地先测试效果：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server  <span class="comment">#本地测试</span></div></pre></td></tr></table></figure></p>
+<p>测试通过后，即可在云服务器上更新Git目录了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/10/20/how-to-play-with-hexo/" data-id="ciuywcqif00040apmjaowphj9" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
+
+    </footer>
+  </div>
   
 </article>
 
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 </section>
         
           <aside id="sidebar">
