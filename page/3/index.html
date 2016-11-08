@@ -68,6 +68,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-es5-to-es6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/01/es5-to-es6/" class="article-date">
+  <time datetime="2016-11-01T03:37:56.000Z" itemprop="datePublished">2016-11-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/01/es5-to-es6/">Learning ES6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近在写一个React的小项目，用了ES6的写法，略生疏。部分ES5与ES6的对应写法，在此做一简短记录，便于日后查阅。</p>
+<h2 id="Arrow-Functions"><a href="#Arrow-Functions" class="headerlink" title="Arrow Functions"></a>Arrow Functions</h2><p>ES6最显眼的区别于ES5的变化之一就是箭头函数了。写惯了JS的传统function，对箭头函数的感觉还是不够热：</p>
+<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array.map(<span class="keyword">function</span>(v, i) &#123;</div><div class="line">  <span class="built_in">return</span> v + 1;  </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array.map( (v, i) =&gt; v + 1  )</div></pre></td></tr></table></figure></p>
+<p>======= 我是一只分割线 =======</p>
+<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(<span class="keyword">function</span>(v) &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(v =&gt; &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>======= 我也是一只分割线 =======</p>
+<p>对于定义一个类：<br>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var Person = <span class="keyword">function</span>(id, name) &#123;</div><div class="line">  this.id = id;</div><div class="line">  this.name = name;</div><div class="line">  this.speak(name);</div><div class="line">&#125;;</div><div class="line">Person.prototype.speak = <span class="keyword">function</span>(name) &#123;</div><div class="line">  console.log(<span class="string">'My name is '</span>, name);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor (id, name) &#123;  <span class="comment"># 构造函数</span></div><div class="line">    this.id = id;</div><div class="line">    this.name = name;</div><div class="line">    this.speak(name);</div><div class="line">  &#125;</div><div class="line">  speak(name) &#123;</div><div class="line">    console.log(<span class="string">'My name is '</span>, name);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>======= 我会告诉你我是一只分割线吗 =======</p>
+<p>在React里用createClass定义一个组件类。<br>ES5的写法就是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">var App = React.createClass(&#123;</div><div class="line">  getDefaultProps: <span class="function"><span class="title">function</span></span>() &#123;   <span class="comment"># 获取默认属性</span></div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">      autoLoad: <span class="literal">false</span>,</div><div class="line">      initWidth: 100,</div><div class="line">      appName: <span class="string">'A Name'</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  propTypes: &#123;</div><div class="line">    autoLoad: React.PropTypes.bool.isRequired,</div><div class="line">    initWidth: React.PropTypes.number.isRequired,</div><div class="line">    appName: React.PropTypes.string.isRequired</div><div class="line">  &#125;,</div><div class="line">  getInitialState: <span class="function"><span class="title">function</span></span>() &#123;   <span class="comment"># 初始化state</span></div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">      currentWidth: 100,</div><div class="line">      currentState: 1</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  handleChange: <span class="keyword">function</span>(e) &#123;  <span class="comment"># 一个普通的监听后执行的回调函数</span></div><div class="line">    this.setState(&#123;</div><div class="line">      currentWidth: 200,</div><div class="line">      currentState: 0</div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  render: <span class="function"><span class="title">function</span></span>() &#123;  <span class="comment"># 渲染模板</span></div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'wrapper'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;this.handleChange&#125; /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>ES6的写法则为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">class App extends React.Component &#123;</div><div class="line">  static defaultProps = &#123;   <span class="comment"># ES6用static成员实现默认属性</span></div><div class="line">    autoLoad: <span class="literal">false</span>,</div><div class="line">    initWidth: 100,</div><div class="line">    appName: <span class="string">'A Name'</span></div><div class="line">  &#125;; <span class="comment"># 这里有分号！</span></div><div class="line">  static propTypes = &#123;</div><div class="line">    autoLoad: React.PropTypes.bool.isRequired,</div><div class="line">    initWidth: React.PropTypes.number.isRequired,</div><div class="line">    appName: React.PropTypes.string.isRequired</div><div class="line">  &#125;; <span class="comment"># 这里也有分号！</span></div><div class="line"></div><div class="line">  constructor(props) &#123;  <span class="comment"># 在构造函数中初始化state</span></div><div class="line">    super(props); <span class="comment"># 继承</span></div><div class="line">    this.state = &#123;</div><div class="line">      currentWidth: 100,</div><div class="line">      currentState: 1</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleChange(e) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      currentWidth: 200,</div><div class="line">      currentState: 0</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">componentWillMount</span></span>() &#123; <span class="comment"># 另外加一个监听器的例子</span></div><div class="line">    Something.addEventListener(<span class="string">'change'</span>, this.onAppChange);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">componentDidUnmount</span></span>() &#123;</div><div class="line">    Something.removeEventListener(<span class="string">'change'</span>, this.onAppChange);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  onAppChange = (event) =&gt; &#123;  <span class="comment"># onAppChange的值是箭头函数，初始化时即绑好this</span></div><div class="line">    <span class="comment"># Do whatever you want</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'wrapper'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;this.handleChange.bind(this)&#125; /&gt;</div><div class="line">        <span class="comment"># 或：&lt;input type='text' onChange=&#123;e=&gt;this.handleChange(e)&#125; /&gt;</span></div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>======= 我会告诉你我是一只分割线吗 =======</p>
+<p>其他的写法</p>
+<p>比如import时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var MyComp = require(<span class="string">'./MyComp'</span>); <span class="comment"># ES5</span></div><div class="line">import MyComp from <span class="string">'./MyComp'</span>; <span class="comment"># ES6</span></div></pre></td></tr></table></figure></p>
+<p>比如exports时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">module.exports = MyComp; <span class="comment"># ES5</span></div><div class="line"><span class="built_in">export</span> default class MyComp extends Component&#123; ... &#125; <span class="comment"># ES6</span></div></pre></td></tr></table></figure></p>
+<p>最后推荐一个好东东：<a href="http://es6-features.org/#Constants" target="_blank" rel="external">ECMAScript 6 — New Features: Overview &amp; Comparison</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/11/01/es5-to-es6/" data-id="civ8yovbj0006hxpm4x7g4x3c" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-halloween" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/10/31/halloween/" class="article-date">
@@ -102,7 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/31/halloween/" data-id="civ7rmpmi0009k9pmgbldrzmf" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/31/halloween/" data-id="civ8yovbq000ahxpmjnyvek6h" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/culture/">culture</a></li></ul>
@@ -114,63 +174,10 @@
 
 
   
-    <article id="post-regular-expression" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/30/regular-expression/" class="article-date">
-  <time datetime="2016-10-30T05:56:48.000Z" itemprop="datePublished">2016-10-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/30/regular-expression/">正则表达式的常用要点小结</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Regular Expression，RegExp，正则表达式，作为一种常用工具，虽然长得很像外星文，但如果写得好，可以极大的提高代码执行效率。正则表达式的功能就是执行字符串的查找和替换，正确的使用正则，可以避免繁琐的代码循环。</p>
-<p>本文记录一些常用的要点，便于工作时查阅。</p>
-<h2 id="常见字符"><a href="#常见字符" class="headerlink" title="常见字符"></a>常见字符</h2><p>.     : 匹配任意字符，换行符除外<br>\d    : 等价于[0-9]，匹配数字<br>\D    : 等价于[^0-9]，匹配非数字<br>\w    : 等价于[A-Za-z0-9_]，别忘了下划线！<br>\W    : 等价于[^A-Za-z0-9]<br>\s    : 匹配空白符，包括空格、制表符、换行符、换页符（\f\n\r\t\v）<br>\S    : 匹配非空白符<br>\t    : 匹配水平制表符tab<br>\v    : 匹配垂直制表符vertical tab<br>\r    : 匹配回车符carriage return<br>\n    : 匹配换行符linefeed<br>\f    : 匹配换页符form-feed<br>[\b]  : 匹配退格键backspace，与\b不同。<br>\0    : 匹配一个NUL字符<br>\cX   : X为A-Z中的字符，匹配control-X</p>
-<h2 id="常见边界"><a href="#常见边界" class="headerlink" title="常见边界"></a>常见边界</h2><p>^     : 匹配字符串的开始，/^A/匹配’Anta’，不匹配’antA’<br>$     : 匹配字符串的结尾，/t$/匹配’eat’，不匹配’tea’<br>\b    : 匹配零宽单词边界（字母与空格之间，即匹配\w与\W之间的空间），/\bno/匹配’at noon’中的’no’<br>\B    : 匹配零宽非单词边界（两字母之间，或两空格之间）/\Bon/匹配’at noon’中的’on’<br>\b 和 \B，只匹配位置，不匹配字符。用\bcat\b匹配都的字符串长度是3，不是5.</p>
-<h2 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h2><p>+     : 匹配一个或多个，至少一个（+放在字符或字符集的后面，\w+）<br>*     : 匹配0个或多个，可以是0次，可以多次，表示字符可有可无<br>?     : 匹配0个或1个，最多不超1个。例如合法URL的https中的s，可出现0次或1次<br>{3}   : 匹配重复3次，精确次数，\d{3}<br>{3, } : 匹配至少3个，\d{3, } 匹配至少3个数字<br>{2,4} : 匹配最少2次，最多4次。</p>
-<h2 id="「贪婪型」匹配和「懒惰型」匹配"><a href="#「贪婪型」匹配和「懒惰型」匹配" class="headerlink" title="「贪婪型」匹配和「懒惰型」匹配"></a>「贪婪型」匹配和「懒惰型」匹配</h2><p>贪婪型字符，*，+，{n, } 等字符在匹配时的行为模式是“多多益善”，而不是“适可而止”。它们会尽可能的从一段文本中的开头一直匹配到文本末尾，而不是匹配到第一个匹配为止。</p>
-<p>解决的方法，就是让贪婪型变成懒惰型，匹配一个即停止。在字符后面加“?”即可。<br>* =====&gt; *?<br>+ =====&gt; +?<br>{n, } ======&gt; {n, }?</p>
-<h2 id="分行匹配模式"><a href="#分行匹配模式" class="headerlink" title="分行匹配模式"></a>分行匹配模式</h2><p>例如一段代码中有分散的几行是注释（双斜杠”//“开头的一行），如何用分行模式将其匹配出来？正则中的分行匹配模式（multiline mode）即(?m)记号可以让正则的引擎把行分隔符当作一个字符串的分隔符来对待。这时候，^将不仅匹配正常的字符串开头，还将匹配换行符后的开始位置；同理，$将不仅匹配字符串的结尾，还匹配换行符后面的结束位置。</p>
-<p>需要注意的是，(?m)分行记号必须出现在正则表达式的最前面。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(?m)^\s*//.*$</div></pre></td></tr></table></figure></p>
-<p>(?m)表示匹配多行，^\s*表示字符串的开始，后面是任意个空白字符，然后是双斜杠，然后是任意个任意字符，最后是字符串结尾。</p>
-<h2 id="子表达式"><a href="#子表达式" class="headerlink" title="子表达式"></a>子表达式</h2><p>（未完待续……）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/30/regular-expression/" data-id="civ7rmpmt000ik9pmnvr90jzz" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RegExp/">RegExp</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -190,7 +197,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li></ul>
     </div>
   </div>
 
@@ -200,7 +207,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/git/" style="font-size: 15px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a>
     </div>
   </div>
 
@@ -222,6 +229,10 @@
       <ul>
         
           <li>
+            <a href="/2016/11/08/npm-publish-your-package/">npm-publish-your-package</a>
+          </li>
+        
+          <li>
             <a href="/2016/11/07/git-commonly-used-commands/">Git的常用命令（更新中）</a>
           </li>
         
@@ -235,10 +246,6 @@
         
           <li>
             <a href="/2016/11/01/es5-to-es6/">Learning ES6</a>
-          </li>
-        
-          <li>
-            <a href="/2016/10/31/halloween/">Halloween&#39;s Day</a>
           </li>
         
       </ul>
