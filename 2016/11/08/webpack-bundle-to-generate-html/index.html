@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Run Faster To Get A Bite</title>
+  <title>使用Webpack自动化生成多语言页面 | Run Faster To Get A Bite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A tiny personal blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Run Faster To Get A Bite">
-<meta property="og:url" content="http://shaojing.wang/index.html">
+  <meta name="description" content="这次的需求是，一个页面模板支持多语言的展示。So，页面模板里的变量会被不同语言包的JSON数据替换。看起来就是一个模板引擎做的事儿。不过用Webpack完成这一切，还同时打包了CSS、JS、图片、字体等静态文件，并按指定目录路径生成最终页面，也确实花费了一番功夫。大致流程和要点记录在此。
+使用html-webpack-plugin 插件生成HTML使用html-webpack-plugin插件的好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Webpack自动化生成多语言页面">
+<meta property="og:url" content="http://shaojing.wang/2016/11/08/webpack-bundle-to-generate-html/index.html">
 <meta property="og:site_name" content="Run Faster To Get A Bite">
-<meta property="og:description" content="A tiny personal blog">
+<meta property="og:description" content="这次的需求是，一个页面模板支持多语言的展示。So，页面模板里的变量会被不同语言包的JSON数据替换。看起来就是一个模板引擎做的事儿。不过用Webpack完成这一切，还同时打包了CSS、JS、图片、字体等静态文件，并按指定目录路径生成最终页面，也确实花费了一番功夫。大致流程和要点记录在此。
+使用html-webpack-plugin 插件生成HTML使用html-webpack-plugin插件的好">
+<meta property="og:updated_time" content="2016-11-09T02:45:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Run Faster To Get A Bite">
-<meta name="twitter:description" content="A tiny personal blog">
+<meta name="twitter:title" content="使用Webpack自动化生成多语言页面">
+<meta name="twitter:description" content="这次的需求是，一个页面模板支持多语言的展示。So，页面模板里的变量会被不同语言包的JSON数据替换。看起来就是一个模板引擎做的事儿。不过用Webpack完成这一切，还同时打包了CSS、JS、图片、字体等静态文件，并按指定目录路径生成最终页面，也确实花费了一番功夫。大致流程和要点记录在此。
+使用html-webpack-plugin 插件生成HTML使用html-webpack-plugin插件的好">
   
     <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
   
@@ -66,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-webpack-bundle-to-generate-html" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-webpack-bundle-to-generate-html" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/08/webpack-bundle-to-generate-html/" class="article-date">
   <time datetime="2016-11-08T07:56:47.000Z" itemprop="datePublished">2016-11-08</time>
@@ -85,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/08/webpack-bundle-to-generate-html/">使用Webpack自动化生成多语言页面</a>
+    <h1 class="article-title" itemprop="name">
+      使用Webpack自动化生成多语言页面
     </h1>
   
 
@@ -165,75 +167,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-npm-publish-your-package" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/08/npm-publish-your-package/" class="article-date">
-  <time datetime="2016-11-08T02:42:44.000Z" itemprop="datePublished">2016-11-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/08/npm-publish-your-package/">向npm发布自己的package</a>
-    </h1>
+    <a href="/2016/11/08/npm-publish-your-package/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">向npm发布自己的package</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近做了一个用webpack打包多语言包来生成静态网站的工具。然后把工具发布到npm上了。<br>关于包包发布npm的步骤简要做一个记录。</p>
-<h3 id="npm-adduser"><a href="#npm-adduser" class="headerlink" title="npm adduser"></a>npm adduser</h3><p>先注册一个npm账户，可以去npm上注册，也可以直接在机器终端：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm adduser</div></pre></td></tr></table></figure></p>
-<p>这个命令会引导你逐步注册一个新的账号，顺次填写username、email和password等信息。</p>
-<h3 id="npm-publish"><a href="#npm-publish" class="headerlink" title="npm publish"></a>npm publish</h3><p>注册成功后，会在当前环境里以新注册的账户身份登录。不需多余操作，直接在项目的根目录执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm publish</div></pre></td></tr></table></figure></p>
-<p>即可完成当前项目的包发布。</p>
-<h3 id="npm-version-patch-minor-major"><a href="#npm-version-patch-minor-major" class="headerlink" title="npm version patch (minor, major)"></a>npm version patch (minor, major)</h3><p>发布成功后，登录npm的站点可以找到新发的包。<br>更新包时，执行version命令，后带一个参数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm version minor  <span class="comment"># package.json文件里的version会自动更新一个小版本1.1.0</span></div><div class="line">$ npm version major  <span class="comment"># package.json文件里的version会自动更新一个大版本2.0.0</span></div></pre></td></tr></table></figure></p>
-<p>version命令之后，还要再执行一次publish才可以！</p>
-<p>具体参考：<br>Patch releases: 1.0 or 1.0.x or ~1.0.4<br>Minor releases: 1 or 1.x or ^1.0.4<br>Major releases: * or x</p>
-<h3 id="Why-my-package-cannot-be-installed"><a href="#Why-my-package-cannot-be-installed" class="headerlink" title="Why my package cannot be installed ?"></a>Why my package cannot be installed ?</h3><p>Publish成功之后，在npm上可以看到自己的包，但是测试从npm上install包到本地，却失败。<br>寻了原因，发现是package.json文件里少写里一个属性“bin”！</p>
-<p>翻开npm的官方文档，其中关于package.json文件的书写要求里，就有着bin的相关内容：</p>
-<p>A lot of packages have one or more executable files that they’d like to install into the PATH. npm makes this pretty easy (in fact, it uses this feature to install the “npm” executable.)</p>
-<p>To use this, supply a bin field in your package.json which is a map of command name to local file name. On install, npm will symlink that file into prefix/bin for global installs, or ./node_modules/.bin/ for local installs.</p>
-<p>For example, myapp could have this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="string">"bin"</span> : &#123; <span class="string">"myapp"</span> : <span class="string">"./cli.js"</span> &#125; &#125;</div></pre></td></tr></table></figure></p>
-<p>Thus, when you install myapp, it’ll create a symlink from the cli.js script to:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/bin/myapp</div></pre></td></tr></table></figure></p>
-<h3 id="顺便让Linux的man命令也找到你的包"><a href="#顺便让Linux的man命令也找到你的包" class="headerlink" title="顺便让Linux的man命令也找到你的包"></a>顺便让Linux的man命令也找到你的包</h3><p>还是在package.json文件里，添加一个man属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"man"</span>: <span class="string">"./man/your-app"</span></div></pre></td></tr></table></figure></p>
-<h3 id="每次更新别忘记version命令和重新publish"><a href="#每次更新别忘记version命令和重新publish" class="headerlink" title="每次更新别忘记version命令和重新publish"></a>每次更新别忘记version命令和重新publish</h3><p>更新后，如果是小改动，就执行一次：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm version minor  <span class="comment"># package.json里的version自动从2.1.0进化到2.2.0</span></div></pre></td></tr></table></figure></p>
-<p>然后再次publish：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm publish</div></pre></td></tr></table></figure></p>
-<p>更多规范看 <a href="https://docs.npmjs.com/files/package.json" target="_blank" rel="external">npm关于package.json的官方文档</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/08/npm-publish-your-package/" data-id="civabpaex000f01pm3wxvvzkz" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">
