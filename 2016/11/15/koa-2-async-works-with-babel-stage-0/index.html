@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Run Faster To Get A Bite</title>
+  <title>Koa@2的async在webpack打包时报错 | Run Faster To Get A Bite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A tiny personal blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Run Faster To Get A Bite">
-<meta property="og:url" content="http://shaojing.wang/index.html">
+  <meta name="description" content="人说前端技术近年发展太快，新工具层出不穷，学习成本越来越高。也有人说前端搞得太过工程化完全没必要，就像“用大炮打小鸟”。Anyway，我想，技术无论如何发展，技术还是要服务于产品和内容。如果技术能让我们更高效的开发新产品，同时提升产品功能可及的高度，何乐不为。技术的发展和持续的学习是必要的，但不能盲目追求新技术而脱离产品本身。为产品选择合适的技术方案，才是优选。
+说多了，近日的学习遇到一些瓶颈，记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Koa@2的async在webpack打包时报错">
+<meta property="og:url" content="http://shaojing.wang/2016/11/15/koa-2-async-works-with-babel-stage-0/index.html">
 <meta property="og:site_name" content="Run Faster To Get A Bite">
-<meta property="og:description" content="A tiny personal blog">
+<meta property="og:description" content="人说前端技术近年发展太快，新工具层出不穷，学习成本越来越高。也有人说前端搞得太过工程化完全没必要，就像“用大炮打小鸟”。Anyway，我想，技术无论如何发展，技术还是要服务于产品和内容。如果技术能让我们更高效的开发新产品，同时提升产品功能可及的高度，何乐不为。技术的发展和持续的学习是必要的，但不能盲目追求新技术而脱离产品本身。为产品选择合适的技术方案，才是优选。
+说多了，近日的学习遇到一些瓶颈，记">
+<meta property="og:updated_time" content="2016-11-15T03:55:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Run Faster To Get A Bite">
-<meta name="twitter:description" content="A tiny personal blog">
+<meta name="twitter:title" content="Koa@2的async在webpack打包时报错">
+<meta name="twitter:description" content="人说前端技术近年发展太快，新工具层出不穷，学习成本越来越高。也有人说前端搞得太过工程化完全没必要，就像“用大炮打小鸟”。Anyway，我想，技术无论如何发展，技术还是要服务于产品和内容。如果技术能让我们更高效的开发新产品，同时提升产品功能可及的高度，何乐不为。技术的发展和持续的学习是必要的，但不能盲目追求新技术而脱离产品本身。为产品选择合适的技术方案，才是优选。
+说多了，近日的学习遇到一些瓶颈，记">
   
     <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
   
@@ -66,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-koa-2-async-works-with-babel-stage-0" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-koa-2-async-works-with-babel-stage-0" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/" class="article-date">
   <time datetime="2016-11-15T03:20:05.000Z" itemprop="datePublished">2016-11-15</time>
@@ -85,8 +87,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
+    <h1 class="article-title" itemprop="name">
+      Koa@2的async在webpack打包时报错
     </h1>
   
 
@@ -127,91 +129,20 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-redux-primary-introduction" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/10/redux-primary-introduction/" class="article-date">
-  <time datetime="2016-11-10T10:37:57.000Z" itemprop="datePublished">2016-11-10</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/10/redux-primary-introduction/">Redux初识概要</a>
-    </h1>
+    <a href="/2016/11/10/redux-primary-introduction/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Redux初识概要</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>考虑到复杂应用中JS要管理更多的状态（state），例如UI状态、是否显示某个效果，是否激活某个路由，是否点击了某个Tag、是否有服务器响应等等。由此出现了Redux来做应用的数据和状态管理。初学此物，其设计模式略感绕。记录要点如下，方便日后查阅。</p>
-<h4 id="单一数据源：整个应用的state只存在于唯一的store中"><a href="#单一数据源：整个应用的state只存在于唯一的store中" class="headerlink" title="单一数据源：整个应用的state只存在于唯一的store中"></a>单一数据源：整个应用的state只存在于唯一的store中</h4><h4 id="改变state的唯一方法是触发action-（store-dispatch）"><a href="#改变state的唯一方法是触发action-（store-dispatch）" class="headerlink" title="改变state的唯一方法是触发action （store.dispatch）"></a>改变state的唯一方法是触发action （store.dispatch）</h4><h4 id="纯函数reducer修改state：接收旧state和action，计算后返回新state"><a href="#纯函数reducer修改state：接收旧state和action，计算后返回新state" class="headerlink" title="纯函数reducer修改state：接收旧state和action，计算后返回新state"></a>纯函数reducer修改state：接收旧state和action，计算后返回新state</h4><p>以上是Redux的三大原则。</p>
-<p>代码看晕时，请默念这三大原则。</p>
-<p>下面是具体一点的内容：</p>
-<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><ul>
-<li>一个普通JS对象</li>
-<li>用来描述“发生了什么”（没有说怎样更新state）</li>
-<li>大概可以长这个样子： { type: ‘INCREMENT’ }</li>
-<li>必须有type属性（其值基本为常量）</li>
-<li>用store.dispatch({ type: ‘INCREMENT’ })方法把action传给store</li>
-</ul>
-<h3 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h3><ul>
-<li>就是一个纯函数：接收旧state和action，返回新state。(previousState, action) =&gt; newState</li>
-<li>不要在reducer里修改参数</li>
-<li>不要在reducer里请求API</li>
-<li>不要在reducer里做路由跳转</li>
-<li>不要在reducer里调用非纯函数例如Date.now() Math.random()</li>
-<li>拆分的多个reducer可以用combineReducers()来合并</li>
-<li><p>初始化state的reducer可以这样子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import &#123; VisibilityFilters &#125; from <span class="string">'./actions'</span></div><div class="line"></div><div class="line">const initialState = &#123;</div><div class="line">  visibilityFilter: VisibilityFilters.SHOW_ALL,</div><div class="line">  todos: []</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">function</span> todoApp(state, action) &#123;</div><div class="line">  <span class="keyword">if</span> (typeof state === <span class="string">'undefined'</span>) &#123;</div><div class="line">    <span class="built_in">return</span> initialState</div><div class="line">  &#125;</div><div class="line">  // 这里暂不处理任何 action，</div><div class="line">  // 仅返回传入的 state。</div><div class="line">  <span class="built_in">return</span> state</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>一个改变state的reducer可以这样子：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> todoApp(state = initialState, action) &#123;</div><div class="line">  switch (action.type) &#123;</div><div class="line">    <span class="keyword">case</span> SET_VISIBILITY_FILTER: <span class="comment"># 从action的type属性获取“发生了什么”</span></div><div class="line">      <span class="built_in">return</span> Object.assign(&#123;&#125;, state, &#123; <span class="comment"># 这里新建一个副本&#123;&#125;来输出，不要直接修改state！！！！</span></div><div class="line">        visibilityFilter: action.filter <span class="comment"># 用action的另一属性来赋值发生之后的state要变成什么</span></div><div class="line">      &#125;)</div><div class="line">    default:</div><div class="line">      <span class="built_in">return</span> state  <span class="comment"># 没发生事情就传原来的state</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># 注意！第4行如果写成Object.assign(state, &#123;...&#125;); 就是修改了state！这是不允许的。</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="store"><a href="#store" class="headerlink" title="store"></a>store</h3><ul>
-<li>一个应用只有唯一的一个store。</li>
-<li>需要拆分逻辑时，拆分多个reducer，不要拆store。</li>
-<li>先有state（对象）的结构，再写reducer们，然后创建store:<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore &#125; from <span class="string">'redux'</span></div><div class="line">import todoApp from <span class="string">'./reducers'</span>  <span class="comment"># 根reducer应该把多个子reducer输出合并成一个单一的 state 树。</span></div><div class="line"><span class="built_in">let</span> store = createStore(todoApp)</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>给createStore方法传入reducers，得到的就是store。</p>
-<p>注意！createStore() 的第二个参数是可选的, 用于设置 state 初始状态。这对开发同构（isomorphic）应用时非常有用，服务器端 redux 应用的 state 结构可以与客户端保持一致, 那么客户端可以将从网络接收到的服务端 state 直接用于本地数据初始化：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> store = createStore(todoApp, window.STATE_FROM_SERVER)</div></pre></td></tr></table></figure></p>
-<p>严格的单向数据流是 Redux 架构的设计核心。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/10/redux-primary-introduction/" data-id="civiyuf0n000prnpmysg23rtd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">redux</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
 
-
-  
-
-
-  <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">
