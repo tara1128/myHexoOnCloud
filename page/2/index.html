@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,82 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-redux-primary-introduction" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/10/redux-primary-introduction/" class="article-date">
+  <time datetime="2016-11-10T10:37:57.000Z" itemprop="datePublished">2016-11-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/10/redux-primary-introduction/">Redux初识概要</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>考虑到复杂应用中JS要管理更多的状态（state），例如UI状态、是否显示某个效果，是否激活某个路由，是否点击了某个Tag、是否有服务器响应等等。由此出现了Redux来做应用的数据和状态管理。初学此物，其设计模式略感绕。记录要点如下，方便日后查阅。</p>
+<h4 id="单一数据源：整个应用的state只存在于唯一的store中"><a href="#单一数据源：整个应用的state只存在于唯一的store中" class="headerlink" title="单一数据源：整个应用的state只存在于唯一的store中"></a>单一数据源：整个应用的state只存在于唯一的store中</h4><h4 id="改变state的唯一方法是触发action-（store-dispatch）"><a href="#改变state的唯一方法是触发action-（store-dispatch）" class="headerlink" title="改变state的唯一方法是触发action （store.dispatch）"></a>改变state的唯一方法是触发action （store.dispatch）</h4><h4 id="纯函数reducer修改state：接收旧state和action，计算后返回新state"><a href="#纯函数reducer修改state：接收旧state和action，计算后返回新state" class="headerlink" title="纯函数reducer修改state：接收旧state和action，计算后返回新state"></a>纯函数reducer修改state：接收旧state和action，计算后返回新state</h4><p>以上是Redux的三大原则。</p>
+<p>代码看晕时，请默念这三大原则。</p>
+<p>下面是具体一点的内容：</p>
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><ul>
+<li>一个普通JS对象</li>
+<li>用来描述“发生了什么”（没有说怎样更新state）</li>
+<li>大概可以长这个样子： { type: ‘INCREMENT’ }</li>
+<li>必须有type属性（其值基本为常量）</li>
+<li>用store.dispatch({ type: ‘INCREMENT’ })方法把action传给store</li>
+</ul>
+<h3 id="reducer"><a href="#reducer" class="headerlink" title="reducer"></a>reducer</h3><ul>
+<li>就是一个纯函数：接收旧state和action，返回新state。(previousState, action) =&gt; newState</li>
+<li>不要在reducer里修改参数</li>
+<li>不要在reducer里请求API</li>
+<li>不要在reducer里做路由跳转</li>
+<li>不要在reducer里调用非纯函数例如Date.now() Math.random()</li>
+<li>拆分的多个reducer可以用combineReducers()来合并</li>
+<li><p>初始化state的reducer可以这样子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import &#123; VisibilityFilters &#125; from <span class="string">'./actions'</span></div><div class="line"></div><div class="line">const initialState = &#123;</div><div class="line">  visibilityFilter: VisibilityFilters.SHOW_ALL,</div><div class="line">  todos: []</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="keyword">function</span> todoApp(state, action) &#123;</div><div class="line">  <span class="keyword">if</span> (typeof state === <span class="string">'undefined'</span>) &#123;</div><div class="line">    <span class="built_in">return</span> initialState</div><div class="line">  &#125;</div><div class="line">  // 这里暂不处理任何 action，</div><div class="line">  // 仅返回传入的 state。</div><div class="line">  <span class="built_in">return</span> state</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>一个改变state的reducer可以这样子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> todoApp(state = initialState, action) &#123;</div><div class="line">  switch (action.type) &#123;</div><div class="line">    <span class="keyword">case</span> SET_VISIBILITY_FILTER: <span class="comment"># 从action的type属性获取“发生了什么”</span></div><div class="line">      <span class="built_in">return</span> Object.assign(&#123;&#125;, state, &#123; <span class="comment"># 这里新建一个副本&#123;&#125;来输出，不要直接修改state！！！！</span></div><div class="line">        visibilityFilter: action.filter <span class="comment"># 用action的另一属性来赋值发生之后的state要变成什么</span></div><div class="line">      &#125;)</div><div class="line">    default:</div><div class="line">      <span class="built_in">return</span> state  <span class="comment"># 没发生事情就传原来的state</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment"># 注意！第4行如果写成Object.assign(state, &#123;...&#125;); 就是修改了state！这是不允许的。</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="store"><a href="#store" class="headerlink" title="store"></a>store</h3><ul>
+<li>一个应用只有唯一的一个store。</li>
+<li>需要拆分逻辑时，拆分多个reducer，不要拆store。</li>
+<li>先有state（对象）的结构，再写reducer们，然后创建store:<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import &#123; createStore &#125; from <span class="string">'redux'</span></div><div class="line">import todoApp from <span class="string">'./reducers'</span>  <span class="comment"># 根reducer应该把多个子reducer输出合并成一个单一的 state 树。</span></div><div class="line"><span class="built_in">let</span> store = createStore(todoApp)</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>给createStore方法传入reducers，得到的就是store。</p>
+<p>注意！createStore() 的第二个参数是可选的, 用于设置 state 初始状态。这对开发同构（isomorphic）应用时非常有用，服务器端 redux 应用的 state 结构可以与客户端保持一致, 那么客户端可以将从网络接收到的服务端 state 直接用于本地数据初始化：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> store = createStore(todoApp, window.STATE_FROM_SERVER)</div></pre></td></tr></table></figure></p>
+<p>严格的单向数据流是 Redux 架构的设计核心。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/11/10/redux-primary-introduction/" data-id="civkcplt1000gqkpmwp4l0gqa" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/redux/">redux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-webpack-bundle-to-generate-html" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -157,7 +233,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/08/webpack-bundle-to-generate-html/" data-id="civiyuf1w002brnpmz8tspzxd" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/11/08/webpack-bundle-to-generate-html/" data-id="civkcpltw0011qkpm7m76o1g6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/i18n/">i18n</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
@@ -169,70 +245,10 @@
 
 
   
-    <article id="post-npm-publish-your-package" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/08/npm-publish-your-package/" class="article-date">
-  <time datetime="2016-11-08T02:42:44.000Z" itemprop="datePublished">2016-11-08</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/08/npm-publish-your-package/">向npm发布自己的package</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近做了一个用webpack打包多语言包来生成静态网站的工具。然后把工具发布到npm上了。<br>关于包包发布npm的步骤简要做一个记录。</p>
-<h3 id="npm-adduser"><a href="#npm-adduser" class="headerlink" title="npm adduser"></a>npm adduser</h3><p>先注册一个npm账户，可以去npm上注册，也可以直接在机器终端：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm adduser</div></pre></td></tr></table></figure></p>
-<p>这个命令会引导你逐步注册一个新的账号，顺次填写username、email和password等信息。</p>
-<h3 id="npm-publish"><a href="#npm-publish" class="headerlink" title="npm publish"></a>npm publish</h3><p>注册成功后，会在当前环境里以新注册的账户身份登录。不需多余操作，直接在项目的根目录执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm publish</div></pre></td></tr></table></figure></p>
-<p>即可完成当前项目的包发布。</p>
-<h3 id="npm-version-patch-minor-major"><a href="#npm-version-patch-minor-major" class="headerlink" title="npm version patch (minor, major)"></a>npm version patch (minor, major)</h3><p>发布成功后，登录npm的站点可以找到新发的包。<br>更新包时，执行version命令，后带一个参数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ npm version minor  <span class="comment"># package.json文件里的version会自动更新一个小版本1.1.0</span></div><div class="line">$ npm version major  <span class="comment"># package.json文件里的version会自动更新一个大版本2.0.0</span></div></pre></td></tr></table></figure></p>
-<p>version命令之后，还要再执行一次publish才可以！</p>
-<p>具体参考：<br>Patch releases: 1.0 or 1.0.x or ~1.0.4<br>Minor releases: 1 or 1.x or ^1.0.4<br>Major releases: * or x</p>
-<h3 id="Why-my-package-cannot-be-installed"><a href="#Why-my-package-cannot-be-installed" class="headerlink" title="Why my package cannot be installed ?"></a>Why my package cannot be installed ?</h3><p>Publish成功之后，在npm上可以看到自己的包，但是测试从npm上install包到本地，却失败。<br>寻了原因，发现是package.json文件里少写里一个属性“bin”！</p>
-<p>翻开npm的官方文档，其中关于package.json文件的书写要求里，就有着bin的相关内容：</p>
-<p>A lot of packages have one or more executable files that they’d like to install into the PATH. npm makes this pretty easy (in fact, it uses this feature to install the “npm” executable.)</p>
-<p>To use this, supply a bin field in your package.json which is a map of command name to local file name. On install, npm will symlink that file into prefix/bin for global installs, or ./node_modules/.bin/ for local installs.</p>
-<p>For example, myapp could have this:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; <span class="string">"bin"</span> : &#123; <span class="string">"myapp"</span> : <span class="string">"./cli.js"</span> &#125; &#125;</div></pre></td></tr></table></figure></p>
-<p>Thus, when you install myapp, it’ll create a symlink from the cli.js script to:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/<span class="built_in">local</span>/bin/myapp</div></pre></td></tr></table></figure></p>
-<h3 id="顺便让Linux的man命令也找到你的包"><a href="#顺便让Linux的man命令也找到你的包" class="headerlink" title="顺便让Linux的man命令也找到你的包"></a>顺便让Linux的man命令也找到你的包</h3><p>还是在package.json文件里，添加一个man属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"man"</span>: <span class="string">"./man/your-app"</span></div></pre></td></tr></table></figure></p>
-<h3 id="每次更新别忘记version命令和重新publish"><a href="#每次更新别忘记version命令和重新publish" class="headerlink" title="每次更新别忘记version命令和重新publish"></a>每次更新别忘记version命令和重新publish</h3><p>更新后，如果是小改动，就执行一次：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm version minor  <span class="comment"># package.json里的version自动从2.1.0进化到2.2.0</span></div></pre></td></tr></table></figure></p>
-<p>然后再次publish：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm publish</div></pre></td></tr></table></figure></p>
-<p>更多规范看 <a href="https://docs.npmjs.com/files/package.json" target="_blank" rel="external">npm关于package.json的官方文档</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/08/npm-publish-your-package/" data-id="civiyuf0j000jrnpmy8l9xij4" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/npm/">npm</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -240,7 +256,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -250,7 +266,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -260,9 +276,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 15px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
     </div>
   </div>
 
@@ -279,9 +295,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/16/render-template-with-koa2/">Koa@2的模板渲染及React组件用ES6的几种写法</a>
+          </li>
         
           <li>
             <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
@@ -299,10 +319,6 @@
             <a href="/2016/11/08/npm-publish-your-package/">向npm发布自己的package</a>
           </li>
         
-          <li>
-            <a href="/2016/11/07/git-commonly-used-commands/">Git的常用命令（更新中）</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -316,7 +332,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

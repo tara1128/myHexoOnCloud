@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Koa@2的模板渲染及React组件用ES6的几种写法 | Run Faster To Get A Bite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="上一篇文章记录了基于Koa@2框架的项目搭建以及Webpack的相关配置。这一篇文章记录Koa@2在渲染模板时的问题。
+在服务端引入Koa以及相关中间件123456789101112131415161718192021222324252627282930313233343536373839import &apos;babel-polyfill&apos;import Koa from &apos;koa&apos;import rout">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Koa@2的模板渲染及React组件用ES6的几种写法">
+<meta property="og:url" content="http://shaojing.wang/2016/11/16/render-template-with-koa2/index.html">
+<meta property="og:site_name" content="Run Faster To Get A Bite">
+<meta property="og:description" content="上一篇文章记录了基于Koa@2框架的项目搭建以及Webpack的相关配置。这一篇文章记录Koa@2在渲染模板时的问题。
+在服务端引入Koa以及相关中间件123456789101112131415161718192021222324252627282930313233343536373839import &apos;babel-polyfill&apos;import Koa from &apos;koa&apos;import rout">
+<meta property="og:updated_time" content="2016-11-16T03:10:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Koa@2的模板渲染及React组件用ES6的几种写法">
+<meta name="twitter:description" content="上一篇文章记录了基于Koa@2框架的项目搭建以及Webpack的相关配置。这一篇文章记录Koa@2在渲染模板时的问题。
+在服务端引入Koa以及相关中间件123456789101112131415161718192021222324252627282930313233343536373839import &apos;babel-polyfill&apos;import Koa from &apos;koa&apos;import rout">
+  
+    <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Run Faster To Get A Bite</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">but world moves much faster than you, like always</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-render-template-with-koa2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/16/render-template-with-koa2/" class="article-date">
+  <time datetime="2016-11-16T02:12:18.000Z" itemprop="datePublished">2016-11-16</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Koa@2的模板渲染及React组件用ES6的几种写法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上一篇文章记录了基于Koa@2框架的项目搭建以及Webpack的相关配置。<br>这一篇文章记录Koa@2在渲染模板时的问题。</p>
+<h3 id="在服务端引入Koa以及相关中间件"><a href="#在服务端引入Koa以及相关中间件" class="headerlink" title="在服务端引入Koa以及相关中间件"></a>在服务端引入Koa以及相关中间件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">import <span class="string">'babel-polyfill'</span></div><div class="line">import Koa from <span class="string">'koa'</span></div><div class="line">import router from <span class="string">'./routes'</span></div><div class="line">import path from <span class="string">'path'</span></div><div class="line">import views from <span class="string">'koa-views'</span></div><div class="line">import json from <span class="string">'koa-json'</span></div><div class="line">import logger from <span class="string">'koa-logger'</span></div><div class="line">import koaStatic from <span class="string">'koa-static-plus'</span></div><div class="line">import koaOnError from <span class="string">'koa-onerror'</span></div><div class="line">import convert from <span class="string">'koa-convert'</span></div><div class="line">import Bodyparser from <span class="string">'koa-bodyparser'</span></div><div class="line">import config from <span class="string">'../common/config'</span> <span class="comment"># config文件做全局配置</span></div><div class="line">import homeRenderCtrl from <span class="string">'./controllers/homeRenderCtrl'</span> <span class="comment"># 渲染模板的controller</span></div><div class="line">const templatePath = path.join(__dirname, <span class="string">'./template'</span>) <span class="comment"># 放模板文件的目录</span></div><div class="line">const app = new Koa()</div><div class="line"></div><div class="line">app.use(convert(Bodyparser()))</div><div class="line">app.use(convert(json()))</div><div class="line">app.use(convert(logger()))</div><div class="line"></div><div class="line">/* Static serve */</div><div class="line">app.use(convert(koaStatic(config.rootPath + config.publicPath)))</div><div class="line"></div><div class="line">/* Template ejs file, must be used before using router */</div><div class="line">app.use(views(templatePath, &#123; extension: <span class="string">'ejs'</span> &#125;))</div><div class="line"></div><div class="line">app.use(async (ctx) =&gt; &#123;</div><div class="line">  // ctx.body = <span class="string">'Am i working ... ?'</span>;</div><div class="line">  console.log(<span class="string">'I am about to RENDER::::'</span>, `<span class="variable">$&#123;ctx.method&#125;</span> - <span class="variable">$&#123;ctx.url&#125;</span>`);</div><div class="line">  await homeRenderCtrl(ctx) <span class="comment"># render的具体动作放在一个controllers里的文件</span></div><div class="line">&#125;); </div><div class="line"></div><div class="line">/* Error logger */</div><div class="line">koaOnError(app, &#123;template: templatePath + <span class="string">'/500.ejs'</span> &#125;)</div><div class="line"></div><div class="line">/* Server Listening */</div><div class="line">app.listen(config.port, <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">  console.log(<span class="string">'App is now listening port'</span>, config.port, <span class="string">', using Koa@2 ...'</span>);  </div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="使用Koa-2的ctx-render方法"><a href="#使用Koa-2的ctx-render方法" class="headerlink" title="使用Koa@2的ctx.render方法"></a>使用Koa@2的ctx.render方法</h3><p>上述代码中，引用了一个渲染模板的controller文件，controllers文件们可以放在server目录里的controllers目录里。这个文件接收了server里传来的ctx，具体代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">import React from <span class="string">'react'</span></div><div class="line">import &#123; RouterContext &#125; from <span class="string">'react-router'</span></div><div class="line">import &#123; renderToString &#125; from <span class="string">'react-dom/server'</span></div><div class="line">import config from <span class="string">'../../common/config'</span></div><div class="line">import BigButton from <span class="string">'../../common/components/bigButton'</span></div><div class="line">const btntext = <span class="string">'Click Me'</span>;</div><div class="line"></div><div class="line"><span class="built_in">export</span> default async (ctx) =&gt; &#123;</div><div class="line">  <span class="built_in">return</span> ctx.render(<span class="string">'index'</span>, &#123; <span class="comment"># ctx.render之前必须要return</span></div><div class="line">    title: config.title,</div><div class="line">    desc: config.description,</div><div class="line">    app: renderToString(</div><div class="line">      &lt;BigButton btnText=&#123;btntext&#125; /&gt;</div><div class="line">    )</div><div class="line">  &#125;)</div></pre></td></tr></table></figure></p>
+<p>这里的bigButton是引入的一个组件，由于组件可以被client端和server端共用，因此组件们都可以统一放置在common目录下的components目录里。另外，对于Koa@2的ctx对象的渲染模板的方法，必须要return出来才可以生效。</p>
+<p>在测试过程中，将组件的引用赋值给了小写字母开头的变量名bigButton，就会报错，请使用大写字母开头的组件名称如BigButton。</p>
+<h3 id="使用ES6书写React组件的几种写法"><a href="#使用ES6书写React组件的几种写法" class="headerlink" title="使用ES6书写React组件的几种写法"></a>使用ES6书写React组件的几种写法</h3><p>真的不是只有一种写法，所以初学时容易记混，So，把几种写法对比看一下，帮助理解。</p>
+<h4 id="用箭头函数的方式定义的组件，prop以参数形式传入：-文件保存为-js"><a href="#用箭头函数的方式定义的组件，prop以参数形式传入：-文件保存为-js" class="headerlink" title="用箭头函数的方式定义的组件，prop以参数形式传入：(文件保存为.js)"></a>用箭头函数的方式定义的组件，prop以参数形式传入：(文件保存为.js)</h4><p>来一盘代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">import React, &#123; Component, PropTypes &#125; from <span class="string">'react'</span></div><div class="line"></div><div class="line">const BigButton = (&#123;btnText&#125;) =&gt; ( <span class="comment"># 引用这个组件时，就要传进来一个参数给btnText</span></div><div class="line">  &lt;div className=<span class="string">'btn-wrapper'</span>&gt;</div><div class="line">    &lt;button className=<span class="string">'big-btn'</span>&gt;&#123;btnText&#125;&lt;/button&gt;  <span class="comment"># 组件内直接用变量形式用参数，不要this</span></div><div class="line">  &lt;/div&gt;</div><div class="line">)</div><div class="line"></div><div class="line">BigButton.propTypes = &#123; <span class="comment"># 定义后的组件，必须指定propTypes</span></div><div class="line">  btnText: PropTypes.string.isRequired  </div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">export</span> default BigButton <span class="comment"># 输出组件</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 其他文件引用时：</span></div><div class="line">import React from <span class="string">'react'</span></div><div class="line">import BigButton from <span class="string">'../../common/components/bigButton'</span></div><div class="line">const txt = <span class="string">'Click Me!'</span>;</div><div class="line">&lt;BigButton btnText=&#123;txt&#125; /&gt;</div></pre></td></tr></table></figure></p>
+<h4 id="在组件中使用static定义propTypes的形式：-文件保存为-jsx"><a href="#在组件中使用static定义propTypes的形式：-文件保存为-jsx" class="headerlink" title="在组件中使用static定义propTypes的形式：(文件保存为.jsx)"></a>在组件中使用static定义propTypes的形式：(文件保存为.jsx)</h4><p>来一盘代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">import React, &#123; Component &#125; from <span class="string">'react'</span></div><div class="line"></div><div class="line"><span class="built_in">export</span> default class MyComp extends Component &#123; <span class="comment"># 直接在这里export，不用经过const定义再export，当然也可以先const再export</span></div><div class="line">  static propTypes = &#123;</div><div class="line">    option: React.PropTypes.object.isRequired,</div><div class="line">    style: React.PropTypes.object,</div><div class="line">    className: React.PropTypes.string,</div><div class="line">    onEvents: React.PropTypes.object</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="title">componentDidMount</span></span>() &#123;</div><div class="line">    // Do something ...</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="title">componentDidUpdate</span></span>() &#123;</div><div class="line">    // Do something ...</div><div class="line">  &#125;</div><div class="line">  <span class="function"><span class="title">render</span></span> () &#123;</div><div class="line">    const &#123; className, style &#125; = this.props</div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;section</div><div class="line">        style=&#123;style&#125;</div><div class="line">        className=&#123;className&#125;</div><div class="line">        data=<span class="string">"some-string"</span> /&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">其他文件在引用时：</div><div class="line">import React, &#123; Component &#125; from <span class="string">'react'</span></div><div class="line">import MyComp from <span class="string">'../components/MyComp'</span></div><div class="line">&lt;MyComp option=&#123;someObject&#125; style=&#123;&#123;height:<span class="string">'300px'</span>, margin:<span class="string">'20px'</span>&#125;&#125; /&gt; <span class="comment"># 只有option是required</span></div></pre></td></tr></table></figure></p>
+<h4 id="带有constructor函数的较为标准的写法-文件保存为-js"><a href="#带有constructor函数的较为标准的写法-文件保存为-js" class="headerlink" title="带有constructor函数的较为标准的写法 (文件保存为.js)"></a>带有constructor函数的较为标准的写法 (文件保存为.js)</h4><p>个人还是更喜欢标准的东东，来一盘热腾腾的代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">class IndexLogin extends React.Component &#123;</div><div class="line"></div><div class="line">  constructor(props) &#123;</div><div class="line">    super(props);</div><div class="line">    this.state = &#123;</div><div class="line">      username: <span class="string">''</span>,</div><div class="line">      password: <span class="string">''</span>,</div><div class="line">      error: <span class="string">''</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  onChange(e) &#123;</div><div class="line">    // Do something or something like: </div><div class="line">    ReactDOM.unmountComponentAtNode( ReactDOM.findDOMNode(this).parentNode );</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'form-field'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;e=&gt;this.onChange(e)&#125; onFocus=&#123;e=&gt;this.removeErrorMsg(e)&#125; autoFocus value=&#123;this.state.username&#125; placeholder=<span class="string">'Your username here please'</span> /&gt;</div><div class="line">        &lt;a className=<span class="string">'btn-submit'</span> onClick=&#123;this.handleSubmit.bind(this)&#125;&gt;Click me&lt;/a&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">引用时：</div><div class="line">ReactDOM.render( &lt;IndexLogin /&gt;, document.getElementById(<span class="string">'someDiv'</span>));</div></pre></td></tr></table></figure></p>
+<p>更多的形式还有，暂不记录了昂～～</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/11/16/render-template-with-koa2/" data-id="civkcplt4000iqkpm3s8xgodi" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/react/">react</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Koa@2的async在webpack打包时报错</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 15px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/16/render-template-with-koa2/">Koa@2的模板渲染及React组件用ES6的几种写法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/10/redux-primary-introduction/">Redux初识概要</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/08/webpack-bundle-to-generate-html/">使用Webpack自动化生成多语言页面</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/08/npm-publish-your-package/">向npm发布自己的package</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Alex Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

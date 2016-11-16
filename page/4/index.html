@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,59 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-stat-command-check-file-detail" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/06/stat-command-check-file-detail/" class="article-date">
+  <time datetime="2016-11-06T03:39:23.000Z" itemprop="datePublished">2016-11-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/06/stat-command-check-file-detail/">查看文件详细信息的终端命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在Terminal的命令行中操作时，常需要查看文件的详细信息，包括文件大小、最后的修改时间等。尽管有很多方法可以查看这些信息，但在Linux系统和mac的OSX系统中，命令略有不同。</p>
+<h2 id="在mac里查看文件信息"><a href="#在mac里查看文件信息" class="headerlink" title="在mac里查看文件信息"></a>在mac里查看文件信息</h2><h3 id="stat-x"><a href="#stat-x" class="headerlink" title="stat -x"></a>stat -x</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">stat</span> -x btn.png</div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">File: <span class="string">"btn.png"</span></div><div class="line">Size: 3628         FileType: Regular File</div><div class="line">Mode: (0644/-rw-r--r--)         Uid: (  501/    alex)  Gid: (   20/   staff)</div><div class="line">Device: 1,4   Inode: 11189114    Links: 1</div><div class="line">Access: Sun Nov  6 11:27:53 2016</div><div class="line">Modify: Sun Nov  6 11:27:06 2016</div><div class="line">Change: Sun Nov  6 11:27:06 2016</div></pre></td></tr></table></figure>
+<p>在mac终端里，直接快速查看文件大小的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ du -h btn.png</div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">4.0K  btn.png</div></pre></td></tr></table></figure></p>
+<p>这就引出了两个很有用的命令：Disk Usage Utilities：du和df。</p>
+<h3 id="Disk-Usage-Utilities-du-amp-df-command"><a href="#Disk-Usage-Utilities-du-amp-df-command" class="headerlink" title="Disk Usage Utilities: du &amp; df command"></a>Disk Usage Utilities: du &amp; df command</h3><h4 id="du"><a href="#du" class="headerlink" title="du"></a>du</h4><p>du，即displays disk usage information for each file and directory (ie: home directories, folders, etc)<br>（很多命令的名字是几个莫名其妙的字母组合，似乎很难记，但是看了说明之后，立刻觉得非常好记了有木有？）<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ du -sh ~</div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">17G	/Users/alex  <span class="comment"># This users home directory takes up 17GB of space!</span></div></pre></td></tr></table></figure></p>
+<p>再来一个试验，切换到某个目录，比如~目录，然后：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">$ du -sh *</div><div class="line"><span class="comment"># 输出该目录下的目录和文件及其大小：</span></div><div class="line">636K	Applications</div><div class="line">330M	AwesomeProject</div><div class="line">8.0K	Desktop</div><div class="line">1.2G	Documents</div><div class="line"> 86M	Downloads</div><div class="line">313M	Facebook-React</div><div class="line"> 67M	HexoB<span class="built_in">log</span></div><div class="line">3.4G	Library</div><div class="line">1.4G	Music</div><div class="line"> 51M	Pictures</div><div class="line">8.0K	Public</div></pre></td></tr></table></figure></p>
+<p>du这个命令在Linux下也是可以用的。</p>
+<h4 id="df"><a href="#df" class="headerlink" title="df"></a>df</h4><p>df，即displays disk usage information based on file system (ie: entire drives, attached media, etc)。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$ df -h <span class="comment"># 参数h又是什意？好难记…但是知道了h是human readable form的意思之后…呵呵！</span></div><div class="line"><span class="comment"># 输出的就是：</span></div><div class="line">Filesystem      Size   Used  Avail Capacity iused      ifree %iused  Mounted on</div><div class="line">/dev/disk1     112Gi   60Gi   52Gi    54% 2387768 4292579511    0%   /</div><div class="line">devfs          180Ki  180Ki    0Bi   100%     624          0  100%   /dev</div><div class="line">map -hosts       0Bi    0Bi    0Bi   100%       0          0  100%   /net</div><div class="line">map auto_home    0Bi    0Bi    0Bi   100%       0          0  100%   /home</div></pre></td></tr></table></figure></p>
+<p>df这个命令在Linux下也是可以用的。</p>
+<h2 id="在Linux里查看文件信息"><a href="#在Linux里查看文件信息" class="headerlink" title="在Linux里查看文件信息"></a>在Linux里查看文件信息</h2><h3 id="stat-L-和-stat-f-和-stat-t"><a href="#stat-L-和-stat-f-和-stat-t" class="headerlink" title="stat -L 和 stat -f 和 stat -t"></a>stat -L 和 stat -f 和 stat -t</h3><p>在Linux中，使用stat命令可以查询文件状态信息。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">stat</span> -L index.html</div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">File: <span class="string">'index.html'</span></div><div class="line">Size: 33959       Blocks: 72         IO Block: 4096   regular file</div><div class="line">Device: fd01h/64769d  Inode: 344400      Links: 1</div><div class="line">Access: (0664/-rw-rw-r--)  Uid: (  500/  ubuntu)   Gid: (  500/  ubuntu)</div><div class="line">Access: 2016-11-01 18:05:28.537545732 +0800</div><div class="line">Modify: 2016-11-01 18:05:28.537545732 +0800</div><div class="line">Change: 2016-11-01 18:05:28.537545732 +0800</div><div class="line">Birth: -</div><div class="line"><span class="comment"># ===========================</span></div><div class="line">$ <span class="built_in">stat</span> <span class="_">-f</span> index.html <span class="comment"># 显示文件系统状态，而非文件的状态</span></div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">File: <span class="string">"index.html"</span></div><div class="line">ID: e94a0eba275cc9a1 Namelen: 255     Type: ext2/ext3</div><div class="line">Block size: 4096       Fundamental block size: 4096</div><div class="line">Blocks: Total: 5127583    Free: 3668037    Available: 3405906</div><div class="line">Inodes: Total: 1310720    Free: 1180305</div><div class="line"><span class="comment"># ===========================</span></div><div class="line">$ <span class="built_in">stat</span> -t index.html <span class="comment"># 简洁方式输出</span></div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">index.html 33959 72 81b4 500 500 fd01 344400 1 0 0 1477994728 1477994728 1477994728 0 4096</div></pre></td></tr></table></figure></p>
+<h3 id="ll-l-和-ls-l"><a href="#ll-l-和-ls-l" class="headerlink" title="ll -l 和 ls -l"></a>ll -l 和 ls -l</h3><p>除了stat命令之外，还有ll命令也可以快速查看文件的简要信息：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ ll <span class="_">-l</span> index.html <span class="comment"># 或ls -l index.html</span></div><div class="line"><span class="comment"># 输出的是：</span></div><div class="line">-rw-rw-r-- 1 ubuntu ubuntu 33959 Nov  1 18:05 index.html</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/11/06/stat-command-check-file-detail/" data-id="civkcplth000vqkpmnimqejhu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-babel-used-for-es6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -121,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/01/babel-used-for-es6/" data-id="civiyueza0000rnpmovxc8ixv" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/11/01/babel-used-for-es6/" data-id="civkcplsc0004qkpmqdvaksv5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li></ul>
@@ -133,70 +186,10 @@
 
 
   
-    <article id="post-es5-to-es6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/01/es5-to-es6/" class="article-date">
-  <time datetime="2016-11-01T03:37:56.000Z" itemprop="datePublished">2016-11-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/es5-to-es6/">Learning ES6</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>最近在写一个React的小项目，用了ES6的写法，略生疏。部分ES5与ES6的对应写法，在此做一简短记录，便于日后查阅。</p>
-<h2 id="Arrow-Functions"><a href="#Arrow-Functions" class="headerlink" title="Arrow Functions"></a>Arrow Functions</h2><p>ES6最显眼的区别于ES5的变化之一就是箭头函数了。写惯了JS的传统function，对箭头函数的感觉还是不够热：</p>
-<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">array.map(<span class="keyword">function</span>(v, i) &#123;</div><div class="line">  <span class="built_in">return</span> v + 1;  </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">array.map( (v, i) =&gt; v + 1  )</div></pre></td></tr></table></figure></p>
-<p>======= 我是一只分割线 =======</p>
-<p>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(<span class="keyword">function</span>(v) &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">numbers.forEach(v =&gt; &#123;</div><div class="line">  <span class="keyword">if</span>(v % 2 == 0)&#123;</div><div class="line">    console.log(v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>======= 我也是一只分割线 =======</p>
-<p>对于定义一个类：<br>ES5的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var Person = <span class="keyword">function</span>(id, name) &#123;</div><div class="line">  this.id = id;</div><div class="line">  this.name = name;</div><div class="line">  this.speak(name);</div><div class="line">&#125;;</div><div class="line">Person.prototype.speak = <span class="keyword">function</span>(name) &#123;</div><div class="line">  console.log(<span class="string">'My name is '</span>, name);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>ES6的写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor (id, name) &#123;  <span class="comment"># 构造函数</span></div><div class="line">    this.id = id;</div><div class="line">    this.name = name;</div><div class="line">    this.speak(name);</div><div class="line">  &#125;</div><div class="line">  speak(name) &#123;</div><div class="line">    console.log(<span class="string">'My name is '</span>, name);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>======= 我会告诉你我是一只分割线吗 =======</p>
-<p>在React里用createClass定义一个组件类。<br>ES5的写法就是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">var App = React.createClass(&#123;</div><div class="line">  getDefaultProps: <span class="function"><span class="title">function</span></span>() &#123;   <span class="comment"># 获取默认属性</span></div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">      autoLoad: <span class="literal">false</span>,</div><div class="line">      initWidth: 100,</div><div class="line">      appName: <span class="string">'A Name'</span></div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  propTypes: &#123;</div><div class="line">    autoLoad: React.PropTypes.bool.isRequired,</div><div class="line">    initWidth: React.PropTypes.number.isRequired,</div><div class="line">    appName: React.PropTypes.string.isRequired</div><div class="line">  &#125;,</div><div class="line">  getInitialState: <span class="function"><span class="title">function</span></span>() &#123;   <span class="comment"># 初始化state</span></div><div class="line">    <span class="built_in">return</span> &#123;</div><div class="line">      currentWidth: 100,</div><div class="line">      currentState: 1</div><div class="line">    &#125;</div><div class="line">  &#125;,</div><div class="line">  handleChange: <span class="keyword">function</span>(e) &#123;  <span class="comment"># 一个普通的监听后执行的回调函数</span></div><div class="line">    this.setState(&#123;</div><div class="line">      currentWidth: 200,</div><div class="line">      currentState: 0</div><div class="line">    &#125;);</div><div class="line">  &#125;,</div><div class="line">  render: <span class="function"><span class="title">function</span></span>() &#123;  <span class="comment"># 渲染模板</span></div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'wrapper'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;this.handleChange&#125; /&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>ES6的写法则为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div></pre></td><td class="code"><pre><div class="line">class App extends React.Component &#123;</div><div class="line">  static defaultProps = &#123;   <span class="comment"># ES6用static成员实现默认属性</span></div><div class="line">    autoLoad: <span class="literal">false</span>,</div><div class="line">    initWidth: 100,</div><div class="line">    appName: <span class="string">'A Name'</span></div><div class="line">  &#125;; <span class="comment"># 这里有分号！</span></div><div class="line">  static propTypes = &#123;</div><div class="line">    autoLoad: React.PropTypes.bool.isRequired,</div><div class="line">    initWidth: React.PropTypes.number.isRequired,</div><div class="line">    appName: React.PropTypes.string.isRequired</div><div class="line">  &#125;; <span class="comment"># 这里也有分号！</span></div><div class="line"></div><div class="line">  constructor(props) &#123;  <span class="comment"># 在构造函数中初始化state</span></div><div class="line">    super(props); <span class="comment"># 继承</span></div><div class="line">    this.state = &#123;</div><div class="line">      currentWidth: 100,</div><div class="line">      currentState: 1</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  handleChange(e) &#123;</div><div class="line">    this.setState(&#123;</div><div class="line">      currentWidth: 200,</div><div class="line">      currentState: 0</div><div class="line">    &#125;);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">componentWillMount</span></span>() &#123; <span class="comment"># 另外加一个监听器的例子</span></div><div class="line">    Something.addEventListener(<span class="string">'change'</span>, this.onAppChange);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">componentDidUnmount</span></span>() &#123;</div><div class="line">    Something.removeEventListener(<span class="string">'change'</span>, this.onAppChange);</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  onAppChange = (event) =&gt; &#123;  <span class="comment"># onAppChange的值是箭头函数，初始化时即绑好this</span></div><div class="line">    <span class="comment"># Do whatever you want</span></div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="function"><span class="title">render</span></span>() &#123;</div><div class="line">    <span class="built_in">return</span> (</div><div class="line">      &lt;div className=<span class="string">'wrapper'</span>&gt;</div><div class="line">        &lt;input <span class="built_in">type</span>=<span class="string">'text'</span> onChange=&#123;this.handleChange.bind(this)&#125; /&gt;</div><div class="line">        <span class="comment"># 或：&lt;input type='text' onChange=&#123;e=&gt;this.handleChange(e)&#125; /&gt;</span></div><div class="line">      &lt;/div&gt;</div><div class="line">    )</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>======= 我会告诉你我是一只分割线吗 =======</p>
-<p>其他的写法</p>
-<p>比如import时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var MyComp = require(<span class="string">'./MyComp'</span>); <span class="comment"># ES5</span></div><div class="line">import MyComp from <span class="string">'./MyComp'</span>; <span class="comment"># ES6</span></div></pre></td></tr></table></figure></p>
-<p>比如exports时：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">module.exports = MyComp; <span class="comment"># ES5</span></div><div class="line"><span class="built_in">export</span> default class MyComp extends Component&#123; ... &#125; <span class="comment"># ES6</span></div></pre></td></tr></table></figure></p>
-<p>最后推荐一个好东东：<a href="http://es6-features.org/#Constants" target="_blank" rel="external">ECMAScript 6 — New Features: Overview &amp; Comparison</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/01/es5-to-es6/" data-id="civiyuf0a000crnpmzpry136n" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/React/">React</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -204,7 +197,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -214,7 +207,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -224,9 +217,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 10px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 10px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 15px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 10px;">webpack</a>
     </div>
   </div>
 
@@ -243,9 +236,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/11/16/render-template-with-koa2/">Koa@2的模板渲染及React组件用ES6的几种写法</a>
+          </li>
         
           <li>
             <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
@@ -263,10 +260,6 @@
             <a href="/2016/11/08/npm-publish-your-package/">向npm发布自己的package</a>
           </li>
         
-          <li>
-            <a href="/2016/11/07/git-commonly-used-commands/">Git的常用命令（更新中）</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -280,7 +273,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
