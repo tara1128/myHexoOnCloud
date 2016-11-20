@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Run Faster To Get A Bite">
 <meta property="og:description" content="在项目开发的过程中，使用热替换无疑是提高效率的不二选择。由此，开发环境的配置和生产环境的配置，可能有很多区别。这次的项目还是基于Koa@2和Webpack的，如果每次都要bundle才能看到开发中的更新，那岂非太麻烦。于是花了一下午时间终于调通了热替换的功能，这样在代码改动并保存后，页面就自动更新了。后续将要开发的Redux，效率会提高很多！
 “热替换”中间件的工作原理，大致可以解释为：它作为we">
-<meta property="og:updated_time" content="2016-11-20T07:03:29.000Z">
+<meta property="og:updated_time" content="2016-11-20T07:58:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Koa框架下的Webpack热替换配置">
 <meta name="twitter:description" content="在项目开发的过程中，使用热替换无疑是提高效率的不二选择。由此，开发环境的配置和生产环境的配置，可能有很多区别。这次的项目还是基于Koa@2和Webpack的，如果每次都要bundle才能看到开发中的更新，那岂非太麻烦。于是花了一下午时间终于调通了热替换的功能，这样在代码改动并保存后，页面就自动更新了。后续将要开发的Redux，效率会提高很多！
@@ -59,9 +59,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -111,7 +111,7 @@
 <p>再看生产环境：bin/production</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env node</span></div><div class="line">var fs = require(<span class="string">'fs'</span>)</div><div class="line">var path = require(<span class="string">'path'</span>)</div><div class="line">try &#123;</div><div class="line">  fs.statSync(path.join(__dirname, <span class="string">'../dist'</span>)); <span class="comment"># 判断打包后的目录是否存在</span></div><div class="line">&#125; catch (e) &#123;</div><div class="line">  console.log(<span class="string">'The app has not been built yet! Execute webpack first!'</span>)</div><div class="line">  process.exit(0) <span class="comment"># 不存在就直接退出</span></div><div class="line">&#125;</div><div class="line">require(<span class="string">'../dist/server-bundle.js'</span>) <span class="comment"># 执行打包后的入口文件，名字在webpack的生产环境配置中自定义</span></div></pre></td></tr></table></figure>
 <p>生产环境的入口文件是server/index，其打包后即为dist/<em>**</em>.js</p>
-<h3 id="两份Webpack的配置文件"><a href="#两份Webpack的配置文件" class="headerlink" title="两份Webpack的配置文件"></a>两份Webpack的配置文件</h3><p>针对于开发环境和生产环境的不同，有必要准备两份webpack的配置文件。一份应用于开发环境，其中需要做热替换的配置。另一份应用于生产环境，不需要热替换的配置。当然你也可以用一份，但是如何区分两个环境的不同配置，会比较麻烦。不如分开。</p>
+<h3 id="Webpack的配置"><a href="#Webpack的配置" class="headerlink" title="Webpack的配置"></a>Webpack的配置</h3><p>针对于开发环境和生产环境的不同，可以准备两份webpack的配置文件。一份应用于开发环境，其中需要做热替换的配置。另一份应用于生产环境，不需要热替换的配置。当然你也可以用一份，但是如何区分两个环境的不同配置，会比较麻烦。不如分开。</p>
 <p>由于当前项目的架构是Isomorphic形式，有部分代码会被服务端和客户端共用，因此生产环境下，webpack配置文件输出的module不是一个，而是两个module组成的数组。而在开发环境下，由于热替换仅是针对客户端的，因此输出module仅一个。</p>
 <h4 id="开发环境的webpack配置文件，带有热替换的配置："><a href="#开发环境的webpack配置文件，带有热替换的配置：" class="headerlink" title="开发环境的webpack配置文件，带有热替换的配置："></a>开发环境的webpack配置文件，带有热替换的配置：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  name: <span class="string">'Dev env bundle with hot middleware'</span>,</div><div class="line">  devtool: <span class="string">'cheap-source-map'</span>,</div><div class="line">  entry: [</div><div class="line">    <span class="string">'eventsource-polyfill'</span>,  <span class="comment"># For IE</span></div><div class="line">    <span class="string">'webpack-hot-middleware/client?path=/__webpack_hmr&amp;timeout=2000&amp;reload=true&amp;quiet=false'</span>, <span class="comment"># 热替换参数</span></div><div class="line">    <span class="string">'./client/index.js'</span>  <span class="comment"># 入口文件</span></div><div class="line">  ],</div><div class="line">  output: &#123;</div><div class="line">    path: path.join(__dirname, <span class="string">'/public/build'</span>),</div><div class="line">    filename: <span class="string">'[name].js'</span>,</div><div class="line">    publicPath: <span class="string">'/build/'</span>,</div><div class="line">    chunkFilename: <span class="string">'[id].chunk.js'</span></div><div class="line">  &#125;,</div><div class="line">  module: &#123;</div><div class="line">    loaders: [</div><div class="line">      &#123;</div><div class="line">        <span class="built_in">test</span>: /\.jsx?$/,</div><div class="line">        loader: <span class="string">'babel-loader'</span>,</div><div class="line">        query: &#123;</div><div class="line">          presets: [<span class="string">'react-hmre'</span>], <span class="comment"># 这里要配置react-hmre</span></div><div class="line">          plugins: [</div><div class="line">            [<span class="string">'inline-replace-variables'</span>, &#123; <span class="string">'__SERVER__'</span>: <span class="literal">false</span> &#125;]</div><div class="line">          ]</div><div class="line">      &#125;,</div><div class="line">      <span class="comment"># Other loaders ... ... </span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  plugins: [</div><div class="line">    new webpack.optimize.CommonsChunkPlugin(<span class="string">'common'</span>, <span class="string">'combo.js'</span>),</div><div class="line">    new webpack.optimize.DedupePlugin(),</div><div class="line">    new webpack.DefinePlugin(&#123;</div><div class="line">      <span class="string">'process.env.NODE_ENV'</span>: JSON.stringify(<span class="string">'development'</span>),</div><div class="line">      __SERVER__: <span class="literal">false</span></div><div class="line">    &#125;),</div><div class="line">    new webpack.optimize.OccurenceOrderPlugin(), <span class="comment"># 使用热替换需要的插件.</span></div><div class="line">    new webpack.HotModuleReplacementPlugin(),  <span class="comment"># 使用热替换需要的插件.</span></div><div class="line">    new webpack.NoErrorsPlugin()   <span class="comment"># 使用热替换需要的插件.</span></div><div class="line">  ]</div></pre></td></tr></table></figure>
 <p>如上述代码中的entry里所示，热替换的参数可以放在entry的路径配置里。支持的参数有：</p>
@@ -122,14 +122,14 @@
 <li>reload：设为true时就在webpack打包后自动加载页面，通常都会设为true</li>
 <li>noInfo：设为true时禁用console的信息log</li>
 <li>quiet：设为true时禁用所有的console的log</li>
-<li>dynamicPublicPath： 设为true时会使用webpack的publicPath作为路径的前缀（也可以在entry里动态设置<strong>webpack_public_path</strong>）</li>
+<li>dynamicPublicPath： 设为true时会使用webpack的publicPath作为路径的前缀</li>
 </ul>
 <p>附：<a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank" rel="external">参考Git相关</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/17/hot-middleware-for-koa/" data-id="civmb0l5g000rzipmknrvlasj" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/11/17/hot-middleware-for-koa/" data-id="civmb0l5g000rzipmknrvlasj" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
@@ -142,7 +142,7 @@
   
   
     <a href="/2016/11/16/render-template-with-koa2/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Koa@2的模板渲染及React组件用ES6的几种写法</div>
     </a>
   
@@ -157,7 +157,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorier</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -167,7 +167,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -177,7 +177,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
     </div>
@@ -186,7 +186,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -196,7 +196,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -233,7 +233,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
