@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>基础知识：排序算法 | Run Faster To Get A Bite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="前端市场风云变幻，为了以更好姿态在风云中前行，不能一味的追逐新工具新技术。其实万变不离其宗，根基扎牢，才能向上更多。以不变应万变，乃是亘古不变之真理。
+遂决定还是要不时的回顾基础知识。每回顾一次，记录一次。今天回顾排序算法。
+冒泡排序以升序排列为例，之所以叫冒泡是因为算法多次在数组中移动，比较相邻的元素，较小的移动到数组左端，较大的移动到右端，数据像气泡一样被移动。该算法很常用，性能略慢，基本可满">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基础知识：排序算法">
+<meta property="og:url" content="http://shaojing.wang/2016/11/24/fundamental-array-sort/index.html">
+<meta property="og:site_name" content="Run Faster To Get A Bite">
+<meta property="og:description" content="前端市场风云变幻，为了以更好姿态在风云中前行，不能一味的追逐新工具新技术。其实万变不离其宗，根基扎牢，才能向上更多。以不变应万变，乃是亘古不变之真理。
+遂决定还是要不时的回顾基础知识。每回顾一次，记录一次。今天回顾排序算法。
+冒泡排序以升序排列为例，之所以叫冒泡是因为算法多次在数组中移动，比较相邻的元素，较小的移动到数组左端，较大的移动到右端，数据像气泡一样被移动。该算法很常用，性能略慢，基本可满">
+<meta property="og:updated_time" content="2016-11-24T03:08:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基础知识：排序算法">
+<meta name="twitter:description" content="前端市场风云变幻，为了以更好姿态在风云中前行，不能一味的追逐新工具新技术。其实万变不离其宗，根基扎牢，才能向上更多。以不变应万变，乃是亘古不变之真理。
+遂决定还是要不时的回顾基础知识。每回顾一次，记录一次。今天回顾排序算法。
+冒泡排序以升序排列为例，之所以叫冒泡是因为算法多次在数组中移动，比较相邻的元素，较小的移动到数组左端，较大的移动到右端，数据像气泡一样被移动。该算法很常用，性能略慢，基本可满">
+  
+    <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Run Faster To Get A Bite</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">but world moves much faster than you, like always</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-fundamental-array-sort" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/24/fundamental-array-sort/" class="article-date">
+  <time datetime="2016-11-24T01:51:43.000Z" itemprop="datePublished">2016-11-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Rudiments/">Rudiments</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      基础知识：排序算法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前端市场风云变幻，为了以更好姿态在风云中前行，不能一味的追逐新工具新技术。其实万变不离其宗，根基扎牢，才能向上更多。以不变应万变，乃是亘古不变之真理。</p>
+<p>遂决定还是要不时的回顾基础知识。每回顾一次，记录一次。今天回顾排序算法。</p>
+<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>以升序排列为例，之所以叫冒泡是因为算法多次在数组中移动，比较相邻的元素，较小的移动到数组左端，较大的移动到右端，数据像气泡一样被移动。该算法很常用，性能略慢，基本可满足需求，代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.BubbleSort = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var len = this.length;</div><div class="line">  var tmp; <span class="comment"># 定义一个临时变量放挪动的元素</span></div><div class="line">  var count = 0;</div><div class="line">  <span class="keyword">for</span>(var i = 0; i &lt; len - 1; i++)&#123; <span class="comment"># 外循环用来遍历元素</span></div><div class="line">    <span class="keyword">for</span>(var j = 0; j &lt; len-1-i; j++)&#123; <span class="comment"># 内循环用来比较元素</span></div><div class="line">      <span class="keyword">if</span>( this[j] &gt; this[j+1] )&#123; <span class="comment"># 前面元素比后面元素更大时，要交换位置</span></div><div class="line">        tmp = this[j]; <span class="comment"># 前面元素大，先放临时变量里</span></div><div class="line">        this[j] = this[j+1]; <span class="comment"># 后面元素小，放前面</span></div><div class="line">        this[j+1] = tmp; <span class="comment"># 从临时变量里取出大的元素，放后面</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> this; <span class="comment"># 别忘了返回排序后的新数组</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>冒泡排序的另一种写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">bubbleSort</span></span>() &#123;</div><div class="line">  var num = myArray.length; <span class="comment"># 假设有一个数组myArray</span></div><div class="line">  var temp;</div><div class="line">  <span class="keyword">for</span> (var outer = num; outer &gt;= 2; --outer) &#123; <span class="comment"># 倒着循环外层遍历元素 outer-- 也可以</span></div><div class="line">    <span class="keyword">for</span> (var inner = 0; inner &lt;= outer - 1; ++inner) &#123; <span class="comment"># inner++ 也可以</span></div><div class="line">      <span class="keyword">if</span>(myArray[inner] &gt; myArray[inner+1]) &#123;</div><div class="line">        temp = myArray[inner];</div><div class="line">        myArray[inner] = myArray[inner + 1];</div><div class="line">        myArray[inner + 1] = temp;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>从数组开头开始，第一个元素和其他元素比较，最小的放前面，然后从第二个元素再开始比较。直到倒数第二个元素为止。</p>
+<p>外循环从第一个元素到倒数第二个元素。<br>内循环从第二个元素到最后一个元素，查找比当前外循环指向元素更小的元素。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.SelectionSort = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var i, j, min, temp;</div><div class="line">  <span class="keyword">for</span>(i = 0; i &lt; this.length-1; i++)&#123; <span class="comment"># 外循环，从第一个元素到倒数第二个元素</span></div><div class="line">    min = i; <span class="comment"># 外循环当前所指向元素的角标做一个标记</span></div><div class="line">    <span class="keyword">for</span>(j = i+1; j &lt; this.length; j++)&#123; <span class="comment"># 内循环，从第二个元素到最后一个元素</span></div><div class="line">      <span class="keyword">if</span>( this[min] &gt; this[j] )&#123; <span class="comment"># 如果外循环当前指向元素大于内循环的元素</span></div><div class="line">        min = j; <span class="comment"># 把值最小的元素的index赋给min，用更小的元素参与下一轮比较</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    temp = this[min];</div><div class="line">    this[min] = this[i];</div><div class="line">    this[i] = temp;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> this;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>To be continued … …</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/11/24/fundamental-array-sort/" data-id="civvs5rzr0005hvpmgsl0wm18" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/11/17/hot-middleware-for-koa/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Koa框架下的Webpack热替换配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 10px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/11/24/fundamental-array-sort/">基础知识：排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/hot-middleware-for-koa/">Koa框架下的Webpack热替换配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/16/render-template-with-koa2/">Koa@2的模板渲染及React组件用ES6的几种写法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/10/redux-primary-introduction/">Redux初识概要</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Alex Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
