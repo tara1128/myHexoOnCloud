@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,63 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-vim-to-be-like-a-IDE" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/28/vim-to-be-like-a-IDE/" class="article-date">
+  <time datetime="2016-10-28T09:28:39.000Z" itemprop="datePublished">2016-10-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/28/vim-to-be-like-a-IDE/">把Vim打造成一枚IDE</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>用惯了Vim之后，就不想再安装任何IDE了，因为不喜欢臃肿的IDE和繁琐的配置，况且前端的代码基本上不需要编译，Vim用熟了完全可以高效工作，IDE在提高工作效率的作用上完全没有明显优势。So，never installed any IDEs。当然，也曾因此被某些人鄙视：“神马？你居然不用IDE？”……呵呵，小盆友，这不是一个以IDE论英雄的时代。</p>
+<p>今天偶然发现一篇好文章，推荐了一些实用工具，可以让Vim用得更舒爽，就像在用一枚IDE。终于可以满足我既不抛弃Vim，又可以享受IDE带来的便捷操作了。更重要的是，Vim的插件安装尤其干净利索，丝毫不臃肿！</p>
+<p>这么好的事儿，必须要立刻写博做一记录啊！</p>
+<h2 id="Vim的插件管理工具pathogen-vim"><a href="#Vim的插件管理工具pathogen-vim" class="headerlink" title="Vim的插件管理工具pathogen.vim"></a>Vim的插件管理工具pathogen.vim</h2><p>据说是vim最好用的管理插件的插件。话不多说，直接上Checkout地址：<br><a href="https://github.com/tpope/vim-pathogen.git" target="_blank" rel="external">https://github.com/tpope/vim-pathogen.git</a></p>
+<p>解压后的脚本放在~/.vim/autoload/目录里即可。pathogen安装完毕！</p>
+<p>同时在~/.vim/vimrc 文件里添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">call pathogen<span class="comment">#infect()  # 这句话要写在filetype plugin indent on和syntax on之前</span></div></pre></td></tr></table></figure></p>
+<p>需要注意的是，pathogen只能放在~/.vim/autoload/目录下，启动之也只能通过修改~/.vim/vimrc文件。</p>
+<p>pathogen让每个插件占有一个单独的目录，解决了文件分散的问题，好装好卸！安装完pathogen之后，在~/.vim/目录下新建一个专门放插件的目录bundle，以后要安装的所有插件都放这个目录里，要删除某个插件，只需要删除这个目录里对应的目录和文件即可。要更新某个插件，只需要checkout最新的版本进去即可。</p>
+<p>So cool，OK？</p>
+<h2 id="用pathogen安装一个插件syntastic"><a href="#用pathogen安装一个插件syntastic" class="headerlink" title="用pathogen安装一个插件syntastic"></a>用pathogen安装一个插件syntastic</h2><p>Cannot be any easier……<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$   <span class="built_in">cd</span> ~/.vim/bundle/</div><div class="line">$   git <span class="built_in">clone</span> --depth=1 https://github.com/scrooloose/syntastic.git</div></pre></td></tr></table></figure></p>
+<p>Done！退出Vim再重新开启。</p>
+<p>网上推荐的部分配置：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">set</span> statusline+=%<span class="comment">#warningmsg#</span></div><div class="line"><span class="built_in">set</span> statusline+=%&#123;SyntasticStatuslineFlag()&#125;</div><div class="line"><span class="built_in">set</span> statusline+=%*</div><div class="line"><span class="built_in">let</span> g:syntastic_always_populate_loc_list = 1 <span class="string">"automatically load errors into the location list</span></div><div class="line">let g:syntastic_auto_loc_list = 1 "close error window automatically</div><div class="line"><span class="built_in">let</span> g:syntastic_check_on_open = 1 <span class="string">"check for errors when a file is loaded</span></div><div class="line">let g:syntastic_check_on_wq = 0 "<span class="built_in">disable</span> checks <span class="keyword">for</span> errors whenever you save the file</div><div class="line"><span class="built_in">let</span> g:syntastic_error_symbol = <span class="string">"✗"</span> <span class="string">"Syntastic uses arrow symbols to indicate errors, change it.</span></div></pre></td></tr></table></figure></p>
+<p>常用的命令：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">:SyntasticInfo  <span class="comment"># 显示当前状态</span></div><div class="line">:SyntasticReset  <span class="comment"># 清空错误信息</span></div><div class="line">:Errors  <span class="comment"># 打开错误信息显示窗口</span></div><div class="line">:SyntasticToggleMode  <span class="comment"># 切换当前插件状态，激活或禁用</span></div><div class="line">:SyntasticCheck  <span class="comment"># 手动调用语法检查</span></div><div class="line">:SyntasticSetLoclist  <span class="comment"># 手动输出错误到quick-fix，但不会打开错误窗口。</span></div><div class="line">:lnext  <span class="comment"># 到下一个错误</span></div><div class="line">:lprevious  <span class="comment"># 到上一个错误</span></div></pre></td></tr></table></figure></p>
+<p>修改Syntastic的高亮颜色来适应当前自己的Vim主题色：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">highlight SyntasticErrorSign guifg=white guibg=black</div></pre></td></tr></table></figure></p>
+<p>Try it yourself!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/10/28/vim-to-be-like-a-IDE/" data-id="ciw7fqko60018kkpms1yfpbo3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-touch-event-in-mobiles" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -117,78 +174,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="civvs5s0z000whvpm81kvqemq" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciw7fqkob001dkkpm26opwspp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/touch/">touch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-commonJS-how-it-works" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/27/commonJS-how-it-works/" class="article-date">
-  <time datetime="2016-10-27T05:07:42.000Z" itemprop="datePublished">2016-10-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/27/commonJS-how-it-works/">CommonJS的模块运行机制简述</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>如今的Web前端领域，以Node环境为基础的各种开发工具和开发模式层出不穷。新技术看似日新月异，实则万变不离其宗。最初心急如焚的学习新工具，搭新环境做项目实践，总能看到一篇篇洋洋洒洒的分享文章被各个自媒体转发，总有人喜欢把事情说得天花乱坠。不明真相的吃瓜群众和默默撸码的小程序猿们还以为发生了怎样的技术革命…</p>
-<p>在尝试了多种开发工具和开发模式之后，累觉不爱。何苦追寻那日新月异的繁茂枝叶？不如深入根茎，理透本质。事物的表象变化多端，然而本质则是亘古不变矣！</p>
-<p>First of all，本文讨论的对象皆在Node环境之下，这也是为什么将下文中的任何一个JS文件嵌入到浏览器中会报错。当然如今有很多帮助浏览器加载CommonJS规范的工具类如Browserify，etc.</p>
-<p>Ok，then，先给机器安装Node环境。如果你用Windows，走好，不送！</p>
-<p>Node的模块化即采用的CommonJS模块规范。简而言之，就是每一个文件就是一个模块。每个模块有自己的作用域。在文件内部定义类、函数、变量，都是模块私有的，对其他模块是不可见的。</p>
-<p>模块之间的关系。一个模块通过exports方法将自己内部的对象输出作为接口供外界模块访问。一个模块通过require方法加载其他模块并运行之，然后返回其exports出的对象。</p>
-<p>在每个模块内部都有一个module变量，代表当前的这个模块。Node内部有一个Module构造函数，所有模块的module都是这个Module的实例。如果想看看一个具体的module长什么样子…</p>
-<h2 id="一个module对象"><a href="#一个module对象" class="headerlink" title="一个module对象"></a>一个module对象</h2><p>创建一个目录test/，作为本次实验的项目根目录。先不着急写package.json文件。先创建一个example.js模块和一个index.js模块。<br>在example.js模块里，写一些代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">var name = <span class="string">'example'</span>;</div><div class="line">var fileName = <span class="keyword">function</span>(name) &#123;</div><div class="line">    <span class="built_in">return</span> name + <span class="string">'.js'</span>;</div><div class="line">&#125;;</div><div class="line">console.log(<span class="string">'If you require me, this code will be executed.'</span>);</div><div class="line">console.log(module);</div><div class="line">module.exports.name = name;</div><div class="line">module.exports.fileName = fileName;</div></pre></td></tr></table></figure></p>
-<p>然后在index.js文件里，写一些代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var example = require(<span class="string">'./example.js'</span>);</div><div class="line">var name = example.name;  <span class="comment">#example 文件里有exports这个变量</span></div><div class="line">var file = example.fileName(name);</div><div class="line">console.log(<span class="string">'In index, import file '</span>, file );</div><div class="line">console.log(module);</div></pre></td></tr></table></figure></p>
-<p>然后在项目根目录下执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$   node index.js</div></pre></td></tr></table></figure></p>
-<p>这样会打印出example模块的module如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">Module &#123;</div><div class="line">  id: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">  exports: &#123;&#125;,</div><div class="line">  parent:  <span class="comment">#引用example模块的文件就是example的parent，此例中就是index.js</span></div><div class="line">   Module &#123;</div><div class="line">     id: <span class="string">'.'</span>, <span class="comment">#这里的id就是文件的绝对路径，index的路径就是当前执行的目录</span></div><div class="line">     exports: &#123;&#125;,</div><div class="line">     parent: null,  <span class="comment">#index文件没有被任何文件引用，parent为空</span></div><div class="line">     filename: <span class="string">'/Users/alex/test/index.js'</span>,</div><div class="line">     loaded: <span class="literal">false</span>,</div><div class="line">     children: [ [Circular] ],</div><div class="line">     paths: </div><div class="line">      [ <span class="string">'/Users/alex/test/node_modules'</span>,</div><div class="line">        <span class="string">'/Users/alex/node_modules'</span>,</div><div class="line">        <span class="string">'/Users/node_modules'</span>,</div><div class="line">        <span class="string">'/node_modules'</span> ] &#125;,</div><div class="line">  filename: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">  loaded: <span class="literal">false</span>,</div><div class="line">  children: [],   <span class="comment"># example模块没有加载其他模块，因此children为空</span></div><div class="line">  paths: </div><div class="line">   [ <span class="string">'/Users/alex/test/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/alex/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/node_modules'</span>,</div><div class="line">     <span class="string">'/node_modules'</span> ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>同样index文件的module对象打印出来是这个样子的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">Module &#123;</div><div class="line">  id: <span class="string">'.'</span>, <span class="comment">#index文件位于当前执行目录</span></div><div class="line">  exports: &#123;&#125;,</div><div class="line">  parent: null, <span class="comment">#index文件没有被任何文件引入</span></div><div class="line">  filename: <span class="string">'/Users/alex/test/index.js'</span>,</div><div class="line">  loaded: <span class="literal">false</span>,</div><div class="line">  children: <span class="comment">#index内部加载了example模块，因此index的children有example模块</span></div><div class="line">   [ Module &#123;</div><div class="line">       id: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">       exports: [Object],</div><div class="line">       parent: [Circular],</div><div class="line">       filename: <span class="string">'/Users/alex/test/example.js'</span>,</div><div class="line">       loaded: <span class="literal">true</span>,</div><div class="line">       children: [],</div><div class="line">       paths: [Object] &#125; ],</div><div class="line">  paths: </div><div class="line">   [ <span class="string">'/Users/alex/test/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/alex/node_modules'</span>,</div><div class="line">     <span class="string">'/Users/node_modules'</span>,</div><div class="line">     <span class="string">'/node_modules'</span> ]</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="module对象的几个属性"><a href="#module对象的几个属性" class="headerlink" title="module对象的几个属性"></a>module对象的几个属性</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># module.id 模块文件的绝对路径带文件名</span></div><div class="line"><span class="comment"># module.filename 模块文件名带绝对路径</span></div><div class="line"><span class="comment"># module.loaded 模块是否完成加载</span></div><div class="line"><span class="comment"># module.parent 谁调用了本模块</span></div><div class="line"><span class="comment"># module.children 本模块调用了谁</span></div><div class="line"><span class="comment"># module.exports 本模块对外的输出值</span></div></pre></td></tr></table></figure>
-<h2 id="require的加载机制"><a href="#require的加载机制" class="headerlink" title="require的加载机制"></a>require的加载机制</h2><p>First，require并不是CommonJS的全局命令，而是当前模块module的一个方法module.require。这个require命令会读取并执行一个JS文件，然后返回该模块的exports对象。<br>简言之，require做的就是：load -&gt; compile -&gt; return.</p>
-<p>require的参数里，文件名默认后缀为js，因此可以写”.js”也可以不写。而对于文件的路径，如果是以”/“开头的就是绝对路径了，例如”/Users/alex/test/“，如果是”./“则是相对路径，表示相对于当前执行的文件的路径而言。如果当前执行的是index文件，而index文件位于项目的根目录，那么”./“在当前环境下就表示根目录。</p>
-<p>如果require的路径里没有任何路径，只是某个模块的名称，例如某个核心模块react或express之类，这些模块也许已经被全局安装到开发者的本地机器里，也许是局部安装在项目的目录里，anyway，不加路径的require命令，会让Node同学依次搜索以下文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># /usr/local/lib/node/***.js</span></div><div class="line"><span class="comment"># /home/user/project/node_modules/***.js</span></div><div class="line"><span class="comment"># /home/user/node_modules/***.js</span></div><div class="line"><span class="comment"># /node_modules/***.js</span></div></pre></td></tr></table></figure></p>
-<p>具体的路径名会因系统的不同而略有差异。</p>
-<p>如果想得到require命令加载的文件名，使用resolve方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$   <span class="comment"># require.resolve();</span></div></pre></td></tr></table></figure></p>
-<p>如果没有发现所要加载的文件，则node会尝试用.js .json .node为后缀再去搜索文件。.json后缀的文件会以JSON格式的文本文件解析，.node后缀的文件会以编译后的二进制文件解析。</p>
-<p>require会调用Node内部的Module._load命令。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Module._load = <span class="keyword">function</span>(request, parent, isMain) &#123;</div><div class="line">  <span class="comment"># 先看Module._cache中是否有指定的模块</span></div><div class="line">  <span class="comment"># 如没有，就创建一个新的Module实例，并缓存</span></div><div class="line">  <span class="comment"># 用module.load()加载指定的模块文件</span></div><div class="line">  <span class="comment"># 用module.compile()执行文件里的代码</span></div><div class="line">  <span class="comment"># 如果load 或 compile 报错，就从缓存删除该模块</span></div><div class="line">  <span class="comment"># 没有报错，则返回该模块的module.exports对象</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>上述所提到的compile方法的具体流程大致如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Module.prototype._compile = <span class="keyword">function</span>(content, filename) &#123;</div><div class="line">  <span class="comment"># 定义一个require函数指向module.require</span></div><div class="line">  <span class="comment"># require.resolve() 方法将模块名解析到绝对路径</span></div><div class="line">  <span class="comment"># reuqire.main 指向当前本模块</span></div><div class="line">  <span class="comment"># require.extensions 根据不同的后缀名调用不同的执行函数</span></div><div class="line">  <span class="comment"># 将所指文件放到一个函数中，可调用require，并执行该函数</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>Damn，有点晕…</p>
-<p>Anyway，当require函数准备完毕，那么所加载的模块内的代码就已经被放进了一个新的函数中，并可执行。这也是为什么模块可以避免污染全局的原因。Just like：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span> (exports, require, module, __filename, __dirname) &#123;</div><div class="line">  <span class="comment"># My code goes here ...</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>And，Module._compile方法是同步执行的。<br>So，Module_load要等它执行完成，才会返回module.exports。</p>
-<p>推荐文章：<br><a href="http://blog.ponyfoo.com/2014/08/25/a-gentle-browserify-walkthrough" target="_blank" rel="external">About Browserify</a><br><a href="http://fredkschott.com/post/2014/06/require-and-the-module-system/" target="_blank" rel="external">How Require works</a><br><a href="https://docs.nodejitsu.com/articles/getting-started/what-is-require" target="_blank" rel="external">What is require</a><br><a href="http://addyosmani.com/writing-modular-js/" target="_blank" rel="external">Writting Modular JS with AMD, CommonJS</a></p>
-<p>饿了。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/27/commonJS-how-it-works/" data-id="civvs5s1k001bhvpm1143bu89" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/node/">node</a></li></ul>
 
     </footer>
   </div>
@@ -208,7 +197,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -218,7 +207,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -228,18 +217,18 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 10px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 15px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 15px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
   </div>
 
@@ -247,12 +236,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/11/24/fundamental-array-sort/">基础知识：排序算法</a>
+            <a href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
           </li>
         
           <li>
@@ -265,10 +258,6 @@
         
           <li>
             <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/10/redux-primary-introduction/">Redux初识概要</a>
           </li>
         
       </ul>
@@ -284,7 +273,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

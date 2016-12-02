@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,56 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-fundamental-bin-search" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/02/fundamental-bin-search/" class="article-date">
+  <time datetime="2016-12-02T06:47:36.000Z" itemprop="datePublished">2016-12-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Rudiments/">Rudiments</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>首先，二分查找算法只对有序的数列而言。它的效率比顺序查找更高。</p>
+<p>二分查找算法的基本思想，与猜数字游戏类似。例如1-100之间猜一个数字。当你猜50时，对方说“大了”，你可能会猜25，对方又说“小了”，再猜的时候应该会猜25-50之间的中间值，这样继续猜下去直到猜到为止。每一次猜，都会选择当前最大值和最小值的中间点。</p>
+<p>二分查找的算法大概描述如下：（假设要查询的值为n）<br>1、先将数组的第一个位置设置为下边界lowerBound<br>2、再将数组的最后一个元素位置设为上边界upperBound<br>3、当下边界 &lt;= 上边界时，做如下操作：(由于上下边界在以下操作中一直在变，因此这里是一个while循环，直到上下边界变到下边界不再&lt;=上边界为止)<br>  a): 中点位置mid设为上下边界之和除以2；<br>  b): 如果中点mid所在元素array[mid] &lt; n，将下边界设为中点mid元素位置+1<br>  c): 如果中点mid所在元素array[mid] &gt; n，将上边界设为中点mid元素位置-1</p>
+<p>来一盆代码实现一下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> binSearch = <span class="keyword">function</span>(array, data) &#123;</div><div class="line">  <span class="built_in">let</span> lowerBound = 0;</div><div class="line">  <span class="built_in">let</span> upperBound = array.length - 1;</div><div class="line">  <span class="keyword">while</span> ( lowerBound &lt;= upperBound ) &#123;</div><div class="line">    <span class="built_in">let</span> mid = Math.floor( (lowerBound + upperBound)/2 );</div><div class="line">    console.log(<span class="string">'二分查找，当前的中点是：'</span>, array[mid]);</div><div class="line">    <span class="keyword">if</span>( array[mid] &lt; data ) &#123;</div><div class="line">      lowerBound = mid + 1;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( array[mid] &gt; data ) &#123;</div><div class="line">      upperBound = mid - 1;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">return</span> mid;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> -1;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = binSearch;</div></pre></td></tr></table></figure>
+<p>做一个测试：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/* 测试二分查找算法 */</div><div class="line">(<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">  <span class="built_in">let</span> binSearch = require(<span class="string">'./binSearch'</span>);  </div><div class="line">  <span class="built_in">let</span> myArray = [1,3,5,6,7,8,9,10,11,12,23,34,45,56,67,78,89,90];</div><div class="line">  <span class="built_in">let</span> data = 78;</div><div class="line">  console.log( <span class="string">'BinSearch, searching'</span>, data, <span class="string">': '</span>, myArray, binSearch(myArray, data) );</div><div class="line">&#125;());</div></pre></td></tr></table></figure>
+<p>Guess what happened … :)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/12/02/fundamental-bin-search/" data-id="ciw7fqklz0000kkpmljxgqpu7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-fundamental-array-sort" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -86,7 +136,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/24/fundamental-array-sort/">基础知识：排序算法</a>
+      <a class="article-title" href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
     </h1>
   
 
@@ -106,81 +156,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/24/fundamental-array-sort/" data-id="civvs5rzr0005hvpmgsl0wm18" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/11/24/fundamental-array-sort/" data-id="ciw7fqkm40001kkpm96lvlcf0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hot-middleware-for-koa" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/17/hot-middleware-for-koa/" class="article-date">
-  <time datetime="2016-11-17T11:14:00.000Z" itemprop="datePublished">2016-11-17</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/17/hot-middleware-for-koa/">Koa框架下的Webpack热替换配置</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在项目开发的过程中，使用热替换无疑是提高效率的不二选择。由此，开发环境的配置和生产环境的配置，可能有很多区别。这次的项目还是基于Koa@2和Webpack的，如果每次都要bundle才能看到开发中的更新，那岂非太麻烦。于是花了一下午时间终于调通了热替换的功能，这样在代码改动并保存后，页面就自动更新了。后续将要开发的Redux，效率会提高很多！</p>
-<p>“热替换”中间件的工作原理，大致可以解释为：它作为webpack的一个插件存在，并且监听webpack的编译器事件。服务器会通过编译器事件向连接的客户端以“服务器派发事件（Server Sent Events，SSEs）”的形式发送通知，当客户端接收到消息后，会检查本地的代码是否已经更新，如果没有，则触发webpack的相关模块来重新加载。</p>
-<p>关于SSEs多说一句：a web app “subscribes” to a stream of updates generated by a server and, whenever a new event occurs, a notification is sent to the client.</p>
-<p>BTW，“热替换”这个词是我自己翻译的，可能不准确。来自于hotReplacement，请自行理解。</p>
-<p>趁热打铁马上对今天的调试工作做一份记录！</p>
-<h3 id="在package-json文件中对开发环境和生产环境的入口做配置"><a href="#在package-json文件中对开发环境和生产环境的入口做配置" class="headerlink" title="在package.json文件中对开发环境和生产环境的入口做配置"></a>在package.json文件中对开发环境和生产环境的入口做配置</h3><p>在package.json的scripts属性里，做几个命令的配置，来一盆热腾腾的代码先：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"scripts"</span>: &#123;</div><div class="line">  <span class="string">"dev"</span>: <span class="string">"NODE_ENV=development node bin/development"</span>, <span class="comment"># 开发环境入口，执行时命令为 npm run dev</span></div><div class="line">  <span class="string">"start"</span>: <span class="string">"NODE_ENV=production node bin/production"</span>, <span class="comment"># 生产环境入口，执行时命令为 npm run start</span></div><div class="line">  <span class="string">"build"</span>: <span class="string">"NODE_ENV=production npm run clean &amp;&amp; webpack --config webpack.build.js "</span>, <span class="comment"># 打包命令 npm run build 用于生产环境</span></div><div class="line">  <span class="string">"clean"</span>: <span class="string">"rm -rf public/ &amp;&amp; rm -rf dist/"</span>, <span class="comment"># 这里清理的是打包后的目录，名字可以自定义</span></div><div class="line">&#125;,</div></pre></td></tr></table></figure></p>
-<p>对应的，在bin目录下，建立两个文件，分别作为开发环境和生产环境的脚本入口：<br>development.js &amp; production.js</p>
-<h3 id="开发环境的渲染流程-VS-生产环境的渲染流程"><a href="#开发环境的渲染流程-VS-生产环境的渲染流程" class="headerlink" title="开发环境的渲染流程 VS 生产环境的渲染流程"></a>开发环境的渲染流程 VS 生产环境的渲染流程</h3><p>在开发环境下：<br>从bin/development开始，配置Koa、配置热替换、再到route、再到渲染的controller</p>
-<p>在生产环境下：<br>从bin/production开始，该文件内会判断是否存在dist目录，存在则执行指定的文件如index，否则提示run build。</p>
-<p>小注：开发环境在入口中做了Koa的配置，生产环境在server/index里做Koa配置，两处配置的基本思路都一致，只有涉及到热替换的部分不同，因此可以抽象出一个通用模块。时间关系我还没有做这个通用模块，由于是从0开始开发，边写边学，因此没有在最开始就做这个模块的抽离。</p>
-<p>先看开发环境：</p>
-<p>bin/development.js的主要代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env node # 第一行是响应node命令，必须这么写！</span></div><div class="line">require(<span class="string">'babel-polyfill'</span>) <span class="comment"># Using Babel</span></div><div class="line">require(<span class="string">'babel-core/register'</span>)(&#123;</div><div class="line">  plugins: [</div><div class="line">    [<span class="string">'babel-plugin-transform-require-ignore'</span>, &#123;</div><div class="line">      extensions: [<span class="string">'.less'</span>, <span class="string">'.css'</span>]</div><div class="line">    &#125;],</div><div class="line">    <span class="string">'transform-async-to-generator'</span></div><div class="line">  ]</div><div class="line">&#125;);</div><div class="line">/* 配置Koa和各种中间件 *／</div><div class="line">var Koa = require(<span class="string">'koa'</span>);</div><div class="line">var app = new Koa();</div><div class="line">/* 这里是各种中间件的引用，views，logger，convert，bodyparser等 */</div><div class="line"></div><div class="line">/* 配置热替换中间件，用koa-webpack-middleware */</div><div class="line">var webpack = require(<span class="string">'webpack'</span>);</div><div class="line">var KWM = require(<span class="string">'koa-webpack-middleware'</span>);</div><div class="line">var devMiddleware = KWM.devMiddleware;</div><div class="line">var hotMiddleware = KWM.hotMiddleware;</div><div class="line">var webpackConfig = require(<span class="string">'../webpack.dev'</span>); <span class="comment"># 两个webpack配置文件，用dev的</span></div><div class="line">var compiler = webpack(webpackConfig, <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">  app.use(router); <span class="comment"># 路由分发放在webpack的bundle回调里，避免异步问题</span></div><div class="line">&#125;);</div><div class="line">app.env = <span class="string">'development'</span>;</div><div class="line">/* 使用热替换的中间件 */</div><div class="line">app.use(devMiddleware(compiler, &#123;</div><div class="line">  noInfo: <span class="literal">true</span>,</div><div class="line">  watchOptions: &#123;</div><div class="line">    aggregateTimeout: 300,</div><div class="line">    poll: <span class="literal">true</span></div><div class="line">  &#125;,</div><div class="line">  publicPath: <span class="string">'/build/'</span>, <span class="comment"># 这个属性是required，和webpack的publicPath等值</span></div><div class="line">  stats: &#123;</div><div class="line">    colors: <span class="literal">true</span></div><div class="line">  &#125;</div><div class="line">&#125;));</div><div class="line">app.use(hotMiddleware(compiler, &#123;</div><div class="line">  <span class="built_in">log</span>: console.log,</div><div class="line">  path: <span class="string">'/__webpack_hmr'</span>,</div><div class="line">  heartbeat: 10 * 1000  <span class="comment"># 这个心跳是什么鬼，还没查到……</span></div><div class="line">&#125;));</div><div class="line"></div><div class="line">/* 这里是各种中间件的use，views，logger，convert，bodyparser等 */</div><div class="line">app.use(convert(Bodyparser())); </div><div class="line">app.use(convert(json()));</div><div class="line">app.use(convert(logger())); <span class="comment"># 都放在热替换中间件后面引用</span></div><div class="line"><span class="comment"># blah blah blah ... ...</span></div><div class="line"></div><div class="line">/* Static serve */</div><div class="line">app.use(convert( <span class="comment"># 很重要的配置，静态文件的路径</span></div><div class="line">  koaStatic(path.join(__dirname, <span class="string">'../public'</span>), &#123;pathPrefix: <span class="string">''</span>&#125;)</div><div class="line">));</div><div class="line"></div><div class="line">/* Template ejs, must before using router */</div><div class="line">app.use(views(templatePath, &#123; extension: <span class="string">'ejs'</span> &#125;)); <span class="comment"># 模板路径</span></div><div class="line"></div><div class="line">/* 这些配置其实都该放在bundle的回调里，但是目前尚未出错，先这样写，稍后再测 */</div><div class="line"></div><div class="line">/* Server Listening and Watching */</div><div class="line">var server = require(<span class="string">'http'</span>).createServer(app.callback())</div><div class="line">var watcher = chokidar.watch([ <span class="comment"># chokidar的应用，监听三个目录</span></div><div class="line">  path.join(__dirname, <span class="string">'../client'</span>),</div><div class="line">  path.join(__dirname, <span class="string">'../common'</span>),</div><div class="line">  path.join(__dirname, <span class="string">'../server'</span>)</div><div class="line">]);</div><div class="line">watcher.on(<span class="string">'ready'</span>, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">  watcher.on(<span class="string">'all'</span>, <span class="keyword">function</span> (e, p) &#123;</div><div class="line">    Object.keys(require.cache).forEach(<span class="keyword">function</span>(id) &#123; <span class="comment"># 清理文件缓存</span></div><div class="line">      <span class="keyword">if</span> (/[\/\\](client|server|common)[\/\\]/.test(id)) delete require.cache[id];</div><div class="line">    &#125;);</div><div class="line">  &#125;)</div><div class="line">&#125;);</div><div class="line">server.listen(config.port, <span class="function"><span class="title">function</span></span> () &#123;</div><div class="line">  console.log(<span class="string">'In Dev Env!!! App is now listening port'</span>, config.port, <span class="string">' ! ... ... '</span>); </div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>再看生产环境：bin/production</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/env node</span></div><div class="line">var fs = require(<span class="string">'fs'</span>)</div><div class="line">var path = require(<span class="string">'path'</span>)</div><div class="line">try &#123;</div><div class="line">  fs.statSync(path.join(__dirname, <span class="string">'../dist'</span>)); <span class="comment"># 判断打包后的目录是否存在</span></div><div class="line">&#125; catch (e) &#123;</div><div class="line">  console.log(<span class="string">'The app has not been built yet! Execute webpack first!'</span>)</div><div class="line">  process.exit(0) <span class="comment"># 不存在就直接退出</span></div><div class="line">&#125;</div><div class="line">require(<span class="string">'../dist/server-bundle.js'</span>) <span class="comment"># 执行打包后的入口文件，名字在webpack的生产环境配置中自定义</span></div></pre></td></tr></table></figure>
-<p>生产环境的入口文件是server/index，其打包后即为dist/<em>**</em>.js</p>
-<h3 id="Webpack的配置"><a href="#Webpack的配置" class="headerlink" title="Webpack的配置"></a>Webpack的配置</h3><p>针对于开发环境和生产环境的不同，可以准备两份webpack的配置文件。一份应用于开发环境，其中需要做热替换的配置。另一份应用于生产环境，不需要热替换的配置。当然你也可以用一份，但是如何区分两个环境的不同配置，会比较麻烦。不如分开。</p>
-<p>由于当前项目的架构是Isomorphic形式，有部分代码会被服务端和客户端共用，因此生产环境下，webpack配置文件输出的module不是一个，而是两个module组成的数组。而在开发环境下，由于热替换仅是针对客户端的，因此输出module仅一个。</p>
-<h4 id="开发环境的webpack配置文件，带有热替换的配置："><a href="#开发环境的webpack配置文件，带有热替换的配置：" class="headerlink" title="开发环境的webpack配置文件，带有热替换的配置："></a>开发环境的webpack配置文件，带有热替换的配置：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line">module.exports = &#123;</div><div class="line">  name: <span class="string">'Dev env bundle with hot middleware'</span>,</div><div class="line">  devtool: <span class="string">'cheap-source-map'</span>,</div><div class="line">  entry: [</div><div class="line">    <span class="string">'eventsource-polyfill'</span>,  <span class="comment"># For IE</span></div><div class="line">    <span class="string">'webpack-hot-middleware/client?path=/__webpack_hmr&amp;timeout=2000&amp;reload=true&amp;quiet=false'</span>, <span class="comment"># 热替换参数</span></div><div class="line">    <span class="string">'./client/index.js'</span>  <span class="comment"># 入口文件</span></div><div class="line">  ],</div><div class="line">  output: &#123;</div><div class="line">    path: path.join(__dirname, <span class="string">'/public/build'</span>),</div><div class="line">    filename: <span class="string">'[name].js'</span>,</div><div class="line">    publicPath: <span class="string">'/build/'</span>,</div><div class="line">    chunkFilename: <span class="string">'[id].chunk.js'</span></div><div class="line">  &#125;,</div><div class="line">  module: &#123;</div><div class="line">    loaders: [</div><div class="line">      &#123;</div><div class="line">        <span class="built_in">test</span>: /\.jsx?$/,</div><div class="line">        loader: <span class="string">'babel-loader'</span>,</div><div class="line">        query: &#123;</div><div class="line">          presets: [<span class="string">'react-hmre'</span>], <span class="comment"># 这里要配置react-hmre</span></div><div class="line">          plugins: [</div><div class="line">            [<span class="string">'inline-replace-variables'</span>, &#123; <span class="string">'__SERVER__'</span>: <span class="literal">false</span> &#125;]</div><div class="line">          ]</div><div class="line">      &#125;,</div><div class="line">      <span class="comment"># Other loaders ... ... </span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  plugins: [</div><div class="line">    new webpack.optimize.CommonsChunkPlugin(<span class="string">'common'</span>, <span class="string">'combo.js'</span>),</div><div class="line">    new webpack.optimize.DedupePlugin(),</div><div class="line">    new webpack.DefinePlugin(&#123;</div><div class="line">      <span class="string">'process.env.NODE_ENV'</span>: JSON.stringify(<span class="string">'development'</span>),</div><div class="line">      __SERVER__: <span class="literal">false</span></div><div class="line">    &#125;),</div><div class="line">    new webpack.optimize.OccurenceOrderPlugin(), <span class="comment"># 使用热替换需要的插件.</span></div><div class="line">    new webpack.HotModuleReplacementPlugin(),  <span class="comment"># 使用热替换需要的插件.</span></div><div class="line">    new webpack.NoErrorsPlugin()   <span class="comment"># 使用热替换需要的插件.</span></div><div class="line">  ]</div></pre></td></tr></table></figure>
-<p>如上述代码中的entry里所示，热替换的参数可以放在entry的路径配置里。支持的参数有：</p>
-<ul>
-<li>path：热替换插件提供服务的路径</li>
-<li>timeout：断链后重连的等待时间</li>
-<li>overlay：设为false时是禁用基于DOM的客户端重载</li>
-<li>reload：设为true时就在webpack打包后自动加载页面，通常都会设为true</li>
-<li>noInfo：设为true时禁用console的信息log</li>
-<li>quiet：设为true时禁用所有的console的log</li>
-<li>dynamicPublicPath： 设为true时会使用webpack的publicPath作为路径的前缀</li>
-</ul>
-<p>附：<a href="https://github.com/glenjamin/webpack-hot-middleware" target="_blank" rel="external">参考Git相关</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/17/hot-middleware-for-koa/" data-id="civvs5s0g000hhvpmmn02aa61" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
 
     </footer>
   </div>
@@ -200,7 +179,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -210,7 +189,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -220,18 +199,18 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 10px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 10px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 15px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 15px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
   </div>
 
@@ -239,12 +218,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2016/11/24/fundamental-array-sort/">基础知识：排序算法</a>
+            <a href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
           </li>
         
           <li>
@@ -257,10 +240,6 @@
         
           <li>
             <a href="/2016/11/15/koa-2-async-works-with-babel-stage-0/">Koa@2的async在webpack打包时报错</a>
-          </li>
-        
-          <li>
-            <a href="/2016/11/10/redux-primary-introduction/">Redux初识概要</a>
           </li>
         
       </ul>
@@ -276,7 +255,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
