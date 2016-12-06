@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>XMLHttpRequest 要点简述 | Run Faster To Get A Bite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="同步发送请求在使用XHR对象时，第一个要调用的方法是open()：1xhr.open(&apos;get&apos;, &apos;myrequest.php&apos;, false); # false表示不是异步发送，true表示异步发送请求
+open方法不会真正发送请求，只是启动一个请求准备发送。
+第二个要调用的方法是send()：1xhr.send(null); # 对某些浏览器而言send里的参数是必需的，因此无参数也要传nu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="XMLHttpRequest 要点简述">
+<meta property="og:url" content="http://shaojing.wang/2016/12/06/xml-http-request/index.html">
+<meta property="og:site_name" content="Run Faster To Get A Bite">
+<meta property="og:description" content="同步发送请求在使用XHR对象时，第一个要调用的方法是open()：1xhr.open(&apos;get&apos;, &apos;myrequest.php&apos;, false); # false表示不是异步发送，true表示异步发送请求
+open方法不会真正发送请求，只是启动一个请求准备发送。
+第二个要调用的方法是send()：1xhr.send(null); # 对某些浏览器而言send里的参数是必需的，因此无参数也要传nu">
+<meta property="og:updated_time" content="2016-12-06T03:11:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="XMLHttpRequest 要点简述">
+<meta name="twitter:description" content="同步发送请求在使用XHR对象时，第一个要调用的方法是open()：1xhr.open(&apos;get&apos;, &apos;myrequest.php&apos;, false); # false表示不是异步发送，true表示异步发送请求
+open方法不会真正发送请求，只是启动一个请求准备发送。
+第二个要调用的方法是send()：1xhr.send(null); # 对某些浏览器而言send里的参数是必需的，因此无参数也要传nu">
+  
+    <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Run Faster To Get A Bite</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">but world moves much faster than you, like always</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-xml-http-request" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/06/xml-http-request/" class="article-date">
+  <time datetime="2016-12-06T02:31:37.000Z" itemprop="datePublished">2016-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Rudiments/">Rudiments</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      XMLHttpRequest 要点简述
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="同步发送请求"><a href="#同步发送请求" class="headerlink" title="同步发送请求"></a>同步发送请求</h3><p>在使用XHR对象时，第一个要调用的方法是open()：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'myrequest.php'</span>, <span class="literal">false</span>); <span class="comment"># false表示不是异步发送，true表示异步发送请求</span></div></pre></td></tr></table></figure></p>
+<p>open方法不会真正发送请求，只是启动一个请求准备发送。</p>
+<p>第二个要调用的方法是send()：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.send(null); <span class="comment"># 对某些浏览器而言send里的参数是必需的，因此无参数也要传null</span></div></pre></td></tr></table></figure></p>
+<p>如果是同步发送的请求，JS会在服务器响应之后才继续后面的执行。</p>
+<p>收到响应后，数据自动填充XHR对象的下列属性：</p>
+<ul>
+<li>responseText: 响应主体被返回的文本</li>
+<li>responseXML: 包含响应数据的XML DOM文档（当响应类型是“text/xml”或“application/xml”时）</li>
+<li>status: 响应的HTTP状态</li>
+<li>statusText: HTTP状态说明</li>
+</ul>
+<p>一般将status == 200 作为请求成功的标志，status == 304 则表示请求的资源未被修改，可以直接使用浏览器中缓存的版本。</p>
+<h3 id="异步请求，检测XHR对象的readyState属性"><a href="#异步请求，检测XHR对象的readyState属性" class="headerlink" title="异步请求，检测XHR对象的readyState属性"></a>异步请求，检测XHR对象的readyState属性</h3><p>readyState的各个值及含义：<br>0: 未调用open方法<br>1: 调用了open方法，未调用send方法<br>2: 调用了send方法，未接收到响应<br>3: 接收到了部分响应<br>4: 接收了全部响应，可以在客户端使用了。</p>
+<p>注意！为保证浏览器兼容性，必需在open方法之前，指定onreadystatechange事件处理程序！！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var xhr = new XMLHttpRequest();</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  <span class="keyword">if</span>( xhr.readyState == 4 ) &#123;</div><div class="line">    <span class="keyword">if</span> ( (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || (xhr.status == 304) ) &#123;</div><div class="line">      console.log(<span class="string">'We can use datas: '</span>, xhr.responseText);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      console.log(<span class="string">'Request failed! '</span>, xhr.status);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'myurl.php'</span>, <span class="literal">true</span>); <span class="comment"># open调用之前就指定onreadystatechange事件处理程序！</span></div><div class="line">xhr.send(null);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 在接到响应之前，可以用abort()方法取消异步操作</span></div><div class="line">xhr.abort();</div><div class="line"><span class="comment"># 但终止请求后，要对XHR对象做一个解引用操作。不要重用XHR对象！</span></div><div class="line">xhr = null;</div></pre></td></tr></table></figure>
+<h3 id="设置HTTP头信息"><a href="#设置HTTP头信息" class="headerlink" title="设置HTTP头信息"></a>设置HTTP头信息</h3><p>XHR对象提供了操作“请求头”和“响应头”的信息的方法：</p>
+<h4 id="操作“请求头”："><a href="#操作“请求头”：" class="headerlink" title="操作“请求头”："></a>操作“请求头”：</h4><p>setRequestHeader()方法，必须在open之后、send之前调用！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'myurl.php'</span>, <span class="literal">true</span>);</div><div class="line">xhr.setRequestHeader(<span class="string">'MyHeader'</span>, <span class="string">'MyHeaderValue'</span>); <span class="comment"># 建议头部信息用自定义，不要用浏览器已有的！</span></div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<h4 id="操作“响应头”："><a href="#操作“响应头”：" class="headerlink" title="操作“响应头”："></a>操作“响应头”：</h4><p>getResponseHeader() 和 getAllResponseHeaders()<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var myHeader = xhr.getResponseHeader(<span class="string">'MyHeader'</span>);</div><div class="line">var allHeaders = xhr.getAllResponseHeaders();</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/12/06/xml-http-request/" data-id="ciwcxj2yl001afspmmtrqiv0i" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/02/fundamental-bin-search/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">二分查找算法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorier</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 15px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 20px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/12/06/xml-http-request/">XMLHttpRequest 要点简述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/17/hot-middleware-for-koa/">Koa框架下的Webpack热替换配置</a>
+          </li>
+        
+          <li>
+            <a href="/2016/11/16/render-template-with-koa2/">Koa@2的模板渲染及React组件用ES6的几种写法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 Alex Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
