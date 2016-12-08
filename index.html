@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,70 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-linux-user-space-and-kernel-space" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/08/linux-user-space-and-kernel-space/" class="article-date">
+  <time datetime="2016-12-08T09:26:05.000Z" itemprop="datePublished">2016-12-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/08/linux-user-space-and-kernel-space/">linux-user-space-and-kernel-space</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>今天记录一点Linux系统的小知识。内容来源于互联网。</p>
+<p>Kernel space 是Linux的内核空间，可以执行任意命令，调用系统的一切资源。<br>User Space 是用户程序的运行空间，不能直接调用系统资源，必须通过system call向内核发出指令才可以调用系统资源。</p>
+<p>用top命令查看CPU的使用情况，可以看到二者之间的资源分配情况。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ top</div><div class="line"><span class="comment"># 输出如下：</span></div><div class="line"></div><div class="line">top - 17:22:28 up 18 days, 54 min,  1 user,  load average: 0.00, 0.02, 0.05</div><div class="line">Tasks:  79 total,   2 running,  77 sleeping,   0 stopped,   0 zombie</div><div class="line">%Cpu(s): 0.0 us, 0.0 sy, 0.0 ni, 100.0 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st  <span class="comment"># 重点看这一行</span></div><div class="line">KiB Mem:   1017832 total,   753252 used,   264580 free,    98168 buffers</div><div class="line">KiB Swap:        0 total,        0 used,        0 free.   405860 cached Mem</div></pre></td></tr></table></figure></p>
+<p>重点看CPU那一行。<br>第一项24.8 us（user 的缩写）就是 CPU 消耗在 User space 的时间百分比，第二项0.5 sy（system 的缩写）是消耗在 Kernel space 的时间百分比。</p>
+<p>其它几项的含义：</p>
+<ul>
+<li>ni：niceness 的缩写，CPU 消耗在 nice 进程（低优先级）的时间百分比</li>
+<li>id：idle 的缩写，CPU 消耗在闲置进程的时间百分比，这个值越低，表示 CPU 越忙</li>
+<li>wa：wait 的缩写，CPU 等待外部 I/O 的时间百分比，这段时间 CPU 不能干其他事，但是也没有执行运算，这个值太高就说明外部设备有问题</li>
+<li>hi：hardware interrupt 的缩写，CPU 响应硬件中断请求的时间百分比</li>
+<li>si：software interrupt 的缩写，CPU 响应软件中断请求的时间百分比</li>
+<li>st：stole time 的缩写，该项指标只对虚拟机有效，表示分配给当前虚拟机的 CPU 时间之中，被同一台物理机上的其他虚拟机偷走的时间百分比</li>
+</ul>
+<p>看单个进程的耗时，用time命令，time后面跟命令。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ time git fetch origin</div></pre></td></tr></table></figure></p>
+<p>time命令在程序执行完成的最后几行，输出三行这个：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">real	0m14.950s</div><div class="line">user	0m0.008s</div><div class="line">sys	0m0.007s</div></pre></td></tr></table></figure></p>
+<p>含义如下：</p>
+<ul>
+<li>real：程序从开始运行到结束的全部时间，这是用户能感知到的时间，包括 CPU 切换去执行其他任务的时间。</li>
+<li>user：程序在 User space 执行的时间</li>
+<li>sys：程序在 Kernel space 执行的时间</li>
+</ul>
+<p><a href="http://www.ruanyifeng.com/blog/2016/12/user_space_vs_kernel_space.html" target="_blank" rel="external">一个参考链接</a><br><a href="https://en.wikipedia.org/wiki/User-mode_Linux" target="_blank" rel="external">又一个参考链接</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/12/08/linux-user-space-and-kernel-space/" data-id="ciwg6mmns0016cvpm498zwwd0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-xml-http-request" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -116,60 +180,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/12/06/xml-http-request/" data-id="ciwcxj2yl001afspmmtrqiv0i" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/12/06/xml-http-request/" data-id="ciwg6mmoo001zcvpmeym44000" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fundamental-bin-search" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/12/02/fundamental-bin-search/" class="article-date">
-  <time datetime="2016-12-02T06:47:36.000Z" itemprop="datePublished">2016-12-02</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Rudiments/">Rudiments</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>首先，二分查找算法只对有序的数列而言。它的效率比顺序查找更高。</p>
-<p>二分查找算法的基本思想，与猜数字游戏类似。例如1-100之间猜一个数字。当你猜50时，对方说“大了”，你可能会猜25，对方又说“小了”，再猜的时候应该会猜25-50之间的中间值，这样继续猜下去直到猜到为止。每一次猜，都会选择当前最大值和最小值的中间点。</p>
-<p>二分查找的算法大概描述如下：（假设要查询的值为n）<br>1、先将数组的第一个位置设置为下边界lowerBound<br>2、再将数组的最后一个元素位置设为上边界upperBound<br>3、当下边界 &lt;= 上边界时，做如下操作：(由于上下边界在以下操作中一直在变，因此这里是一个while循环，直到上下边界变到下边界不再&lt;=上边界为止)<br>  a): 中点位置mid设为上下边界之和除以2；<br>  b): 如果中点mid所在元素array[mid] &lt; n，将下边界设为中点mid元素位置+1<br>  c): 如果中点mid所在元素array[mid] &gt; n，将上边界设为中点mid元素位置-1</p>
-<p>来一盆代码实现一下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> binSearch = <span class="keyword">function</span>(array, data) &#123;</div><div class="line">  <span class="built_in">let</span> lowerBound = 0;</div><div class="line">  <span class="built_in">let</span> upperBound = array.length - 1;</div><div class="line">  <span class="keyword">while</span> ( lowerBound &lt;= upperBound ) &#123;</div><div class="line">    <span class="built_in">let</span> mid = Math.floor( (lowerBound + upperBound)/2 );</div><div class="line">    console.log(<span class="string">'二分查找，当前的中点是：'</span>, array[mid]);</div><div class="line">    <span class="keyword">if</span>( array[mid] &lt; data ) &#123;</div><div class="line">      lowerBound = mid + 1;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( array[mid] &gt; data ) &#123;</div><div class="line">      upperBound = mid - 1;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      <span class="built_in">return</span> mid;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> -1;</div><div class="line">&#125;;</div><div class="line"></div><div class="line">module.exports = binSearch;</div></pre></td></tr></table></figure>
-<p>做一个测试：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/* 测试二分查找算法 */</div><div class="line">(<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">  <span class="built_in">let</span> binSearch = require(<span class="string">'./binSearch'</span>);  </div><div class="line">  <span class="built_in">let</span> myArray = [1,3,5,6,7,8,9,10,11,12,23,34,45,56,67,78,89,90];</div><div class="line">  <span class="built_in">let</span> data = 78;</div><div class="line">  console.log( <span class="string">'BinSearch, searching'</span>, data, <span class="string">': '</span>, myArray, binSearch(myArray, data) );</div><div class="line">&#125;());</div></pre></td></tr></table></figure>
-<p>Guess what happened … :)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/12/02/fundamental-bin-search/" data-id="ciwcxj2wu0004fspm3ri46ell" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
 
     </footer>
   </div>
@@ -189,7 +203,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Kategorier</h3>
+    <h3 class="widget-title">Catégories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -199,7 +213,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -209,16 +223,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 15px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 15px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 15px;">es6</a> <a href="/tags/git/" style="font-size: 20px;">git</a> <a href="/tags/http/" style="font-size: 15px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 20px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 15px;">nginx</a> <a href="/tags/node/" style="font-size: 15px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 15px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 20px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 15px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 13.33px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -228,9 +242,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/12/08/linux-user-space-and-kernel-space/">linux-user-space-and-kernel-space</a>
+          </li>
         
           <li>
             <a href="/2016/12/06/xml-http-request/">XMLHttpRequest 要点简述</a>
@@ -248,10 +266,6 @@
             <a href="/2016/11/17/hot-middleware-for-koa/">Koa框架下的Webpack热替换配置</a>
           </li>
         
-          <li>
-            <a href="/2016/11/16/render-template-with-koa2/">Koa@2的模板渲染及React组件用ES6的几种写法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -265,7 +279,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

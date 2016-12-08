@@ -3,17 +3,24 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016/10 | Run Faster To Get A Bite</title>
+  <title>linux-user-space-and-kernel-space | Run Faster To Get A Bite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="A tiny personal blog">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Run Faster To Get A Bite">
-<meta property="og:url" content="http://shaojing.wang/archives/2016/10/page/2/index.html">
+  <meta name="description" content="今天记录一点Linux系统的小知识。内容来源于互联网。
+Kernel space 是Linux的内核空间，可以执行任意命令，调用系统的一切资源。User Space 是用户程序的运行空间，不能直接调用系统资源，必须通过system call向内核发出指令才可以调用系统资源。
+用top命令查看CPU的使用情况，可以看到二者之间的资源分配情况。12345678$ top# 输出如下：top - 17:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="linux-user-space-and-kernel-space">
+<meta property="og:url" content="http://shaojing.wang/2016/12/08/linux-user-space-and-kernel-space/index.html">
 <meta property="og:site_name" content="Run Faster To Get A Bite">
-<meta property="og:description" content="A tiny personal blog">
+<meta property="og:description" content="今天记录一点Linux系统的小知识。内容来源于互联网。
+Kernel space 是Linux的内核空间，可以执行任意命令，调用系统的一切资源。User Space 是用户程序的运行空间，不能直接调用系统资源，必须通过system call向内核发出指令才可以调用系统资源。
+用top命令查看CPU的使用情况，可以看到二者之间的资源分配情况。12345678$ top# 输出如下：top - 17:">
+<meta property="og:updated_time" content="2016-12-08T09:49:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Run Faster To Get A Bite">
-<meta name="twitter:description" content="A tiny personal blog">
+<meta name="twitter:title" content="linux-user-space-and-kernel-space">
+<meta name="twitter:description" content="今天记录一点Linux系统的小知识。内容来源于互联网。
+Kernel space 是Linux的内核空间，可以执行任意命令，调用系统的一切资源。User Space 是用户程序的运行空间，不能直接调用系统资源，必须通过system call向内核发出指令才可以调用系统资源。
+用top命令查看CPU的使用情况，可以看到二者之间的资源分配情况。12345678$ top# 输出如下：top - 17:">
   
     <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
   
@@ -66,63 +73,80 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/10/28/vim-to-be-like-a-IDE/" class="archive-article-date">
-  <time datetime="2016-10-28T09:28:39.000Z" itemprop="datePublished">Oct 28</time>
+        <section id="main"><article id="post-linux-user-space-and-kernel-space" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/08/linux-user-space-and-kernel-space/" class="article-date">
+  <time datetime="2016-12-08T09:26:05.000Z" itemprop="datePublished">2016-12-08</time>
 </a>
-      
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/28/vim-to-be-like-a-IDE/">把Vim打造成一枚IDE</a>
+    <h1 class="article-title" itemprop="name">
+      linux-user-space-and-kernel-space
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/10/28/touch-event-in-mobiles/" class="archive-article-date">
-  <time datetime="2016-10-28T07:44:35.000Z" itemprop="datePublished">Oct 28</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/10/28/touch-event-in-mobiles/">移动开发中的touch事件相关问题</a>
-    </h1>
-  
+        <p>今天记录一点Linux系统的小知识。内容来源于互联网。</p>
+<p>Kernel space 是Linux的内核空间，可以执行任意命令，调用系统的一切资源。<br>User Space 是用户程序的运行空间，不能直接调用系统资源，必须通过system call向内核发出指令才可以调用系统资源。</p>
+<p>用top命令查看CPU的使用情况，可以看到二者之间的资源分配情况。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ top</div><div class="line"><span class="comment"># 输出如下：</span></div><div class="line"></div><div class="line">top - 17:22:28 up 18 days, 54 min,  1 user,  load average: 0.00, 0.02, 0.05</div><div class="line">Tasks:  79 total,   2 running,  77 sleeping,   0 stopped,   0 zombie</div><div class="line">%Cpu(s): 0.0 us, 0.0 sy, 0.0 ni, 100.0 id, 0.0 wa, 0.0 hi, 0.0 si, 0.0 st  <span class="comment"># 重点看这一行</span></div><div class="line">KiB Mem:   1017832 total,   753252 used,   264580 free,    98168 buffers</div><div class="line">KiB Swap:        0 total,        0 used,        0 free.   405860 cached Mem</div></pre></td></tr></table></figure></p>
+<p>重点看CPU那一行。<br>第一项24.8 us（user 的缩写）就是 CPU 消耗在 User space 的时间百分比，第二项0.5 sy（system 的缩写）是消耗在 Kernel space 的时间百分比。</p>
+<p>其它几项的含义：</p>
+<ul>
+<li>ni：niceness 的缩写，CPU 消耗在 nice 进程（低优先级）的时间百分比</li>
+<li>id：idle 的缩写，CPU 消耗在闲置进程的时间百分比，这个值越低，表示 CPU 越忙</li>
+<li>wa：wait 的缩写，CPU 等待外部 I/O 的时间百分比，这段时间 CPU 不能干其他事，但是也没有执行运算，这个值太高就说明外部设备有问题</li>
+<li>hi：hardware interrupt 的缩写，CPU 响应硬件中断请求的时间百分比</li>
+<li>si：software interrupt 的缩写，CPU 响应软件中断请求的时间百分比</li>
+<li>st：stole time 的缩写，该项指标只对虚拟机有效，表示分配给当前虚拟机的 CPU 时间之中，被同一台物理机上的其他虚拟机偷走的时间百分比</li>
+</ul>
+<p>看单个进程的耗时，用time命令，time后面跟命令。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ time git fetch origin</div></pre></td></tr></table></figure></p>
+<p>time命令在程序执行完成的最后几行，输出三行这个：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">real	0m14.950s</div><div class="line">user	0m0.008s</div><div class="line">sys	0m0.007s</div></pre></td></tr></table></figure></p>
+<p>含义如下：</p>
+<ul>
+<li>real：程序从开始运行到结束的全部时间，这是用户能感知到的时间，包括 CPU 切换去执行其他任务的时间。</li>
+<li>user：程序在 User space 执行的时间</li>
+<li>sys：程序在 Kernel space 执行的时间</li>
+</ul>
+<p><a href="http://www.ruanyifeng.com/blog/2016/12/user_space_vs_kernel_space.html" target="_blank" rel="external">一个参考链接</a><br><a href="https://en.wikipedia.org/wiki/User-mode_Linux" target="_blank" rel="external">又一个参考链接</a></p>
 
-    </header>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/12/08/linux-user-space-and-kernel-space/" data-id="ciwg6mmns0016cvpm498zwwd0" class="article-share-link">Partager</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/06/xml-http-request/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">XMLHttpRequest 要点简述</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
-
-  <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/archives/2016/10/">&laquo; __('prev')</a><a class="page-number" href="/archives/2016/10/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/2016/10/page/3/">3</a><a class="page-number" href="/archives/2016/10/page/4/">4</a><a class="extend next" rel="next" href="/archives/2016/10/page/3/">__('next') &raquo;</a>
-  </nav>
 </section>
         
           <aside id="sidebar">
