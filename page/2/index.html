@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,66 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-xml-http-request" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/12/06/xml-http-request/" class="article-date">
+  <time datetime="2016-12-06T02:31:37.000Z" itemprop="datePublished">2016-12-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Rudiments/">Rudiments</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/06/xml-http-request/">XMLHttpRequest 要点简述</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="同步发送请求"><a href="#同步发送请求" class="headerlink" title="同步发送请求"></a>同步发送请求</h3><p>在使用XHR对象时，第一个要调用的方法是open()：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'myrequest.php'</span>, <span class="literal">false</span>); <span class="comment"># false表示不是异步发送，true表示异步发送请求</span></div></pre></td></tr></table></figure></p>
+<p>open方法不会真正发送请求，只是启动一个请求准备发送。</p>
+<p>第二个要调用的方法是send()：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhr.send(null); <span class="comment"># 对某些浏览器而言send里的参数是必需的，因此无参数也要传null</span></div></pre></td></tr></table></figure></p>
+<p>如果是同步发送的请求，JS会在服务器响应之后才继续后面的执行。</p>
+<p>收到响应后，数据自动填充XHR对象的下列属性：</p>
+<ul>
+<li>responseText: 响应主体被返回的文本</li>
+<li>responseXML: 包含响应数据的XML DOM文档（当响应类型是“text/xml”或“application/xml”时）</li>
+<li>status: 响应的HTTP状态</li>
+<li>statusText: HTTP状态说明</li>
+</ul>
+<p>一般将status == 200 作为请求成功的标志，status == 304 则表示请求的资源未被修改，可以直接使用浏览器中缓存的版本。</p>
+<h3 id="异步请求，检测XHR对象的readyState属性"><a href="#异步请求，检测XHR对象的readyState属性" class="headerlink" title="异步请求，检测XHR对象的readyState属性"></a>异步请求，检测XHR对象的readyState属性</h3><p>readyState的各个值及含义：<br>0: 未调用open方法<br>1: 调用了open方法，未调用send方法<br>2: 调用了send方法，未接收到响应<br>3: 接收到了部分响应<br>4: 接收了全部响应，可以在客户端使用了。</p>
+<p>注意！为保证浏览器兼容性，必需在open方法之前，指定onreadystatechange事件处理程序！！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">var xhr = new XMLHttpRequest();</div><div class="line">xhr.onreadystatechange = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  <span class="keyword">if</span>( xhr.readyState == 4 ) &#123;</div><div class="line">    <span class="keyword">if</span> ( (xhr.status &gt;= 200 &amp;&amp; xhr.status &lt; 300) || (xhr.status == 304) ) &#123;</div><div class="line">      console.log(<span class="string">'We can use datas: '</span>, xhr.responseText);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">      console.log(<span class="string">'Request failed! '</span>, xhr.status);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'myurl.php'</span>, <span class="literal">true</span>); <span class="comment"># open调用之前就指定onreadystatechange事件处理程序！</span></div><div class="line">xhr.send(null);</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment"># 在接到响应之前，可以用abort()方法取消异步操作</span></div><div class="line">xhr.abort();</div><div class="line"><span class="comment"># 但终止请求后，要对XHR对象做一个解引用操作。不要重用XHR对象！</span></div><div class="line">xhr = null;</div></pre></td></tr></table></figure>
+<h3 id="设置HTTP头信息"><a href="#设置HTTP头信息" class="headerlink" title="设置HTTP头信息"></a>设置HTTP头信息</h3><p>XHR对象提供了操作“请求头”和“响应头”的信息的方法：</p>
+<h4 id="操作“请求头”："><a href="#操作“请求头”：" class="headerlink" title="操作“请求头”："></a>操作“请求头”：</h4><p>setRequestHeader()方法，必须在open之后、send之前调用！<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'myurl.php'</span>, <span class="literal">true</span>);</div><div class="line">xhr.setRequestHeader(<span class="string">'MyHeader'</span>, <span class="string">'MyHeaderValue'</span>); <span class="comment"># 建议头部信息用自定义，不要用浏览器已有的！</span></div><div class="line">xhr.send(null);</div></pre></td></tr></table></figure></p>
+<h4 id="操作“响应头”："><a href="#操作“响应头”：" class="headerlink" title="操作“响应头”："></a>操作“响应头”：</h4><p>getResponseHeader() 和 getAllResponseHeaders()<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">var myHeader = xhr.getResponseHeader(<span class="string">'MyHeader'</span>);</div><div class="line">var allHeaders = xhr.getAllResponseHeaders();</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/12/06/xml-http-request/" data-id="ciwyl2vln001wrtpm9w1qa7tq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-fundamental-bin-search" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -106,57 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/12/02/fundamental-bin-search/" data-id="ciwg6mmlt0005cvpmv208tm2f" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-fundamental-array-sort" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/24/fundamental-array-sort/" class="article-date">
-  <time datetime="2016-11-24T01:51:43.000Z" itemprop="datePublished">2016-11-24</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/Rudiments/">Rudiments</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前端市场风云变幻，为了以更好姿态在风云中前行，不能一味的追逐新工具新技术。其实万变不离其宗，根基扎牢，才能向上更多。以不变应万变，乃是亘古不变之真理。</p>
-<p>遂决定还是要不时的回顾基础知识。每回顾一次，记录一次。今天回顾排序算法。</p>
-<h3 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h3><p>以升序排列为例，之所以叫冒泡是因为算法多次在数组中移动，比较相邻的元素，较小的移动到数组左端，较大的移动到右端，数据像气泡一样被移动。该算法很常用，性能略慢，基本可满足需求，代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.BubbleSort = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var len = this.length;</div><div class="line">  var tmp; <span class="comment"># 定义一个临时变量放挪动的元素</span></div><div class="line">  var count = 0;</div><div class="line">  <span class="keyword">for</span>(var i = 0; i &lt; len - 1; i++)&#123; <span class="comment"># 外循环用来遍历元素</span></div><div class="line">    <span class="keyword">for</span>(var j = 0; j &lt; len-1-i; j++)&#123; <span class="comment"># 内循环用来比较元素</span></div><div class="line">      <span class="keyword">if</span>( this[j] &gt; this[j+1] )&#123; <span class="comment"># 前面元素比后面元素更大时，要交换位置</span></div><div class="line">        tmp = this[j]; <span class="comment"># 前面元素大，先放临时变量里</span></div><div class="line">        this[j] = this[j+1]; <span class="comment"># 后面元素小，放前面</span></div><div class="line">        this[j+1] = tmp; <span class="comment"># 从临时变量里取出大的元素，放后面</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> this; <span class="comment"># 别忘了返回排序后的新数组</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>冒泡排序的另一种写法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">bubbleSort</span></span>() &#123;</div><div class="line">  var num = myArray.length; <span class="comment"># 假设有一个数组myArray</span></div><div class="line">  var temp;</div><div class="line">  <span class="keyword">for</span> (var outer = num; outer &gt;= 2; --outer) &#123; <span class="comment"># 倒着循环外层遍历元素 outer-- 也可以</span></div><div class="line">    <span class="keyword">for</span> (var inner = 0; inner &lt;= outer - 1; ++inner) &#123; <span class="comment"># inner++ 也可以</span></div><div class="line">      <span class="keyword">if</span>(myArray[inner] &gt; myArray[inner+1]) &#123;</div><div class="line">        temp = myArray[inner];</div><div class="line">        myArray[inner] = myArray[inner + 1];</div><div class="line">        myArray[inner + 1] = temp;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h3><p>从数组开头开始，第一个元素和其他元素比较，最小的放前面，然后从第二个元素再开始比较。直到倒数第二个元素为止。</p>
-<p>外循环从第一个元素到倒数第二个元素。<br>内循环从第二个元素到最后一个元素，查找比当前外循环指向元素更小的元素。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Array.prototype.SelectionSort = <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">  var i, j, min, temp;</div><div class="line">  <span class="keyword">for</span>(i = 0; i &lt; this.length-1; i++)&#123; <span class="comment"># 外循环，从第一个元素到倒数第二个元素</span></div><div class="line">    min = i; <span class="comment"># 外循环当前所指向元素的角标做一个标记</span></div><div class="line">    <span class="keyword">for</span>(j = i+1; j &lt; this.length; j++)&#123; <span class="comment"># 内循环，从第二个元素到最后一个元素</span></div><div class="line">      <span class="keyword">if</span>( this[min] &gt; this[j] )&#123; <span class="comment"># 如果外循环当前指向元素大于内循环的元素</span></div><div class="line">        min = j; <span class="comment"># 把值最小的元素的index赋给min，用更小的元素参与下一轮比较</span></div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    temp = this[min];</div><div class="line">    this[min] = this[i];</div><div class="line">    this[i] = temp;</div><div class="line">  &#125;</div><div class="line">  <span class="built_in">return</span> this;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>To be continued … …</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/24/fundamental-array-sort/" data-id="ciwg6mmly0006cvpm6srjc49u" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/12/02/fundamental-bin-search/" data-id="ciwyl2vkk000urtpm852553ue" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/array/">array</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/rudiments/">rudiments</a></li></ul>
@@ -171,7 +181,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -179,7 +189,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -189,7 +199,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -199,9 +209,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 13.33px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 16.67px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
     </div>
   </div>
 
@@ -218,9 +228,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/12/21/spread-syntax-examples/">那三个点点是什么鬼</a>
+          </li>
         
           <li>
             <a href="/2016/12/08/linux-user-space-and-kernel-space/">Linux的User Space和Kernel Space</a>
@@ -238,10 +252,6 @@
             <a href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
           </li>
         
-          <li>
-            <a href="/2016/11/17/hot-middleware-for-koa/">Koa框架下的Webpack热替换配置</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -255,7 +265,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

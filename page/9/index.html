@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,59 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-regular-expression" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/10/30/regular-expression/" class="article-date">
+  <time datetime="2016-10-30T05:56:48.000Z" itemprop="datePublished">2016-10-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/10/30/regular-expression/">正则表达式的常用要点小结</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Regular Expression，RegExp，正则表达式，作为一种常用工具，虽然长得很像外星文，但如果写得好，可以极大的提高代码执行效率。正则表达式的功能就是执行字符串的查找和替换，正确的使用正则，可以避免繁琐的代码循环。</p>
+<p>本文记录一些常用的要点，便于工作时查阅。</p>
+<h2 id="常见字符"><a href="#常见字符" class="headerlink" title="常见字符"></a>常见字符</h2><p>.     : 匹配任意字符，换行符除外<br>\d    : 等价于[0-9]，匹配数字<br>\D    : 等价于[^0-9]，匹配非数字<br>\w    : 等价于[A-Za-z0-9_]，别忘了下划线！<br>\W    : 等价于[^A-Za-z0-9]<br>\s    : 匹配空白符，包括空格、制表符、换行符、换页符（\f\n\r\t\v）<br>\S    : 匹配非空白符<br>\t    : 匹配水平制表符tab<br>\v    : 匹配垂直制表符vertical tab<br>\r    : 匹配回车符carriage return<br>\n    : 匹配换行符linefeed<br>\f    : 匹配换页符form-feed<br>[\b]  : 匹配退格键backspace，与\b不同。<br>\0    : 匹配一个NUL字符<br>\cX   : X为A-Z中的字符，匹配control-X</p>
+<h2 id="常见边界"><a href="#常见边界" class="headerlink" title="常见边界"></a>常见边界</h2><p>^     : 匹配字符串的开始，/^A/匹配’Anta’，不匹配’antA’<br>$     : 匹配字符串的结尾，/t$/匹配’eat’，不匹配’tea’<br>\b    : 匹配零宽单词边界（字母与空格之间，即匹配\w与\W之间的空间），/\bno/匹配’at noon’中的’no’<br>\B    : 匹配零宽非单词边界（两字母之间，或两空格之间）/\Bon/匹配’at noon’中的’on’<br>\b 和 \B，只匹配位置，不匹配字符。用\bcat\b匹配都的字符串长度是3，不是5.</p>
+<h2 id="重复匹配"><a href="#重复匹配" class="headerlink" title="重复匹配"></a>重复匹配</h2><p>+     : 匹配一个或多个，至少一个（+放在字符或字符集的后面，\w+）<br>*     : 匹配0个或多个，可以是0次，可以多次，表示字符可有可无<br>?     : 匹配0个或1个，最多不超1个。例如合法URL的https中的s，可出现0次或1次<br>{3}   : 匹配重复3次，精确次数，\d{3}<br>{3, } : 匹配至少3个，\d{3, } 匹配至少3个数字<br>{2,4} : 匹配最少2次，最多4次。</p>
+<h2 id="「贪婪型」匹配和「懒惰型」匹配"><a href="#「贪婪型」匹配和「懒惰型」匹配" class="headerlink" title="「贪婪型」匹配和「懒惰型」匹配"></a>「贪婪型」匹配和「懒惰型」匹配</h2><p>贪婪型字符，*，+，{n, } 等字符在匹配时的行为模式是“多多益善”，而不是“适可而止”。它们会尽可能的从一段文本中的开头一直匹配到文本末尾，而不是匹配到第一个匹配为止。</p>
+<p>解决的方法，就是让贪婪型变成懒惰型，匹配一个即停止。在字符后面加“?”即可。<br>* =====&gt; *?<br>+ =====&gt; +?<br>{n, } ======&gt; {n, }?</p>
+<h2 id="分行匹配模式"><a href="#分行匹配模式" class="headerlink" title="分行匹配模式"></a>分行匹配模式</h2><p>例如一段代码中有分散的几行是注释（双斜杠”//“开头的一行），如何用分行模式将其匹配出来？正则中的分行匹配模式（multiline mode）即(?m)记号可以让正则的引擎把行分隔符当作一个字符串的分隔符来对待。这时候，^将不仅匹配正常的字符串开头，还将匹配换行符后的开始位置；同理，$将不仅匹配字符串的结尾，还匹配换行符后面的结束位置。</p>
+<p>需要注意的是，(?m)分行记号必须出现在正则表达式的最前面。例如：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(?m)^\s*//.*$</div></pre></td></tr></table></figure></p>
+<p>(?m)表示匹配多行，^\s*表示字符串的开始，后面是任意个空白字符，然后是双斜杠，然后是任意个任意字符，最后是字符串结尾。</p>
+<h2 id="子表达式"><a href="#子表达式" class="headerlink" title="子表达式"></a>子表达式</h2><p>（未完待续……）</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/10/30/regular-expression/" data-id="ciwyl2vl00019rtpmwyq1pr5a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/RegExp/">RegExp</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-vim-to-be-like-a-IDE" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -113,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/vim-to-be-like-a-IDE/" data-id="ciwg6mmoh001qcvpm3bepaopk" class="article-share-link">Partager</a>
+      <a data-url="http://shaojing.wang/2016/10/28/vim-to-be-like-a-IDE/" data-id="ciwyl2vlk001trtpmkl8kxtzx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
@@ -125,71 +178,10 @@
 
 
   
-    <article id="post-touch-event-in-mobiles" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/10/28/touch-event-in-mobiles/" class="article-date">
-  <time datetime="2016-10-28T07:44:35.000Z" itemprop="datePublished">2016-10-28</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/10/28/touch-event-in-mobiles/">移动开发中的touch事件相关问题</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>刚上线的项目做了移动适配，其中涉及到touch事件的部分问题值得做一记录。遂成此文。</p>
-<p>具体到项目中的需求，是常见的整屏滑动。每一屏的内容作为一个section，使用绝对定位，在页面初始化和缩放时，监听窗口高度来给section们的高度赋值。滑动时，改变section们的外层容器的top值，来使对应的section充满整个窗口。<br>如果不使用绝对定位，而写死高度的话，很难做到对所有设备完成整屏的适配。<br>在移动端切换屏幕，监听了容器的touch事件，获取手指滑动的位移，在位移满足某个条件后，触发相应的切屏事件。</p>
-<p>此为背景。Then…</p>
-<h2 id="IOS的窗口整体滑动问题"><a href="#IOS的窗口整体滑动问题" class="headerlink" title="IOS的窗口整体滑动问题"></a>IOS的窗口整体滑动问题</h2><p>在iPhone下滑动时，窗口整体会随着上下滑动，安卓下暂未发现这个问题。So，解决方案是禁掉整个窗口或文档的touchmove事件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Make IOS not to scroll the whole page when touchmoves:</span></div><div class="line">document.ontouchmove = <span class="keyword">function</span>(e)&#123;</div><div class="line">  e.preventDefault();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="touch和click的触发顺序"><a href="#touch和click的触发顺序" class="headerlink" title="touch和click的触发顺序"></a>touch和click的触发顺序</h2><p>在PC端必然是监听的click事件。经测试，touch和click的触发顺序是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># touchstart -&gt; touchmove (if finger moves) -&gt; touchend -&gt; click</span></div></pre></td></tr></table></figure></p>
-<h2 id="判断当前设备的屏幕是否支持touch"><a href="#判断当前设备的屏幕是否支持touch" class="headerlink" title="判断当前设备的屏幕是否支持touch"></a>判断当前设备的屏幕是否支持touch</h2><p>想当然的会用window.ontouchstart来判断：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( window.ontouchstart )&#123; <span class="comment">#这是一个反例！</span></div><div class="line">  console.log(<span class="string">'Has touch event!'</span>);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  console.log(<span class="string">'No touch event!'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>这样的判断会有问题！<br>如果尚未给window.ontouchstart赋值一个处理函数时，它的值就是null，但它本身是一个object，也就表示当前设备是支持touch的，可上述判断还是会进入到else里。<br>正确的判断方法不是用ontouchstart的值判断，而是用typeof，即使在未赋值时，window.ontouchstart的typeof也是“object”，而不支持touch事件的设备，其typeof会返回“undefined”。<br>So，正确判断是否支持touch的方法：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>( typeof window.ontouchstart !== <span class="string">"undefined"</span> )&#123;</div><div class="line">  console.log(<span class="string">'Has touch event~'</span>);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  console.log(<span class="string">'No touch event~'</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>Got it？</p>
-<h2 id="touch的事件对象"><a href="#touch的事件对象" class="headerlink" title="touch的事件对象"></a>touch的事件对象</h2><p>监听某个元素el的某个touch事件，比如touchstart：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">el.addEventListener(<span class="string">'touchstart'</span>, handleTouchStart, <span class="literal">false</span>);</div></pre></td></tr></table></figure></p>
-<p>然后在自定义处理函数handleTouchStart如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> handleTouchStart(e) &#123;</div><div class="line">  console.log(e);</div><div class="line">  <span class="comment"># Do whatever you want ...</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>打印的e即touch事件对象TouchEvent。它有几个常用属性：</p>
-<h3 id="TouchEvent的path"><a href="#TouchEvent的path" class="headerlink" title="TouchEvent的path"></a>TouchEvent的path</h3><p>path属性返回一个数组，按照冒泡顺序，从被touch的对象，到window对象为止。</p>
-<h3 id="TouchEvent的srcElement和target"><a href="#TouchEvent的srcElement和target" class="headerlink" title="TouchEvent的srcElement和target"></a>TouchEvent的srcElement和target</h3><p>在IE6-8中事件模型与标准不同，非标准的el.attachEvent()绑定的事件监听里，其事件对象的srcElement等价于target。</p>
-<h3 id="TouchEvent的touches"><a href="#TouchEvent的touches" class="headerlink" title="TouchEvent的touches"></a>TouchEvent的touches</h3><p>touches返回的是一个TouchList对象，包含了所有当前接触触摸平面的触点的Touch对象，无论它们的起始于哪个element上，也无论它们状态是否发生了变化。（请区别于TouchEvent.targetTouches）<br>通常使用touches[0]拿到触点及其位置属性：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var touch = e.touches[0];</div><div class="line">var touchStartX = touch.pageX;</div><div class="line">var touchStartY = touch.pageY;</div></pre></td></tr></table></figure></p>
-<p>然后在touchmove中计算出某个方向的位移量：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var touch = e.touches[0]; <span class="comment"># 这几行是写在touchmove事件处理函数中！</span></div><div class="line">var deltaX = touch.pageX - touchStartX;</div><div class="line">var deltaY = touch.pageY - touchStartY;</div></pre></td></tr></table></figure></p>
-<p>虽然在手指滑动的过程中会不断触发touchmove，但是每一次都会更新delta值，因此可以获取到最新的值。但考虑到频繁触发，建议不要在touchmove的处理函数中做大量复杂的计算。<br>当然，拿到最新的delta位移，还是要在touchend里做响应：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这是在touchend里的处理：</span></div><div class="line"><span class="keyword">if</span>( Math.abs(deltaX) &lt; 20 )&#123;</div><div class="line">  <span class="comment"># 位移太小，老子不做响应</span></div><div class="line">  <span class="comment"># deltaX可能是负值，因此要用绝对值来判断位移量的大小！</span></div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  <span class="comment"># Do something ...</span></div><div class="line">  touchStartX = 0;</div><div class="line">  deltaX = 0; <span class="comment"># 干完事儿了要清零</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="TouchEvent的targetTouches"><a href="#TouchEvent的targetTouches" class="headerlink" title="TouchEvent的targetTouches"></a>TouchEvent的targetTouches</h3><p>也是返回一个TouchList对象，是包含了如下触点的Touch对象：触摸起始于当前事件的目标element上，并且仍然没有离开触摸平面的触点。(具体区别要做一个实验才能看出来)</p>
-<h2 id="touchcancel-事件"><a href="#touchcancel-事件" class="headerlink" title="touchcancel 事件"></a>touchcancel 事件</h2><p>正常的touch好像是不会触发touchcancel。它是当触点由于某些原因被中断时而触发。比如弹窗。And，当用户产生的触点个数超过了设备支持的个数，从而导致TouchList中最早的Touch对象被取消。（最后这句话是转的，待验证）</p>
-<p>That maybe so much about it.</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/10/28/touch-event-in-mobiles/" data-id="ciwg6mmoq0022cvpmeozd2vsi" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mobile/">mobile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/touch/">touch</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/10/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/10/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -197,7 +189,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Catégories</h3>
+    <h3 class="widget-title">Categories</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -207,7 +199,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -217,9 +209,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 13.33px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 13.33px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 16.67px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
     </div>
   </div>
 
@@ -236,9 +228,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/12/21/spread-syntax-examples/">那三个点点是什么鬼</a>
+          </li>
         
           <li>
             <a href="/2016/12/08/linux-user-space-and-kernel-space/">Linux的User Space和Kernel Space</a>
@@ -256,10 +252,6 @@
             <a href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
           </li>
         
-          <li>
-            <a href="/2016/11/17/hot-middleware-for-koa/">Koa框架下的Webpack热替换配置</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -273,7 +265,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 Alex Wang<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
