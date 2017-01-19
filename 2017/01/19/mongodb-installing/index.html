@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>在Mac里安装MongoDB | Run Faster To Get A Bite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="最简流程：
+下载最新版MongoDB到本地
+
+解压
+1tar -zxvf mongodb-osx-x86_64-enterprise-3.4.1.tgz
+
+本地创建数据库目录并给予权限
+12mkdir -p /data/dbsudo chown -R alex /data    # alex处是一个username
+
+本地创建放置Mongo的目录
+12cd ~/Applicationsmkdir">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在Mac里安装MongoDB">
+<meta property="og:url" content="http://shaojing.wang/2017/01/19/mongodb-installing/index.html">
+<meta property="og:site_name" content="Run Faster To Get A Bite">
+<meta property="og:description" content="最简流程：
+下载最新版MongoDB到本地
+
+解压
+1tar -zxvf mongodb-osx-x86_64-enterprise-3.4.1.tgz
+
+本地创建数据库目录并给予权限
+12mkdir -p /data/dbsudo chown -R alex /data    # alex处是一个username
+
+本地创建放置Mongo的目录
+12cd ~/Applicationsmkdir">
+<meta property="og:updated_time" content="2017-01-19T07:33:44.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在Mac里安装MongoDB">
+<meta name="twitter:description" content="最简流程：
+下载最新版MongoDB到本地
+
+解压
+1tar -zxvf mongodb-osx-x86_64-enterprise-3.4.1.tgz
+
+本地创建数据库目录并给予权限
+12mkdir -p /data/dbsudo chown -R alex /data    # alex处是一个username
+
+本地创建放置Mongo的目录
+12cd ~/Applicationsmkdir">
+  
+    <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Run Faster To Get A Bite</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">but world moves much faster than you, like always</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mongodb-installing" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/01/19/mongodb-installing/" class="article-date">
+  <time datetime="2017-01-19T07:01:30.000Z" itemprop="datePublished">2017-01-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在Mac里安装MongoDB
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="最简流程："><a href="#最简流程：" class="headerlink" title="最简流程："></a>最简流程：</h2><ol>
+<li><p>下载最新版MongoDB到本地</p>
+</li>
+<li><p>解压</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tar -zxvf mongodb-osx-x86_64-enterprise-3.4.1.tgz</div></pre></td></tr></table></figure>
+</li>
+<li><p>本地创建数据库目录并给予权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">mkdir -p /data/db</div><div class="line">sudo chown -R alex /data    <span class="comment"># alex处是一个username</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>本地创建放置Mongo的目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Applications</div><div class="line">mkdir MongoDB</div></pre></td></tr></table></figure>
+</li>
+<li><p>倒腾文件过去</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cp -R -n mongodb-osx-x86_64-enterprise-3.4.1/ ~/Applications/MongoDB/</div></pre></td></tr></table></figure>
+</li>
+<li><p>添加环境变量到bashrc文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vi ~/.bashrc</div><div class="line"><span class="built_in">export</span> PATH=yourMongoDBDir/bin:<span class="variable">$PATH</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>启动Mongo服务，命令们都在~/Applications/MongoDB/bin里</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Applications/MongoDB/bin</div><div class="line">./mongod</div><div class="line"><span class="comment"># 这时候打开浏览器访问http://127.0.0.1:27017/可以看到提示了。</span></div><div class="line"></div><div class="line"><span class="comment"># 在另一个终端窗口的同一个目录下：</span></div><div class="line">./mongo  <span class="comment"># 这个命令就是启动了mongo shell，可以开始撸了(见本文末尾福利)</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>测试：浏览器打开，输入<a href="http://127.0.0.1:27017" target="_blank" rel="external">http://127.0.0.1:27017</a></p>
+</li>
+</ol>
+<h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p>第一次启动MongoDB之前，需要创建一个目录，让mongod进程用来写数据。默认情况下，mongod进程会使用“/data/db”目录，这也是为什么我们刚才要创建/data/db目录。如果你不要用这个默认的目录路径，则需要在mongod进程的执行时添加一个dbpath选项来指定目录。</p>
+<p>当然，你要确认/data/db是有可被读写的权限的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown -R alex /data    <span class="comment"># alex处是一个username</span></div></pre></td></tr></table></figure></p>
+<h2 id="末尾福利：常用mongo命令"><a href="#末尾福利：常用mongo命令" class="headerlink" title="末尾福利：常用mongo命令"></a>末尾福利：常用mongo命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db         <span class="comment"># 查看正在使用的数据库，默认是一个test数据库</span></div><div class="line">show dbs   <span class="comment"># 查看可用的数据库们</span></div><div class="line">use mydb   <span class="comment"># 创建并切换到新数据库mydb</span></div><div class="line">db.myCollection.insert(&#123;name: <span class="string">'Alex'</span>&#125;)   <span class="comment"># 给一个collection插入一条数据</span></div><div class="line">db.myCollection.find().pretty()  <span class="comment"># 查询这个collection的数据并格式化显示</span></div></pre></td></tr></table></figure>
+<p>其余命令请参考<a href="https://docs.mongodb.com/manual/mongo/" target="_blank" rel="external">Here</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2017/01/19/mongodb-installing/" data-id="ciy42a2hh001z18pmcbnc3pmj" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongo/">mongo</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/12/21/spread-syntax-examples/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">那三个点点是什么鬼</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categorieën</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 16.67px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/01/19/mongodb-installing/">在Mac里安装MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/21/spread-syntax-examples/">那三个点点是什么鬼</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/linux-user-space-and-kernel-space/">Linux的User Space和Kernel Space</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/xml-http-request/">XMLHttpRequest 要点简述</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alex Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

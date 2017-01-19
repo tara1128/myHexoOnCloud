@@ -57,7 +57,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -67,6 +67,45 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-git-commonly-used-commands" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/11/07/git-commonly-used-commands/" class="article-date">
+  <time datetime="2016-11-07T07:42:18.000Z" itemprop="datePublished">2016-11-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/11/07/git-commonly-used-commands/">Git的常用命令（更新中）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>删除一个远程分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin --delete gh-pages</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2016/11/07/git-commonly-used-commands/" data-id="ciy42a2ff000618pmxo97y9ew" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-stat-command-check-file-detail" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -109,75 +148,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/06/stat-command-check-file-detail/" data-id="ciwyl2vld001jrtpmuxe3b9ck" class="article-share-link">Share</a>
+      <a data-url="http://shaojing.wang/2016/11/06/stat-command-check-file-detail/" data-id="ciy42a2i7002n18pmdxsi0aqu" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mac/">mac</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-babel-used-for-es6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/11/01/babel-used-for-es6/" class="article-date">
-  <time datetime="2016-11-01T06:54:11.000Z" itemprop="datePublished">2016-11-01</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/11/01/babel-used-for-es6/">Using Babel to Deal with ES6</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="测试ES6的支持情况"><a href="#测试ES6的支持情况" class="headerlink" title="测试ES6的支持情况"></a>测试ES6的支持情况</h2><p>下午在测试ES6的语句，先是在目录里新建一个app.js文件，写码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">() =&gt; &#123;console.log(<span class="string">'This is an arrow function!'</span>);&#125;();</div></pre></td></tr></table></figure></p>
-<p>在Node环境下（V5+）可执行。浏览器不支持（Of course……）</p>
-<p>然后又随意写了一个箭头函数：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">var arr = [100, 29, 38, 57, 46, 21];</div><div class="line">var res_es6 = arr.map( (v, index) =&gt; &#123;</div><div class="line">  <span class="keyword">if</span>( index % 2 == 0 )&#123;</div><div class="line">    console.log(<span class="string">'Arrow function '</span>, index, <span class="string">', '</span>, v);</div><div class="line">  &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
-<p>经测试，Node环境当然支持，不多说。意外的是浏览器环境也是支持的（Chrome 54.0，Safari 10.0，Opera 41.0）。<br>但是IE（IE10）不支持。</p>
-<p>接着，又随意写了一个ES6语法定义的类：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">class Person &#123;</div><div class="line">  constructor (name, age)&#123;</div><div class="line">    this.name = name;</div><div class="line">    this.age = age;</div><div class="line">    this.speak(name, age);</div><div class="line">  &#125;</div><div class="line">  speak(name, age)&#123;</div><div class="line">    console.log(<span class="string">'Initial a person, my name is'</span>, name,<span class="string">', '</span>, age, <span class="string">'years old.'</span> );</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">var Alex = new Person(<span class="string">'Alex Wang'</span>, 33);</div></pre></td></tr></table></figure></p>
-<p>好吧，我是不是暴露了年龄……-_-: Whatever.</p>
-<p>经测试，在Node环境下运行时会提示“块级作用域在非标准模式下不支持”！报错如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SyntaxError: Block-scoped declarations (<span class="built_in">let</span>, const, <span class="keyword">function</span>, class) not yet supported outside strict mode</div></pre></td></tr></table></figure></p>
-<p>虽然在Node环境下会提示非标准模式不支持，可在非IE的浏览器端完美支持（Chrome 54.0，Safari 10.0，Opera 41.0）。</p>
-<p>解决“非标准模式不支持块级作用域”的问题，很简单，在代码的开头加上一句话：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"use strict"</span>;</div></pre></td></tr></table></figure></p>
-<h2 id="使用Babel"><a href="#使用Babel" class="headerlink" title="使用Babel"></a>使用Babel</h2><p>好吧，该用Babel了。作为一个广泛使用的转码器，它的作用就是把ES6转为ES5，从而解决部分环境不支持ES6的问题。就酱。</p>
-<h3 id="先配置-babelrc-文件"><a href="#先配置-babelrc-文件" class="headerlink" title="先配置.babelrc 文件"></a>先配置.babelrc 文件</h3><p>放在根目录下，设置转码的规则和要用的插件，基本格式是：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [], <span class="comment"># 设定转码规则</span></div><div class="line">  <span class="string">"plugins"</span>: []  <span class="comment"># 指定插件</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>官方提供的规则集：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ npm install --save-dev babel-preset-es2015  <span class="comment">#ES2015转码规则</span></div><div class="line">$ npm install --save-dev babel-preset-react   <span class="comment">#React转码规则</span></div><div class="line"></div><div class="line"><span class="comment"># ES7不同阶段语法提案的转码规则（共4个阶段），选装一个：</span></div><div class="line">$ npm install --save-dev babel-preset-stage-0</div><div class="line">$ npm install --save-dev babel-preset-stage-1</div><div class="line">$ npm install --save-dev babel-preset-stage-2</div><div class="line">$ npm install --save-dev babel-preset-stage-3</div></pre></td></tr></table></figure></p>
-<p>最后将装好的规则写在.babelrc文件里：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"presets"</span>: [</div><div class="line">    <span class="string">"es2015"</span>,</div><div class="line">    <span class="string">"react"</span>,</div><div class="line">    <span class="string">"stage-2"</span></div><div class="line">  ],</div><div class="line">  <span class="string">"plugins"</span>: []</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>当然，在命令行转码，必须安装babel-cli，可以全局安装之：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install --global babel-cli</div></pre></td></tr></table></figure></p>
-<p>转码并输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ babel app.js <span class="_">-d</span> lib         <span class="comment"># 把app.js文件转码并输出到目录lib下</span></div><div class="line">$ babel app.js -o output.js   <span class="comment"># 把app.js文件转码输出为指定名字的文件</span></div><div class="line">$ babel src <span class="_">-d</span> lib            <span class="comment"># 整个目录转码，src目录的转码后输出到lib目录</span></div><div class="line">$ babel src <span class="_">-d</span> lib <span class="_">-s</span>         <span class="comment"># -s参数使之生成source map文件（被转文件app.js生成app.js.map）</span></div></pre></td></tr></table></figure></p>
-<p>这样连IE浏览器也支持了。</p>
-<p>另外，babel-cli自带一个babel-node命令，在命令行下运行babel-node app.js可以直接运行ES6的脚本。</p>
-<h3 id="什么时候用babel-core"><a href="#什么时候用babel-core" class="headerlink" title="什么时候用babel-core ?"></a>什么时候用babel-core ?</h3><p>当你需要用babel的API在代码里手动转码的时候，就要安装babel-core了。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ npm install --save babel-core</div><div class="line"><span class="comment"># 然后在代码里就可以调用babel的API们了：</span></div><div class="line">var babel = require(<span class="string">'babel-core'</span>);</div><div class="line">var es6Code = <span class="string">'let fun = a =&gt; a + 10'</span>;</div><div class="line">var es5Code = babel.transform(es6Code, &#123; <span class="comment">#字符串转码</span></div><div class="line">  presets: [<span class="string">'es2015'</span>]</div><div class="line">&#125;).code;</div><div class="line">babel.transformFile(<span class="string">'file.js'</span>, options, <span class="keyword">function</span>(err, result) &#123;...&#125;);  <span class="comment">#文件异步转码</span></div><div class="line">babel.transformFileSync(<span class="string">'file.js'</span>, options);  <span class="comment">#文件同步转码</span></div></pre></td></tr></table></figure></p>
-<p>配置对象option在<a href="http://babeljs.io/docs/usage/options/" target="_blank" rel="external">官方文档</a>里可以查看。</p>
-<h3 id="如何在浏览器环境支持ES6脚本"><a href="#如何在浏览器环境支持ES6脚本" class="headerlink" title="如何在浏览器环境支持ES6脚本"></a>如何在浏览器环境支持ES6脚本</h3><p>除了上述说的在命令行转码之后再给浏览器用的脚本之外，还可以在浏览器端直接支持ES6脚本，方法就是安装一个browser.js，然后在script标签的type属性里设置”text/babel”，就可以直接src一个ES6的JS文件鸟～～<br>关于这个browser.js，就是Babel提供的转换器脚本，它很大，有好几M，开始我从CDN上直接拷贝文本下来，拷到机器死掉，于是就乖乖的从命令行安装再从node_modules目录里拿了……在命令行安装5.x版本的babel-core：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ npm install babel-core@5</div></pre></td></tr></table></figure></p>
-<p>然后从node_modules/babel-core/目录里找到browser.js或者browser.min.js，给浏览器用就好了。</p>
-<h3 id="什么时候用babel-polyfill"><a href="#什么时候用babel-polyfill" class="headerlink" title="什么时候用babel-polyfill ?"></a>什么时候用babel-polyfill ?</h3><p>Babel默认只转换syntax，不转换ES6新增的API，So，装一个babel-polyfill就好了。</p>
-<h2 id="Last-but-not-least"><a href="#Last-but-not-least" class="headerlink" title="Last but not least:"></a>Last but not least:</h2><p>页面里实时转换ES6到ES5，对性能有影响！So，生产环境要加载已经转码后的脚本哦！</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2016/11/01/babel-used-for-es6/" data-id="ciwyl2vik0000rtpmj7b7l5fd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li></ul>
 
     </footer>
   </div>
@@ -197,7 +171,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
+    <h3 class="widget-title">Categorieën</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -207,9 +181,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
   </div>
 
@@ -219,16 +193,16 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 16.67px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
+      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 16.67px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 10px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
   </div>
 
@@ -236,9 +210,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/01/19/mongodb-installing/">在Mac里安装MongoDB</a>
+          </li>
         
           <li>
             <a href="/2016/12/21/spread-syntax-examples/">那三个点点是什么鬼</a>
@@ -256,10 +234,6 @@
             <a href="/2016/12/02/fundamental-bin-search/">二分查找算法</a>
           </li>
         
-          <li>
-            <a href="/2016/11/24/fundamental-array-sort/">有关排序算法</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -272,7 +246,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2016 Alex Wang<br>
+      &copy; 2017 Alex Wang<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
