@@ -31,7 +31,7 @@
 
 本地创建放置Mongo的目录
 12cd ~/Applicationsmkdir">
-<meta property="og:updated_time" content="2017-01-19T07:33:44.000Z">
+<meta property="og:updated_time" content="2017-02-17T10:51:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Mac里安装MongoDB">
 <meta name="twitter:description" content="最简流程：
@@ -88,7 +88,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
@@ -149,13 +149,13 @@
 </ol>
 <h2 id="注意事项："><a href="#注意事项：" class="headerlink" title="注意事项："></a>注意事项：</h2><p>第一次启动MongoDB之前，需要创建一个目录，让mongod进程用来写数据。默认情况下，mongod进程会使用“/data/db”目录，这也是为什么我们刚才要创建/data/db目录。如果你不要用这个默认的目录路径，则需要在mongod进程的执行时添加一个dbpath选项来指定目录。</p>
 <p>当然，你要确认/data/db是有可被读写的权限的：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown -R alex /data    <span class="comment"># alex处是一个username</span></div></pre></td></tr></table></figure></p>
-<h2 id="末尾福利：常用mongo命令"><a href="#末尾福利：常用mongo命令" class="headerlink" title="末尾福利：常用mongo命令"></a>末尾福利：常用mongo命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">db         <span class="comment"># 查看正在使用的数据库，默认是一个test数据库</span></div><div class="line">show dbs   <span class="comment"># 查看可用的数据库们</span></div><div class="line">use mydb   <span class="comment"># 创建并切换到新数据库mydb</span></div><div class="line">db.myCollection.insert(&#123;name: <span class="string">'Alex'</span>&#125;)   <span class="comment"># 给一个collection插入一条数据</span></div><div class="line">db.myCollection.find().pretty()  <span class="comment"># 查询这个collection的数据并格式化显示</span></div></pre></td></tr></table></figure>
+<h2 id="末尾福利：常用mongo命令"><a href="#末尾福利：常用mongo命令" class="headerlink" title="末尾福利：常用mongo命令"></a>末尾福利：常用mongo命令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">db         <span class="comment"># 查看正在使用的数据库，默认是一个test数据库</span></div><div class="line">show dbs   <span class="comment"># 查看可用的数据库们</span></div><div class="line">use mydb   <span class="comment"># 创建并切换到新数据库mydb</span></div><div class="line">db.myCollection.insert(&#123;name: <span class="string">'Alex'</span>&#125;)   <span class="comment"># 给一个collection插入一条数据</span></div><div class="line">db.myCollection.find().pretty()  <span class="comment"># 查询这个collection的数据并格式化显示</span></div><div class="line"></div><div class="line"><span class="comment"># 给uid为1002的条目做更新，将其category属性的值改为views：</span></div><div class="line">db.myCollection.updateOne(&#123;<span class="string">'uid'</span>: <span class="string">'1002'</span>&#125;, &#123;<span class="variable">$set</span>:&#123;<span class="string">'category'</span>: <span class="string">'views'</span>&#125;&#125;)</div></pre></td></tr></table></figure>
 <p>其余命令请参考<a href="https://docs.mongodb.com/manual/mongo/" target="_blank" rel="external">Here</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://shaojing.wang/2017/01/19/mongodb-installing/" data-id="ciy42a2hh001z18pmcbnc3pmj" class="article-share-link">Delen</a>
+      <a data-url="http://shaojing.wang/2017/01/19/mongodb-installing/" data-id="ciy42a2hh001z18pmcbnc3pmj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/database/">database</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mongo/">mongo</a></li></ul>
@@ -168,7 +168,7 @@
   
   
     <a href="/2016/12/21/spread-syntax-examples/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">那三个点点是什么鬼</div>
     </a>
   
@@ -183,7 +183,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Categorieën</h3>
+    <h3 class="widget-title">Kategorier</h3>
     <div class="widget">
       <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
     </div>
@@ -193,7 +193,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
     </div>
@@ -212,7 +212,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
     </div>
@@ -222,7 +222,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
