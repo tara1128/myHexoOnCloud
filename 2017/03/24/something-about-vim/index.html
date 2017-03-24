@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Something about Vim | Run Faster To Get A Bite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Something about vim :
+1234567891011121314151617181920212223242526#  &amp;gt;G   从当前行到文档末尾增加一级缩进#  &amp;gt;G j . j . 向下一行（j）重复缩进操作（.）#  &amp;gt;&amp;gt;   当前行向内缩进一级#  A    移动到行尾并进入编辑模式（= $a）#  K    查看当前词的手册页#  J    下一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Something about Vim">
+<meta property="og:url" content="http://shaojing.wang/2017/03/24/something-about-vim/index.html">
+<meta property="og:site_name" content="Run Faster To Get A Bite">
+<meta property="og:description" content="Something about vim :
+1234567891011121314151617181920212223242526#  &amp;gt;G   从当前行到文档末尾增加一级缩进#  &amp;gt;G j . j . 向下一行（j）重复缩进操作（.）#  &amp;gt;&amp;gt;   当前行向内缩进一级#  A    移动到行尾并进入编辑模式（= $a）#  K    查看当前词的手册页#  J    下一">
+<meta property="og:updated_time" content="2017-03-24T03:26:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Something about Vim">
+<meta name="twitter:description" content="Something about vim :
+1234567891011121314151617181920212223242526#  &amp;gt;G   从当前行到文档末尾增加一级缩进#  &amp;gt;G j . j . 向下一行（j）重复缩进操作（.）#  &amp;gt;&amp;gt;   当前行向内缩进一级#  A    移动到行尾并进入编辑模式（= $a）#  K    查看当前词的手册页#  J    下一">
+  
+    <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Run Faster To Get A Bite</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">but world moves much faster than you, like always</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://shaojing.wang"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-something-about-vim" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/24/something-about-vim/" class="article-date">
+  <time datetime="2017-03-24T03:01:05.000Z" itemprop="datePublished">2017-03-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/TechDiary/">TechDiary</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Something about Vim
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Something about vim :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#  &gt;G   从当前行到文档末尾增加一级缩进</span></div><div class="line"><span class="comment">#  &gt;G j . j . 向下一行（j）重复缩进操作（.）</span></div><div class="line"><span class="comment">#  &gt;&gt;   当前行向内缩进一级</span></div><div class="line"></div><div class="line"><span class="comment">#  A    移动到行尾并进入编辑模式（= $a）</span></div><div class="line"><span class="comment">#  K    查看当前词的手册页</span></div><div class="line"><span class="comment">#  J    下一行与上一行连到一起</span></div><div class="line"><span class="comment">#  R    进入替换模式</span></div><div class="line">  </div><div class="line"><span class="comment">#  Ctrl + [  等同于Esc</span></div><div class="line"></div><div class="line"><span class="comment">#  fa   在当前行向后找a（;找下一个a）（,找上一个a）</span></div><div class="line"><span class="comment">#  :%s/abc/def/g  全局替换abc为def（g为全局）</span></div><div class="line"></div><div class="line"><span class="comment">#  dw   按单词向后删除（daw：delete a word, OR: d2w）</span></div><div class="line"><span class="comment">#  db   按单词向前删除</span></div><div class="line"></div><div class="line"><span class="comment">#  h gu 查看帮助，查询gu命令的含义</span></div><div class="line"></div><div class="line"><span class="comment">#  gUaw 当前单词变为大写，guaw 当前单词变小写</span></div><div class="line"><span class="comment">#  gUap 当前段落全变大写，guap 当前段落全变小写</span></div><div class="line"><span class="comment">#  g~ap 当前段落大小写转换 g~aw 当前单词大小写转换</span></div><div class="line"></div><div class="line"><span class="comment">#  Ctrl+r =     插入模式下，进入计算器模式并插入计算结果</span></div><div class="line"><span class="comment">#  Ctrl+v 065   插入模式下，插入A（编码为065）</span></div><div class="line"><span class="comment">#  Ctrl+v u00bf 插入模式下，插入¿(编码为00bf)</span></div></pre></td></tr></table></figure>
+<p>To be Continued … … </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://shaojing.wang/2017/03/24/something-about-vim/" data-id="cj0n9n269001j59pmxjfaofi3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/01/19/mongodb-installing/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">在Mac里安装MongoDB</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Kategorier</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/OtherDiary/">OtherDiary</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Rudiments/">Rudiments</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/TechDiary/">TechDiary</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/ES6/">ES6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/React/">React</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/RegExp/">RegExp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/array/">array</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/babel/">babel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/culture/">culture</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/database/">database</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/i18n/">i18n</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mac/">mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mobile/">mobile</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mongo/">mongo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/npm/">npm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/react/">react</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redux/">redux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/rudiments/">rudiments</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/touch/">touch</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/webpack/">webpack</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/ES6/" style="font-size: 13.33px;">ES6</a> <a href="/tags/React/" style="font-size: 10px;">React</a> <a href="/tags/RegExp/" style="font-size: 10px;">RegExp</a> <a href="/tags/array/" style="font-size: 16.67px;">array</a> <a href="/tags/babel/" style="font-size: 10px;">babel</a> <a href="/tags/culture/" style="font-size: 10px;">culture</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/git/" style="font-size: 16.67px;">git</a> <a href="/tags/http/" style="font-size: 13.33px;">http</a> <a href="/tags/i18n/" style="font-size: 10px;">i18n</a> <a href="/tags/koa/" style="font-size: 16.67px;">koa</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/mac/" style="font-size: 10px;">mac</a> <a href="/tags/mobile/" style="font-size: 10px;">mobile</a> <a href="/tags/mongo/" style="font-size: 10px;">mongo</a> <a href="/tags/nginx/" style="font-size: 13.33px;">nginx</a> <a href="/tags/node/" style="font-size: 13.33px;">node</a> <a href="/tags/npm/" style="font-size: 10px;">npm</a> <a href="/tags/proxy/" style="font-size: 10px;">proxy</a> <a href="/tags/react/" style="font-size: 13.33px;">react</a> <a href="/tags/redux/" style="font-size: 10px;">redux</a> <a href="/tags/rudiments/" style="font-size: 16.67px;">rudiments</a> <a href="/tags/touch/" style="font-size: 10px;">touch</a> <a href="/tags/vim/" style="font-size: 13.33px;">vim</a> <a href="/tags/webpack/" style="font-size: 13.33px;">webpack</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/03/24/something-about-vim/">Something about Vim</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/19/mongodb-installing/">在Mac里安装MongoDB</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/21/spread-syntax-examples/">那三个点点是什么鬼</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/08/linux-user-space-and-kernel-space/">Linux的User Space和Kernel Space</a>
+          </li>
+        
+          <li>
+            <a href="/2016/12/06/xml-http-request/">XMLHttpRequest 要点简述</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 Alex Wang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
