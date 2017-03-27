@@ -5,16 +5,16 @@
   
   <title>Git的常用命令（更新中） | Run Faster To Get A Bite</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="删除一个远程分支：1$ git push origin --delete gh-pages">
+  <meta name="description" content="将当前项目创建为Git项目：123456789101112$ git init   # Initialize the local directory as a Git repository.$ git add .  # Adds the files in the local repository and stages them for commit.$ git add README.md  # 加">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git的常用命令（更新中）">
 <meta property="og:url" content="http://shaojing.wang/2016/11/07/git-commonly-used-commands/index.html">
 <meta property="og:site_name" content="Run Faster To Get A Bite">
-<meta property="og:description" content="删除一个远程分支：1$ git push origin --delete gh-pages">
-<meta property="og:updated_time" content="2016-11-07T07:47:49.000Z">
+<meta property="og:description" content="将当前项目创建为Git项目：123456789101112$ git init   # Initialize the local directory as a Git repository.$ git add .  # Adds the files in the local repository and stages them for commit.$ git add README.md  # 加">
+<meta property="og:updated_time" content="2017-03-27T03:13:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git的常用命令（更新中）">
-<meta name="twitter:description" content="删除一个远程分支：1$ git push origin --delete gh-pages">
+<meta name="twitter:description" content="将当前项目创建为Git项目：123456789101112$ git init   # Initialize the local directory as a Git repository.$ git add .  # Adds the files in the local repository and stages them for commit.$ git add README.md  # 加">
   
     <link rel="alternate" href="/atom.xml" title="Run Faster To Get A Bite" type="application/atom+xml">
   
@@ -89,7 +89,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>删除一个远程分支：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin --delete gh-pages</div></pre></td></tr></table></figure></p>
+        <h3 id="将当前项目创建为Git项目："><a href="#将当前项目创建为Git项目：" class="headerlink" title="将当前项目创建为Git项目："></a>将当前项目创建为Git项目：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$ git init   <span class="comment"># Initialize the local directory as a Git repository.</span></div><div class="line">$ git add .  <span class="comment"># Adds the files in the local repository and stages them for commit.</span></div><div class="line">$ git add README.md  <span class="comment"># 加一个项目说明文件</span></div><div class="line"></div><div class="line">$ <span class="comment"># NOTE：</span></div><div class="line">$ <span class="comment"># 在使用add命令之前，如果目录里已有node_modules目录，则也会被stage进去，</span></div><div class="line">$ <span class="comment"># 可我们一般不会stage node_modules目录，因此在add之前，最好先在根目录里创建.gitignore文件。</span></div><div class="line">$ <span class="comment"># 如果不要stage某个文件，使用命令git reset HEAD 'YOUR-FILE'</span></div><div class="line">$ git commit -m <span class="string">'The First Commit'</span></div><div class="line">$ <span class="comment"># Commit之后创建或选择git远程目录，并获取地址如: git@github.com:tara1128/my-project.git</span></div><div class="line">$ git remote add origin git@github.com:tara1128/my-project.git</div><div class="line">$ git push -u origin master</div></pre></td></tr></table></figure>
+<h3 id="删除一个远程分支："><a href="#删除一个远程分支：" class="headerlink" title="删除一个远程分支："></a>删除一个远程分支：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git push origin --delete gh-pages</div></pre></td></tr></table></figure>
 
       
     </div>
